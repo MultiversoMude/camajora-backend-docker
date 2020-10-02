@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+  <record model="ir.ui.view" id="rental_booking_form_view">
+    <field name="name">rental.booking.form (in rental)</field>
+    <field name="model">rental.booking</field>
+    <field name="arch" type="xml">
+      <form>
+        <header></header>
+        <sheet>
+          <div class="oe_title">
+            <h1>
+              <field name="name" />
+            </h1>
+          </div>
+          <group>
+            <field name="date" />
+            <field name="user_id" />
+            <field name="points_used" />
+            <field name="points_balance" />
+            <field name="rent_channel" />
+          </group>
+        </sheet>
+        <div class="oe_chatter"></div>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="rental_booking_search_view">
+    <field name="name">rental.booking.search (in rental)</field>
+    <field name="model">rental.booking</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name" />
+      </search>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="rental_booking_tree_view">
+    <field name="name">rental.booking.tree (in rental)</field>
+    <field name="model">rental.booking</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" />
+        <field name="date" />
+        <field name="user_id" />
+        <field name="rent_channel" />
+      </tree>
+    </field>
+  </record>
+
+  <record model="ir.actions.act_window" id="rental_booking_act_window">
+    <field name="name">Rental Booking</field>
+    <field name="res_model">rental.booking</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[]</field>
+    <field name="context">{}</field>
+  </record>
+
+  <record model="ir.sequence" id="rental_booking_sequence">
+    <field name="name">Rental Booking sequence</field>
+    <field name="code">rental.booking.sku</field>
+    <field name="active">TRUE</field>
+    <field name="prefix">SKU</field>
+    <field name="padding">6</field>
+    <field name="number_next">1</field>
+    <field name="number_increment">1</field>
+  </record>
+
+</odoo>

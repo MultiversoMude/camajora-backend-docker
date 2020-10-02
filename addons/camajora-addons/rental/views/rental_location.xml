@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+  <record model="ir.ui.view" id="rental_location_form_view">
+    <field name="name">rental.location.form (in rental)</field>
+    <field name="model">rental.location</field>
+    <field name="arch" type="xml">
+      <form>
+        <header></header>
+        <sheet>
+          <div class="oe_title">
+            <h1>
+              <field name="name" />
+            </h1>
+          </div>
+          <group>
+            <field name="description" />
+          </group>
+        </sheet>
+        <div class="oe_chatter"></div>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="rental_location_search_view">
+    <field name="name">rental.location.search (in rental)</field>
+    <field name="model">rental.location</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name" />
+        <field name="description" />
+      </search>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="rental_location_tree_view">
+    <field name="name">rental.location.tree (in rental)</field>
+    <field name="model">rental.location</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" />
+        <field name="description" />
+      </tree>
+    </field>
+  </record>
+
+  <record model="ir.actions.act_window" id="rental_location_act_window">
+    <field name="name">Rental location</field>
+    <field name="res_model">rental.location</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[]</field>
+    <field name="context">{}</field>
+  </record>
+
+</odoo>

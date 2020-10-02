@@ -1,0 +1,27 @@
+# Copyright 2019 Metadonors Srl
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from odoo import api, fields, models, _
+import logging
+
+log = logging.getLogger(__name__)
+
+
+class GenerateInstancesWizard(models.TransientModel):
+    _name = 'rental.resource.instance.wizard'
+    _desctiption = 'Wizard per generazione massiva di istanze di risorse'
+
+    count = fields.Integer(string=_("Number of Instances"), help=_("Number of Instances"), default=1)
+    equipments_ids = fields.Many2many('rental.resource.equipment', string=_('Equipments'))
+
+    @api.multi
+    def generate_instances(self):
+        """Generates the number of resource instances entered in wizard field 'count'"""
+
+        resource = self.env['rental.resource'].browse(self.env.context.get('active_id'))
+
+        for count in range(0, self.count):
+            self.env['rental.resource.instance'].create({
+                'resource_id': resource.id,
+                'equipments_ids': [(6, 0, self.equipments_ids.ids)]
+            })

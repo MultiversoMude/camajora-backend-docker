@@ -1,0 +1,30 @@
+# Copyright 2019 Metadonors Srl
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from odoo import api, fields, models, _
+
+
+class RentalBooking(models.Model):
+
+    _name = 'rental.booking'
+    _description = 'Rental Booking'
+
+    name = fields.Char(string=_('SKU'), readonly=True)
+    date = fields.Date(string=_('Date'))
+    user_id = fields.Many2one('res.partner', string=_('User'))
+
+    points_used = fields.Integer(string=_('Points Used'))
+    points_balance = fields.Integer(string=_('Points Balance'))
+
+    rent_channel = fields.Selection([
+        ('main_site', _('Main Site')),
+        ('phone', _('Phone')),
+        ('external_site', _('External Site')),
+        ('location', _('Location')),
+        ('app', _('App')),
+    ], string=_('Rent Channel'), default='main_site')
+
+    @api.model
+    def create(self, vals):
+        vals['name'] = self.env['ir.sequence'].next_by_code('rental.booking.sku')
+        return super().create(vals)
