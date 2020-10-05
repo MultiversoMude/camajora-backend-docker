@@ -24,7 +24,17 @@ class RentalBooking(models.Model):
         ('app', _('App')),
     ], string=_('Rent Channel'), default='main_site')
 
+    slot_ids = fields.One2many('rental.booking.slot', 'booking_id', string=_('Slots'))
+    slot_count = fields.Integer(string=_('Total Slots'), compute='_compute_slot_count')
+
     @api.model
     def create(self, vals):
         vals['name'] = self.env['ir.sequence'].next_by_code('rental.booking.sku')
         return super().create(vals)
+
+    def _compute_slot_count(self):
+        for record in self:
+            count = self.env['rental.booking.slot'].search(
+                [('booking_id', '=', record.id)]
+            )
+            record.slot_count = len(count)
