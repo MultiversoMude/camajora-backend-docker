@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record model="ir.ui.view" id="rental_booking_slot_form_view">
+    <field name="name">rental.booking.slot.form (in rental_credits)</field>
+    <field name="model">rental.booking.slot</field>
+    <field name="inherit_id" ref="rental.rental_booking_slot_form_view" />
+    <field name="arch" type="xml">
+      <field name="total_hours" position="after">
+        <field name="credit_cost" />
+        <field name="credit_total" />
+      </field>
+    </field>
+  </record>
+
+</odoo>

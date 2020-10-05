@@ -1,4 +1,4 @@
-# Copyright 2019 Metadonors Srl
+# Copyright 2020 Metadonors Srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models, _
@@ -13,10 +13,10 @@ class RentalResource(models.Model):
     code = fields.Char(string=_('Code'), required=True, copy=False, readonly=True, index=True)
     active = fields.Boolean(default=True, string=_('Active'))
 
-    type_id = fields.Many2one('rental.resource.type', required=True, string=_('Type'))
-    location_id = fields.Many2one('rental.location', required=True, string=_('Location'))
-    partner_id = fields.Many2one('res.partner', related='location_id.partner_id', string=_('Owner'))
-    instances_ids = fields.One2many('rental.resource.instance', 'resource_id', string=_('Instances'))
+    type_id = fields.Many2one('rental.resource.type', string=_('Type'), required=True)
+    location_id = fields.Many2one('rental.location', string=_('Location'), required=True)
+    partner_id = fields.Many2one('res.partner', related='location_id.partner_id', string=_('Owner'), required=True)
+    instances_ids = fields.One2many('rental.resource.instance', 'resource_id', string=_('Instances'), required=True)
 
     instance_count = fields.Integer(string=_('Total Instances'), compute='_compute_instance_count')
 

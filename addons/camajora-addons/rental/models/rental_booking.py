@@ -1,4 +1,4 @@
-# Copyright 2019 Metadonors Srl
+# Copyright 2020 Metadonors Srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models, _
@@ -10,10 +10,8 @@ class RentalBooking(models.Model):
     _description = 'Rental Booking'
 
     name = fields.Char(string=_('SKU'), readonly=True)
-    date = fields.Date(string=_('Date'))
+    date = fields.Date(string=_('Date'), default=lambda self: fields.Date.today())
     user_id = fields.Many2one('res.partner', string=_('User'))
-
-    total_credits = fields.Integer(string=_('Credits Used'), readonly=True, compute='_compute_total_credits')
 
     rent_channel = fields.Selection([
         ('main_site', _('Main Site')),
@@ -30,16 +28,6 @@ class RentalBooking(models.Model):
     def create(self, vals):
         vals['name'] = self.env['ir.sequence'].next_by_code('rental.booking.sku')
         return super().create(vals)
-
-    def _compute_total_credits(self):
-        for record in self:
-            total_credits = 0
-            for slot_id in record.slot_ids:
-                total_credits += (
-                    slot_id.total_hours *
-                    1  # costo orario in crediti della risorsa
-                )
-            record.total_credits = total_credits
 
     def _compute_slot_count(self):
         for record in self:

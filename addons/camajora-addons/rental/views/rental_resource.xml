@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <odoo>
 
   <record model="ir.ui.view" id="rental_resource_form_view">
@@ -37,7 +36,7 @@
             <page string="Instances">
               <field name="instances_ids" context="{'default_resource_id': active_id}">
                 <tree>
-                  <field name="name" />
+                  <field name="code" />
                   <field name="equipments_ids" widget="many2many_tags" />
                 </tree>
               </field>

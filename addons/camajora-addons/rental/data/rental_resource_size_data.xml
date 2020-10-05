@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
   <data noupdate="0">
     <record id="rental_resource_size_singola" model="rental.resource.size">
       <field name="name">Singola</field>
@@ -21,4 +23,5 @@
       <field name="sequence">40</field>
     </record>
   </data>
+
 </odoo>

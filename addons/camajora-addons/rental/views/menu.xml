@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2020 Metadonors Srl
-     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
+
   <!-- App Menu Entry -->
   <record model="ir.ui.menu" id="rental_main_menu">
     <field name="name">Rental</field>
@@ -80,4 +78,5 @@
     <field name="action" ref="rental_duration_act_window" />
     <field name="sequence" eval="70" />
   </record>
+
 </odoo>

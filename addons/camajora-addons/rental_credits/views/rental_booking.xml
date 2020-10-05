@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record model="ir.ui.view" id="rental_booking_form_view">
+    <field name="name">rental.booking.form (in rental_credits)</field>
+    <field name="model">rental.booking</field>
+    <field name="inherit_id" ref="rental.rental_booking_form_view" />
+    <field name="arch" type="xml">
+      <field name="user_id" position="after">
+        <field name="credits_used" />
+      </field>
+      <field name="total_hours" position="after">
+        <field name="credit_cost" />
+        <field name="credit_total" />
+      </field>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="rental_booking_tree_view">
+    <field name="name">rental.booking.tree (in rental_credits)</field>
+    <field name="model">rental.booking</field>
+    <field name="inherit_id" ref="rental.rental_booking_tree_view" />
+    <field name="arch" type="xml">
+      <field name="user_id" position="after">
+        <field name="credits_used" />
+      </field>
+    </field>
+  </record>
+
+</odoo>

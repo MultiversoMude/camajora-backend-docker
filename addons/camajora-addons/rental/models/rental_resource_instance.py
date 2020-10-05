@@ -1,7 +1,10 @@
-# Copyright 2019 Metadonors Srl
+# Copyright 2020 Metadonors Srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models, _
+import logging
+
+log = logging.getLogger(__name__)
 
 
 class RentalResourceInstance(models.Model):
@@ -9,13 +12,21 @@ class RentalResourceInstance(models.Model):
     _name = 'rental.resource.instance'
     _description = 'Rental Resource Instance'
 
-    name = fields.Char(string=_('SKU'), readonly=True)
+    name = fields.Char(string=_('Name'), readonly=True, default=lambda self: _('New'), compute='_compute_name')
+    code = fields.Char(string=_('SKU'), readonly=True)
     active = fields.Boolean(default=True, string=_('Active'))
 
-    resource_id = fields.Many2one('rental.resource', string=_('Resource'))
+    resource_id = fields.Many2one('rental.resource', string=_('Resource'), required=True)
     equipments_ids = fields.Many2many('rental.resource.equipment', string=_('Equipments'))
+
+    def _compute_name(self):
+        for record in self:
+            record.name = ' '.join([
+                record.resource_id.name,
+                record.code
+            ])
 
     @api.model
     def create(self, vals):
-        vals['name'] = self.env['ir.sequence'].next_by_code('rental.resource.instance.code')
+        vals['code'] = self.env['ir.sequence'].next_by_code('rental.resource.instance.code')
         return super().create(vals)

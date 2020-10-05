@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <odoo>
+
   <record id="generate_instances_wizard_view_form" model="ir.ui.view">
     <field name="name">rental.resource.instance.wizard.form</field>
     <field name="model">rental.resource.instance.wizard</field>
@@ -25,4 +25,5 @@
     <field name="target">new</field>
     <field name="view_id" ref="generate_instances_wizard_view_form" />
   </record>
+
 </odoo>

@@ -1,4 +1,4 @@
-# Copyright 2019 Metadonors Srl
+# Copyright 2020 Metadonors Srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models, _
@@ -10,14 +10,14 @@ class RentalBookingSlot(models.Model):
     _description = 'Rental Booking Slot'
 
     name = fields.Char(related='resource_instance_id.name', string=_('SKU'))
-    booking_id = fields.Many2one('rental.booking', string=_('Booking'))
-    resource_instance_id = fields.Many2one('rental.resource.instance', string=_('Resource Instance'))
-    duration_id = fields.Many2one('rental.duration', string=_('Duration'))
+    booking_id = fields.Many2one('rental.booking', string=_('Booking'), required=True)
+    resource_instance_id = fields.Many2one('rental.resource.instance', string=_('Resource Instance'), required=True)
+    duration_id = fields.Many2one('rental.duration', string=_('Duration'), required=True)
 
-    start_date = fields.Date(string=_('Start Date'))
-    end_date = fields.Date(string=_('End Date'))
-    start_time = fields.Integer(string=_('Start Time'))
-    total_hours = fields.Integer(string=_('Hours'))
+    start_date = fields.Date(string=_('Start Date'), required=True)
+    end_date = fields.Date(string=_('End Date'), required=True)
+    start_time = fields.Integer(string=_('Start Time'), required=True)
+    total_hours = fields.Integer(string=_('Hours'), required=True)
 
     qr_code = fields.Char(string=_('Code'), readonly=True)
 

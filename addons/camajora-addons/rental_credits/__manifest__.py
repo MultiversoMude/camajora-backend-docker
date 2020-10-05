@@ -1,4 +1,4 @@
-# Copyright 2020 Metadonors
+# Copyright 2020 Metadonors Srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
@@ -18,6 +18,9 @@
     'data': [
         'views/res_partner.xml',
         'views/product_template.xml',
+        'views/rental_resource.xml',
+        'views/rental_booking_slot.xml',
+        'views/rental_booking.xml',
         'data/product_template_data.xml',
     ],
     'demo': []

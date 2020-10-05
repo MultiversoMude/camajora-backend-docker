@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <odoo>
 
   <record model="ir.ui.view" id="rental_booking_slot_form_view">
@@ -21,7 +20,6 @@
             <field name="end_date" />
             <field name="start_time" />
             <field name="total_hours" />
-            <field name="qr_code" />
           </group>
         </sheet>
         <div class="oe_chatter"></div>
