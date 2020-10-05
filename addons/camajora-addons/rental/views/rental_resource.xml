@@ -26,7 +26,6 @@
           </div>
           <group>
             <group>
-              <field name="code" />
               <field name="type_id" />
             </group>
             <group>
@@ -65,8 +64,8 @@
     <field name="model">rental.resource</field>
     <field name="arch" type="xml">
       <tree>
-        <field name="name" />
         <field name="code" />
+        <field name="name" />
         <field name="type_id" />
         <field name="location_id" />
         <field name="partner_id" />
@@ -76,21 +75,11 @@
   </record>
 
   <record model="ir.actions.act_window" id="rental_resource_act_window">
-    <field name="name">Rental Resource</field>
+    <field name="name">Resources</field>
     <field name="res_model">rental.resource</field>
     <field name="view_mode">tree,form</field>
     <field name="domain">[]</field>
     <field name="context">{}</field>
-  </record>
-
-  <record model="ir.sequence" id="rental_resource_sequence">
-    <field name="name">Rental Resource sequence</field>
-    <field name="code">rental.resource.code</field>
-    <field name="active">TRUE</field>
-    <field name="prefix">RES</field>
-    <field name="padding">6</field>
-    <field name="number_next">1</field>
-    <field name="number_increment">1</field>
   </record>
 
 </odoo>

@@ -17,7 +17,7 @@ class RentalBookingSlot(models.Model):
     start_date = fields.Date(string=_('Start Date'))
     end_date = fields.Date(string=_('End Date'))
     start_time = fields.Integer(string=_('Start Time'))
-    end_time = fields.Integer(string=_('End Time'))
+    total_hours = fields.Integer(string=_('Hours'))
 
     qr_code = fields.Char(string=_('Code'), readonly=True)
 

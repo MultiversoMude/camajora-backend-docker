@@ -15,6 +15,7 @@
             </h1>
           </div>
           <group>
+            <field name="partner_id" />
             <field name="description" />
           </group>
         </sheet>
@@ -29,6 +30,7 @@
     <field name="arch" type="xml">
       <search>
         <field name="name" />
+        <field name="partner_id" />
         <field name="description" />
       </search>
     </field>
@@ -40,13 +42,14 @@
     <field name="arch" type="xml">
       <tree>
         <field name="name" />
+        <field name="partner_id" />
         <field name="description" />
       </tree>
     </field>
   </record>
 
   <record model="ir.actions.act_window" id="rental_location_act_window">
-    <field name="name">Rental location</field>
+    <field name="name">Locations</field>
     <field name="res_model">rental.location</field>
     <field name="view_mode">tree,form</field>
     <field name="domain">[]</field>

@@ -13,8 +13,7 @@ class RentalBooking(models.Model):
     date = fields.Date(string=_('Date'))
     user_id = fields.Many2one('res.partner', string=_('User'))
 
-    points_used = fields.Integer(string=_('Points Used'))
-    points_balance = fields.Integer(string=_('Points Balance'))
+    total_credits = fields.Integer(string=_('Credits Used'), readonly=True, compute='_compute_total_credits')
 
     rent_channel = fields.Selection([
         ('main_site', _('Main Site')),
@@ -31,6 +30,16 @@ class RentalBooking(models.Model):
     def create(self, vals):
         vals['name'] = self.env['ir.sequence'].next_by_code('rental.booking.sku')
         return super().create(vals)
+
+    def _compute_total_credits(self):
+        for record in self:
+            total_credits = 0
+            for slot_id in record.slot_ids:
+                total_credits += (
+                    slot_id.total_hours *
+                    1  # costo orario in crediti della risorsa
+                )
+            record.total_credits = total_credits
 
     def _compute_slot_count(self):
         for record in self:

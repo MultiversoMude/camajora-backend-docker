@@ -45,7 +45,7 @@
   </record>
 
   <record model="ir.actions.act_window" id="rental_resource_setup_act_window">
-    <field name="name">Rental Resource Setup</field>
+    <field name="name">Resource Setups</field>
     <field name="res_model">rental.resource.setup</field>
     <field name="view_mode">tree,form</field>
     <field name="domain">[]</field>

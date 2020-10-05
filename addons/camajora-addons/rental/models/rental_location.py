@@ -11,3 +11,4 @@ class RentalLocation(models.Model):
 
     name = fields.Char(string=_('Name'))
     description = fields.Char(string=_('Description'))
+    partner_id = fields.Many2one('res.partner', string=_('Owner'))

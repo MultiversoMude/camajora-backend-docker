@@ -41,6 +41,7 @@
         'data/rental_resource_performance_data.xml',
         'data/rental_resource_setup_data.xml',
         'data/rental_resource_size_data.xml',
+        'data/ir_sequence_data.xml',
     ],
-    'demo': [],
+    'demo': []
 }

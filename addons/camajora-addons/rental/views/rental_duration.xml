@@ -50,7 +50,7 @@
   </record>
 
   <record model="ir.actions.act_window" id="rental_duration_act_window">
-    <field name="name">Rental Duration</field>
+    <field name="name">Rental Durations</field>
     <field name="res_model">rental.duration</field>
     <field name="view_mode">tree,form</field>
     <field name="domain">[]</field>

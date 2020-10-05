@@ -58,21 +58,11 @@
   </record>
 
   <record model="ir.actions.act_window" id="rental_resource_instance_act_window">
-    <field name="name">Rental Resource Instance</field>
+    <field name="name">Resource Instances</field>
     <field name="res_model">rental.resource.instance</field>
     <field name="view_mode">tree,form</field>
     <field name="domain">[]</field>
     <field name="context">{}</field>
-  </record>
-
-  <record model="ir.sequence" id="rental_resource_sequence">
-    <field name="name">Rental Resource Instance sequence</field>
-    <field name="code">rental.resource.instance.code</field>
-    <field name="active">TRUE</field>
-    <field name="prefix">SKU</field>
-    <field name="padding">6</field>
-    <field name="number_next">1</field>
-    <field name="number_increment">1</field>
   </record>
 
 </odoo>

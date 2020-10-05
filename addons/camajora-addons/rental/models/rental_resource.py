@@ -9,16 +9,23 @@ class RentalResource(models.Model):
     _name = 'rental.resource'
     _description = 'Rental Resource'
 
-    name = fields.Char(string=_('Name'))
-    code = fields.Char(string=_('Code'), readonly=True)
+    name = fields.Char(string=_('Name'), readonly=True, default=lambda self: _('New'), compute='_compute_name')
+    code = fields.Char(string=_('Code'), required=True, copy=False, readonly=True, index=True)
     active = fields.Boolean(default=True, string=_('Active'))
 
-    type_id = fields.Many2one('rental.resource.type', string=_('Type'))
-    location_id = fields.Many2one('rental.location', string=_('Location'))
-    partner_id = fields.Many2one('res.partner', string=_('Owner'))
+    type_id = fields.Many2one('rental.resource.type', required=True, string=_('Type'))
+    location_id = fields.Many2one('rental.location', required=True, string=_('Location'))
+    partner_id = fields.Many2one('res.partner', related='location_id.partner_id', string=_('Owner'))
     instances_ids = fields.One2many('rental.resource.instance', 'resource_id', string=_('Instances'))
 
     instance_count = fields.Integer(string=_('Total Instances'), compute='_compute_instance_count')
+
+    def _compute_name(self):
+        for record in self:
+            record.name = ' '.join([
+                record.type_id.category_id.name,
+                record.location_id.name
+            ])
 
     def _compute_instance_count(self):
         for record in self:
@@ -43,14 +50,5 @@ class RentalResource(models.Model):
 
     @api.model
     def create(self, vals):
-        vals['code'] = self.env['ir.sequence'].next_by_code('rental.resource.code')
+        vals['code'] = self.env['ir.sequence'].next_by_code('rental.resource.code') or _('New')
         return super().create(vals)
-
-    @api.onchange('location_id')
-    def _generate_name(self):
-        for record in self:
-            record.name = ' '.join([
-                record.type_id.category_id.name,
-                record.location_id.name,
-                record.code
-            ])

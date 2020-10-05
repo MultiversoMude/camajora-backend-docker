@@ -24,21 +24,10 @@
     <field name="action" ref="rental_resource_act_window" />
     <field name="sequence" eval="20" />
   </record>
-  <record model="ir.ui.menu" id="rental_resource_menu">
-    <field name="name">Resource</field>
-    <field name="parent_id" ref="rental_resource_main_menu" />
-    <field name="action" ref="rental_resource_act_window" />
-    <field name="sequence" eval="10" />
-  </record>
-  <record model="ir.ui.menu" id="rental_resource_type_menu">
-    <field name="name">Resource Type</field>
-    <field name="parent_id" ref="rental_resource_main_menu" />
-    <field name="action" ref="rental_resource_type_act_window" />
-    <field name="sequence" eval="20" />
-  </record>
+  <!-- Location Menu -->
   <record model="ir.ui.menu" id="rental_location_menu">
-    <field name="name">Location</field>
-    <field name="parent_id" ref="rental_resource_main_menu" />
+    <field name="name">Locations</field>
+    <field name="parent_id" ref="rental_main_menu" />
     <field name="action" ref="rental_location_act_window" />
     <field name="sequence" eval="30" />
   </record>
@@ -47,7 +36,7 @@
     <field name="name">Configuration</field>
     <field name="parent_id" ref="rental_main_menu" />
     <field name="action" ref="rental_resource_act_window" />
-    <field name="sequence" eval="30" />
+    <field name="sequence" eval="40" />
   </record>
   <record model="ir.ui.menu" id="rental_resource_category_menu">
     <field name="name">Category</field>
