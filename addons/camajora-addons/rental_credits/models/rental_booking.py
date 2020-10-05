@@ -14,27 +14,26 @@ class RentalBooking(models.Model):
 
     credits_used = fields.Integer(string=_('Credits Used'), readonly=True, compute='_compute_credits_used')
 
-    @api.model
-    def create(self, vals):
-        res = super().create(vals)
-        res.user_id.write({
-            'credits': res.user_id.credits - res.total_credits
-        })
-        return res
+    @api.multi
+    def action_confirm(self):
+        if self.user_id.credits < self.credits_used:
+            raise ValidationError('Not enough credits')
 
-    @api.constrains('user_id')
-    def _check_user_credits(self):
-        for record in self:
-            if record.user_id.credits < record.total_credits:
-                raise ValidationError('Not enough credits')
+        res = super().action_confirm()
+
+        self.user_id.write({
+            'credits': self.user_id.credits - self.credits_used
+        })
+
+        return res
 
     def _compute_credits_used(self):
         for record in self:
-            total_credits = 0
+            credit_cost = 0
             for slot_id in record.slot_ids:
-                total_credits += (
+                credit_cost += (
                     slot_id.total_hours *
                     slot_id.resource_instance_id.resource_id.credit_cost  # hourly credit cost
                     # applicare sconto
                 )
-            record.total_credits = total_credits
+            record.credits_used = credit_cost

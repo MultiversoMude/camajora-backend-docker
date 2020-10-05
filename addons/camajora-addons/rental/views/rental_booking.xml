@@ -6,7 +6,11 @@
     <field name="model">rental.booking</field>
     <field name="arch" type="xml">
       <form>
-        <header></header>
+        <header>
+          <button name="action_confirm" states="draft" type="object" string="Confirm"  class="btn-primary"/>
+          <button name="action_cancel" states="draft" type="object" string="Cancel"/>
+          <field name="state" widget="statusbar"/>
+        </header>
         <sheet>
           <div class="oe_title">
             <h1>

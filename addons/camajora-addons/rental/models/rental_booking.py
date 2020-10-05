@@ -24,6 +24,12 @@ class RentalBooking(models.Model):
     slot_ids = fields.One2many('rental.booking.slot', 'booking_id', string=_('Slots'))
     slot_count = fields.Integer(string=_('Total Slots'), compute='_compute_slot_count')
 
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('confirmed', 'Confirmed'),
+        ('cancelled', 'Cancelled'),
+    ], string='Status', readonly=True, copy=False, store=True, default='draft')
+
     @api.model
     def create(self, vals):
         vals['name'] = self.env['ir.sequence'].next_by_code('rental.booking.sku')
@@ -35,3 +41,11 @@ class RentalBooking(models.Model):
                 [('booking_id', '=', record.id)]
             )
             record.slot_count = len(count)
+
+    @api.multi
+    def action_confirm(self):
+        return self.write({'state': 'confirmed'})
+
+    @api.multi
+    def action_cancel(self):
+        return self.write({'state': 'cancelled'})
