@@ -6,7 +6,7 @@
     <field name="model">rental.booking.slot</field>
     <field name="inherit_id" ref="rental.rental_booking_slot_form_view" />
     <field name="arch" type="xml">
-      <field name="total_hours" position="after">
+      <field name="end_time" position="after">
         <field name="credit_cost" />
         <field name="credit_total" />
       </field>
