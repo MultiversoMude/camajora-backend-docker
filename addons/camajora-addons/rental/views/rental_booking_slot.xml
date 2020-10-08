@@ -14,6 +14,7 @@
             </h1>
           </div>
           <group>
+            <field name="booking_id" />
             <field name="resource_instance_id" />
             <field name="duration" attrs="{'invisible': 1}" />
             <field name="duration_id" />
@@ -53,20 +54,28 @@
       <tree>
         <field name="name" />
         <field name="booking_id" />
-        <field name="resource_instance_id" />
         <field name="duration_id" />
-        <field name="start_date" />
-        <field name="end_date" />
-        <field name="start_time" />
-        <field name="end_time" />
+        <field name="dt_start" />
+        <field name="dt_end" />
+        <field name="total_hours" />
       </tree>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="rental_booking_slot_calendar_view">
+    <field name="name">rental.booking.slot.calendar (in rental)</field>
+    <field name="model">rental.booking.slot</field>
+    <field name="arch" type="xml">
+      <calendar color="name" date_start="dt_start" date_stop="dt_end" string="Slots">
+        <field name="name" />
+      </calendar>
     </field>
   </record>
 
   <record model="ir.actions.act_window" id="rental_booking_slot_act_window">
     <field name="name">Booking Slots</field>
     <field name="res_model">rental.booking.slot</field>
-    <field name="view_mode">tree,form</field>
+    <field name="view_mode">tree,form,pivot,calendar</field>
     <field name="domain">[]</field>
     <field name="context">{}</field>
   </record>

@@ -11,6 +11,9 @@
         </header>
         <sheet>
           <div class="oe_button_box" name="button_box">
+            <button class="oe_stat_button" icon="fa-calendar" name="action_open_calendar" type="object">
+              <field name="instance_count" string="Calendar" widget="statinfo" />
+            </button>
             <button class="oe_stat_button" icon="fa-child" name="action_open_instances" type="object">
               <field name="instance_count" string="Instances" widget="statinfo" />
             </button>

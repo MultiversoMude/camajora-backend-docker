@@ -7,9 +7,9 @@
     <field name="arch" type="xml">
       <form>
         <header>
-          <button name="action_confirm" states="draft" type="object" string="Confirm"  class="btn-primary"/>
-          <button name="action_cancel" states="draft" type="object" string="Cancel"/>
-          <field name="state" widget="statusbar"/>
+          <button name="action_confirm" states="draft" type="object" string="Confirm" class="btn-primary" />
+          <button name="action_cancel" states="draft" type="object" string="Cancel" />
+          <field name="state" widget="statusbar" />
         </header>
         <sheet>
           <div class="oe_title">
@@ -27,6 +27,7 @@
               <field name="slot_ids" context="{'default_booking_id': active_id}">
                 <tree>
                   <field name="name" />
+                  <field name="resource_instance_id" />
                   <field name="duration_id" />
                   <field name="dt_start" />
                   <field name="dt_end" />
@@ -67,7 +68,7 @@
   <record model="ir.actions.act_window" id="rental_booking_act_window">
     <field name="name">Bookings</field>
     <field name="res_model">rental.booking</field>
-    <field name="view_mode">tree,form</field>
+    <field name="view_mode">tree,form,pivot</field>
     <field name="domain">[]</field>
     <field name="context">{}</field>
   </record>

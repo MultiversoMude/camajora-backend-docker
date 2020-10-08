@@ -16,7 +16,7 @@ class RentalResourceInstance(models.Model):
     code = fields.Char(string=_('SKU'), readonly=True)
     active = fields.Boolean(default=True, string=_('Active'))
 
-    resource_id = fields.Many2one('rental.resource', string=_('Resource'), required=True)
+    resource_id = fields.Many2one('rental.resource', string=_('Resource'), required=True, ondelete='cascade')
     equipments_ids = fields.Many2many('rental.resource.equipment', string=_('Equipments'))
 
     def _compute_name(self):

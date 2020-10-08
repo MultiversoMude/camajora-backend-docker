@@ -48,6 +48,19 @@ class RentalResource(models.Model):
             'context': {'default_resource_id': self.id},
         }
 
+    @api.multi
+    def action_open_calendar(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Booking Calendar',
+            'res_model': 'rental.booking.slot',
+            'view_type': 'tree',
+            'view_mode': 'calendar',
+            'target': 'current',
+            'domain': [('resource_instance_id', 'in', self.instances_ids)],
+        }
+
     @api.model
     def create(self, vals):
         vals['code'] = self.env['ir.sequence'].next_by_code('rental.resource.code') or _('New')

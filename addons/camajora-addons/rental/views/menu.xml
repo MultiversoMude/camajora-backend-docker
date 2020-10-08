@@ -15,11 +15,25 @@
     <field name="action" ref="rental_booking_act_window" />
     <field name="sequence" eval="10" />
   </record>
+  <record model="ir.ui.menu" id="rental_booking_slot_menu">
+    <field name="name">Booking Slots</field>
+    <field eval="[(6,0,[ref('base.group_no_one')])]" name="groups_id" />
+    <field name="parent_id" ref="rental_main_menu" />
+    <field name="action" ref="rental_booking_slot_act_window" />
+    <field name="sequence" eval="10" />
+  </record>
   <!-- Resource Menu -->
   <record model="ir.ui.menu" id="rental_resource_main_menu">
     <field name="name">Resources</field>
     <field name="parent_id" ref="rental_main_menu" />
     <field name="action" ref="rental_resource_act_window" />
+    <field name="sequence" eval="20" />
+  </record>
+  <record model="ir.ui.menu" id="rental_resource_instance_main_menu">
+    <field name="name">Resource Instances</field>
+    <field eval="[(6,0,[ref('base.group_no_one')])]" name="groups_id" />
+    <field name="parent_id" ref="rental_main_menu" />
+    <field name="action" ref="rental_resource_instance_act_window" />
     <field name="sequence" eval="20" />
   </record>
   <!-- Location Menu -->
