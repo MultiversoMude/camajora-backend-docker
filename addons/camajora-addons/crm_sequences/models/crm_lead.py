@@ -1,4 +1,4 @@
-# Copyright 2019 Metadonors Srl
+# Copyright 2020 Metadonors srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models, _
@@ -9,7 +9,7 @@ class CrmLead(models.Model):
     _inherit = 'crm.lead'
 
     code = fields.Char(
-        string=_("Code"),
+        string=_('Code'),
         readonly=True
     )
 
@@ -18,7 +18,7 @@ class CrmLead(models.Model):
     def name_get(self):
         result = []
         for record in self:
-            name = u"[{}] {}".format(record.code, record.name)
+            name = u'[{}] {}'.format(record.code, record.name)
             result.append((record.id, name))
         return result
 
@@ -34,4 +34,4 @@ class CrmLead(models.Model):
 
         for lead_id in lead_ids:
             code = self.env['ir.sequence'].next_by_code('crm.lead')
-            lead_id.write({"code": code })
+            lead_id.write({'code': code })
