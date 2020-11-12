@@ -79,17 +79,17 @@ class RentalBookingSlot(models.Model):
             start_time = record.start_time or 0
             end_time = record.end_time or 0
             half_day_type = record.half_day_type or 'morning'
-            total_hours = None
+            day_hours = 0
             dt_start = None
             dt_end = None
 
             if duration == 'hourly':
-                total_hours = end_time - start_time
+                day_hours = end_time - start_time
                 dt_start = datetime.combine(start_date, time(start_time, 0))
                 dt_end = datetime.combine(start_date, time(end_time, 0))
 
             elif duration == 'half_daily':
-                total_hours = 4 if half_day_type != 'day' else 8
+                day_hours = 4 if half_day_type != 'day' else 8
                 if half_day_type == 'morning':
                     dt_start = datetime.combine(start_date, time(9, 0))
                     dt_end = datetime.combine(start_date, time(13, 59))
@@ -101,21 +101,22 @@ class RentalBookingSlot(models.Model):
                     dt_end = datetime.combine(start_date, time(18, 59))
 
             elif duration == 'daily':
-                total_hours = 10
+                day_hours = 10
                 dt_start = datetime.combine(start_date, time(0, 0))
                 dt_end = datetime.combine(end_date, time(23, 59))
 
             elif duration == 'weekly':
-                total_hours = 168
+                day_hours = 10
                 dt_start = datetime.combine(get_monday(start_date), time(0, 0))
                 dt_end = datetime.combine(get_sunday(end_date), time(23, 59))
 
             elif duration == 'monthly':
-                total_hours = 720
+                day_hours = 10
                 dt_start = datetime.combine(start_date.replace(day=1), time(0, 0))
                 dt_end = datetime.combine(last_day_of_month(end_date), time(23, 59))
 
-            record.total_hours = total_hours
+            number_of_days = (dt_end - dt_start).days + 1
+            record.total_hours = number_of_days * day_hours
             record.dt_start = timezone.localize(dt_start).astimezone(pytz.utc).replace(tzinfo=None)
             record.dt_end = timezone.localize(dt_end).astimezone(pytz.utc).replace(tzinfo=None)
 

@@ -5,10 +5,8 @@ from odoo.addons.component.core import AbstractComponent
 from odoo.exceptions import MissingError
 
 
-class BasePublicService(AbstractComponent):
+class BaseCommonService(AbstractComponent):
     _inherit = 'base.rest.service'
-    _name = 'base.rest.public.service'
-    _collection = 'base.rest.public.services'
     _expose_model = None
 
     def _validator_search(self):
@@ -50,3 +48,13 @@ class BasePublicService(AbstractComponent):
             raise MissingError('Record not found')
 
         return self._serialize_with_id(payload)
+
+
+class BasePublicService(BaseCommonService):
+    _name = 'base.rest.public.service'
+    _collection = 'base.rest.public.services'
+
+
+class BasePrivateService(BaseCommonService):
+    _name = 'base.rest.private.service'
+    _collection = 'base.rest.private.services'

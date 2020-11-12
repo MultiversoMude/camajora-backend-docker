@@ -1,0 +1,222 @@
+import logging
+
+from odoo import _
+from odoo.addons.base_rest.components.service import to_int
+from odoo.addons.component.core import Component
+from odoo.exceptions import UserError
+
+_logger = logging.getLogger(__name__)
+
+
+class BookingService(Component):
+    _inherit = 'base.rest.private.service'
+    _name = 'booking.service'
+    _usage = 'booking'
+    _description = 'Camajora private services: booking operations'
+
+    def search(self):
+        """
+        Get current cart or create one if not found
+        """
+        cart = self._get()
+        return self._to_json(cart)
+
+    def add_item(self, **params):
+        """
+        Add a booking slot to current cart
+        """
+        cart = self._get()
+        self._add_item(cart, params)
+        return self._to_json(cart)
+
+    def remove_item(self, **params):
+        """
+        Remove a booking slot from current cart
+        """
+        cart = self._get()
+        self._delete_item(cart, params)
+        return self._to_json(cart)
+
+    def clear(self, **params):
+        """
+        Remove all booking slots from current cart
+        """
+        cart = self._get()
+        cart = self._clear_cart(cart)
+        return self._to_json(cart)
+
+    def confirm(self):
+        """
+        Set current cart state to 'confirmed'
+        """
+        cart = self._get()
+        cart.write({'state': 'confirmed'})
+        return self._to_json(cart)
+
+    # PRIVATE  METHODS
+
+    def _serialize(self, record):
+        data = {}
+        data['id'] = record.id
+        data['state'] = record.state
+        data['name'] = record.name
+        data['user_id'] = record.user_id.id
+        data['user_name'] = record.user_id.name
+        data['date'] = record.date
+        data['lines'] = self._serialize_slots(record)
+
+        _logger.error('Serialized cart:')
+        _logger.error(data)
+        return data
+
+    def _serialize_slots(self, cart):
+        items = []
+        for slot in cart.slot_ids:
+            items.append(self._serialize_one_slot(slot))
+
+        return {'count': cart.slot_count, 'items': items}
+
+    def _serialize_one_slot(self, line):
+        image = '{}/website/image/rental.resource.type/{}/image/200x0'.format(
+            self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
+            line.resource_instance_id.resource_id.type_id.id
+        )
+
+        return {
+            'id': line.id,
+            'sku': line.name,
+            'total_hours': line.total_hours,
+            'image': image,
+        }
+
+    def _get_object_schema(self):
+        return {
+            'id': {'type': 'integer', 'required': True, 'empty': False, 'nullable': False},
+            'state': {'type': 'string', 'required': True, 'empty': False, 'nullable': False},
+            'name': {'type': 'string', 'required': True, 'empty': False, 'nullable': False},
+            'user_id': {'type': 'integer', 'required': True, 'empty': False, 'nullable': False},
+            'user_name': {'type': 'string', 'required': True, 'empty': False, 'nullable': False},
+            'date': {'type': 'date', 'required': True, 'empty': False, 'nullable': False},
+            'lines': {
+                'type': 'dict',
+                'schema': {
+                    'count': {'type': 'float', 'required': False, 'empty': True, 'nullable': True},
+                    'items':  {
+                        'type': 'list',
+                        'schema': {
+                            'type': 'dict',
+                            'schema': {
+                                'id': {'type': 'integer', 'required': True},
+                                'sku': {'type': 'string', 'required': True},
+                                'total_hours': {'type': 'integer', 'required': True},
+                                'image': {'type': 'string', 'required': False, 'empty': True, 'nullable': True},
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    def _get(self, create_if_not_found=True):
+
+        _logger.error('GETTING CART FOR')
+        _logger.error(self.env.user.partner_id.name)
+
+        self.env.cr.execute(
+            'SELECT 1 FROM rental_booking WHERE state = \'draft\' and user_id = %s FOR UPDATE',
+            [self.env.user.partner_id.id]
+        )
+
+        cart = self.env['rental.booking'].sudo().search([
+            ('state', 'in', ['draft']),
+            ('user_id', '=', self.env.user.partner_id.id)
+        ])
+
+        if cart:
+            return cart[0]
+
+        _logger.error('CART NOT FOUND')
+        if create_if_not_found:
+            return self._create_empty_cart()
+
+    def _create_empty_cart(self):
+        return self.env['rental.booking'].sudo().create({
+            'user_id': self.env.user.partner_id.id
+        })
+
+    def _add_item(self, cart, params):
+        if cart.state != 'draft':
+            raise UserError(_('You can\'t add item in this cart'))
+
+        resource_instance_id = self.env['rental.resource.instance'].sudo().search([('id', '=', params['resource_instance_id'])])
+        if not resource_instance_id:
+            raise UserError(_('Resource not found'))
+
+        duration_id = self.env['rental.duration'].sudo().search([('id', '=', params['duration_id'])])
+        if not duration_id:
+            raise UserError(_('Duration not found'))
+
+        self.env['rental.booking.slot'].sudo().create({
+            'booking_id': cart.id,
+            'resource_instance_id': resource_instance_id.id,
+            'duration_id': duration_id.id,
+            'start_date':  params['start_date'],
+            'end_date':  params['end_date'],
+            'start_time':  params['start_time'],
+            'end_time':  params['end_time'],
+            'half_day_type':  params['half_day_type'],
+        })
+
+    def _clear_cart(self, cart):
+        if cart.state != 'draft':
+            raise UserError(_('State cart error'))
+
+        cart.sudo().write({'slot_ids': [(5, False, False)]})
+        return cart
+
+    def _delete_item(self, cart, params):
+        if cart.state != 'draft':
+            raise UserError(_('You can\'t delete items from this cart'))
+
+        slot_id = self.env['rental.booking.slot'].sudo().search([
+            ('id', '=', params['slot_id']),
+            ('booking_id', '=', cart.id),
+        ])
+
+        if slot_id:
+            slot_id.sudo().unlink()
+
+    # VALIDATORS
+
+    def _validator_return_search(self):
+        return self._validator_return_get()
+
+    def _validator_add_item(self):
+        return {
+            'resource_instance_id': {
+                'type': 'integer',
+                'coerce': to_int,
+                'required': True,
+            },
+            'duration_id': {
+                'type': 'integer',
+                'coerce': to_int,
+                'required': True,
+            },
+            'start_date': {'type': 'string', 'required': True},
+            'end_date': {'type': 'string', 'required': False, 'nullable': True},
+            'start_time': {'type': 'string', 'required': False, 'nullable': True},
+            'end_time': {'type': 'string', 'required': False, 'nullable': True},
+            'half_day_type': {'type': 'string', 'required': False, 'nullable': True},  # FIXME LIMIT TO POTENTIAL
+        }
+
+    def _validator_remove_item(self):
+        return {
+            'slot_id': {'type': 'integer', 'coerce': to_int, 'required': True}
+        }
+
+    def _validator_clear(self):
+        return {}
+
+    def _validator_confirm(self):
+        return {}
