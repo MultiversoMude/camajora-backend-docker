@@ -1,12 +1,13 @@
-# -*- coding: utf-8 -*-
-# Copyright 2017 Metadonors Srl
+# Copyright 2020 Metadonors srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import secrets
+import os
 
+from binascii import hexlify
 from odoo import api, fields, models, _
 
 TOKEN_LENGHT = 32
+
 
 class AuthApiToken(models.Model):
 
@@ -17,23 +18,23 @@ class AuthApiToken(models.Model):
         return self.env.user
 
     user_id = fields.Many2one(
-        'res.users', 
+        'res.users',
         string=_('User'),
         required=True,
         default=_default_user_id
     )
 
-    token = fields.Char(
-        string=_("API Key"),
-        readonly=True
-    )
+    token = fields.Char(string=_("API Key"), readonly=True)
 
     @api.model
     def retrieve_from_user(self, user_id):
-        keys = self.search([('user_id', '=', user_id.id)])
+        keys = self.search([
+            ('user_id', '=', user_id.id)
+        ])
+
         if len(keys) > 0:
             return keys[0]
-        
+
         key = self.create({
             'user_id': user_id.id
         })
@@ -45,15 +46,16 @@ class AuthApiToken(models.Model):
         keys = self.search([
             ('token', '=', api_key)
         ])
+
         if len(keys) > 0:
             return keys[0]
 
         return False
 
     def _generate_token(self):
-        return secrets.token_urlsafe(TOKEN_LENGHT)
+        return hexlify(os.urandom(TOKEN_LENGHT))
 
     @api.model
     def create(self, vals):
         vals['token'] = self._generate_token()
-        return super(AuthApiToken, self).create(vals)
+        return super().create(vals)
