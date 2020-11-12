@@ -1,18 +1,18 @@
-# -*- coding: utf-8 -*-
-# Copyright 2019 Metadonors Srl
+# Copyright 2020 Metadonors srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
 
 from odoo import api, fields, models, _
-from odoo.http import request
 from odoo.exceptions import AccessDenied
+from odoo.http import request
 
 _logger = logging.getLogger(__name__)
 
+
 class IrHttp(models.AbstractModel):
     _inherit = 'ir.http'
-    
+
     @classmethod
     def _auth_method_api_key(cls):
         headers = request.httprequest.environ
