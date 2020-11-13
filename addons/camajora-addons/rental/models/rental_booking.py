@@ -1,6 +1,12 @@
 # Copyright 2020 Metadonors Srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import base64
+import qrcode
+import random
+import uuid
+
+from io import BytesIO
 from odoo import api, fields, models, _
 
 
@@ -30,9 +36,14 @@ class RentalBooking(models.Model):
         ('cancelled', 'Cancelled'),
     ], string='Status', readonly=True, copy=False, store=True, default='draft')
 
+    token = fields.Char(string=_('Secret Token'), readonly=True)
+    qr_code = fields.Binary(string=_('QR Code'), readonly=True)
+
     @api.model
     def create(self, vals):
         vals['name'] = self.env['ir.sequence'].next_by_code('rental.booking.sku')
+        vals['token'] = self._generate_token()
+        vals['qr_code'] = self._generate_qr_code(vals['token'])
         return super().create(vals)
 
     def _compute_slot_count(self):
@@ -49,3 +60,19 @@ class RentalBooking(models.Model):
     @api.multi
     def action_cancel(self):
         return self.write({'state': 'cancelled'})
+
+    def _generate_token(self):
+        """
+        create a token for coupon (lenght 48)
+
+        :returns: token (str)
+        """
+        random_number = random.randint(0000000000000000, 9999999999999999)
+        token = "%s%s" % (str(uuid.uuid4()).replace("-", ""), str(random_number))
+        return token
+
+    def _generate_qr_code(self, token):
+        img = qrcode.make(token)
+        buffered = BytesIO()
+        img.save(buffered, format='PNG')
+        return base64.b64encode(buffered.getvalue())

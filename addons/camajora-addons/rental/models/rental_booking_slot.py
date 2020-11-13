@@ -61,7 +61,7 @@ class RentalBookingSlot(models.Model):
     dt_start = fields.Datetime(string=_('Booking From'), readonly=True, compute='_compute_range', store=True)
     dt_end = fields.Datetime(string=_('Booking To'), readonly=True, compute='_compute_range', store=True)
 
-    qr_code = fields.Char(string=_('Code'), readonly=True)
+    unlock_link = fields.Char(string=_('Unlock Link'), readonly=True, compute='_compute_unlock_link')
 
     @api.depends(
         'duration',
@@ -151,3 +151,12 @@ class RentalBookingSlot(models.Model):
             if self.search_count(domain) > 0:
                 raise ValidationError(_('You can not have an overlap between two booking slots of the same resource.\n'
                                         'Please correct the start and/or end dates of your booking slot.'))
+
+    @api.depends('booking_id')
+    def _compute_unlock_link(self):
+        for record in self:
+            record.unlock_link = '{}/api/v1/unlock/?token={}&sku={}'.format(
+                self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
+                record.booking_id.token,
+                record.resource_instance_id.code,
+            )

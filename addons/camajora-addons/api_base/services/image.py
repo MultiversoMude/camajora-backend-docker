@@ -6,14 +6,14 @@ import logging
 
 from odoo import SUPERUSER_ID
 from odoo.addons.base_rest.components.service import skip_secure_response
-from odoo.addons.component.core import Component
+from odoo.addons.component.core import AbstractComponent
 from odoo.exceptions import MissingError
 from odoo.http import request
 
 log = logging.getLogger(__name__)
 
 
-class BaseImageService(Component):
+class BaseImageService(AbstractComponent):
     _inherit = 'base.rest.service'
     _name = 'base.rest.public.image'
     _collection = 'base.rest.public.services'
@@ -33,3 +33,8 @@ class BaseImageService(Component):
         response = request.make_response(image_base64, headers)
         response.status_code = status
         return response
+
+    def _validator_get(self):
+        return {
+            'model': {'type': 'string', 'required': True},
+        }

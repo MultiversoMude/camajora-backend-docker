@@ -2,9 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Rental Credits',
-    'description': """
-        Camajora rental credit system""",
+    'name': 'Camajora Credits',
+    'description': """Rental credits management""",
     'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'Metadonors Srl',

@@ -8,7 +8,7 @@ from odoo.addons.component.core import Component
 class ResourceImageService(Component):
     _inherit = 'base.rest.public.image'
     _name = 'resource.image.service'
-    _usage = 'images/resource'
+    _usage = 'images'
     _description = 'Camajora public services: get images by ID, model and size'
 
     @skip_secure_response

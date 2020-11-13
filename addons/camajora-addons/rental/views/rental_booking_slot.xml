@@ -30,6 +30,8 @@
             <field name="total_hours" />
             <field name="dt_start" />
             <field name="dt_end" />
+
+            <field name="unlock_link" widget="url" readonly="1" text="LINK"/>
           </group>
         </sheet>
         <div class="oe_chatter"></div>

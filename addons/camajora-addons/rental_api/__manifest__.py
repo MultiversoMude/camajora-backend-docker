@@ -2,8 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Camajora REST API',
-    'description': 'Base REST addon for Camajora',
+    'name': 'Camajora Rental REST API',
+    'description': """Rental management REST API""",
     'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'Metadonors srl',

@@ -18,9 +18,15 @@
             </h1>
           </div>
           <group>
-            <field name="date" />
-            <field name="user_id" />
-            <field name="rent_channel" />
+            <group>
+              <field name="date" />
+              <field name="user_id" />
+              <field name="rent_channel" />
+            </group>
+            <group>
+              <field name="token" invisible="0" />
+              <field name="qr_code" widget="image" invisible="0" class="oe_avatar" readonly="1" />
+            </group>
           </group>
           <notebook>
             <page string="Slots">
