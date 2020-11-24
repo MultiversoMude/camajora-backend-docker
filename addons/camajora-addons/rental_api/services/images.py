@@ -13,4 +13,8 @@ class ResourceImageService(Component):
 
     @skip_secure_response
     def get(self, _id, model):
-        return self._get_image_response(_id, 'rental.resource.type')
+        """
+        Get mode image
+        """
+        if model in ['rental.resource.type', 'rental.resource.category']:
+            return self._get_image_response(_id, model)

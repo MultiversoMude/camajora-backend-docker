@@ -53,6 +53,16 @@ class BookingService(Component):
         cart.write({'state': 'confirmed'})
         return self._to_json(cart)
 
+    def get_confirmed(self):
+        """
+        Get all user's confirmed orders
+        """
+        booking_ids = self.env['rental.booking'].sudo().search([
+            ('state', 'in', ['confirmed']),
+            ('user_id', '=', self.env.user.partner_id.id)
+        ])
+        return self._to_json(booking_ids, many=True)
+
     # PRIVATE  METHODS
 
     def _serialize(self, record):
@@ -63,6 +73,7 @@ class BookingService(Component):
         data['user_id'] = record.user_id.id
         data['user_name'] = record.user_id.name
         data['date'] = record.date
+        data['token'] = record.token
         data['lines'] = self._serialize_slots(record)
 
         _logger.error('Serialized cart:')
@@ -87,6 +98,8 @@ class BookingService(Component):
             'sku': line.name,
             'total_hours': line.total_hours,
             'image': image,
+            'dt_start': line.dt_start,
+            'dt_end': line.dt_end,
         }
 
     def _get_object_schema(self):
@@ -97,6 +110,7 @@ class BookingService(Component):
             'user_id': {'type': 'integer', 'required': True, 'empty': False, 'nullable': False},
             'user_name': {'type': 'string', 'required': True, 'empty': False, 'nullable': False},
             'date': {'type': 'date', 'required': True, 'empty': False, 'nullable': False},
+            'token': {'type': 'string', 'required': False, 'empty': True, 'nullable': True},
             'lines': {
                 'type': 'dict',
                 'schema': {
@@ -110,6 +124,8 @@ class BookingService(Component):
                                 'sku': {'type': 'string', 'required': True},
                                 'total_hours': {'type': 'integer', 'required': True},
                                 'image': {'type': 'string', 'required': False, 'empty': True, 'nullable': True},
+                                'dt_start': {'type': 'datetime', 'required': True},
+                                'dt_end': {'type': 'datetime', 'required': True},
                             }
                         }
                     }
@@ -118,10 +134,6 @@ class BookingService(Component):
         }
 
     def _get(self, create_if_not_found=True):
-
-        _logger.error('GETTING CART FOR')
-        _logger.error(self.env.user.partner_id.name)
-
         self.env.cr.execute(
             'SELECT 1 FROM rental_booking WHERE state = \'draft\' and user_id = %s FOR UPDATE',
             [self.env.user.partner_id.id]
@@ -219,4 +231,7 @@ class BookingService(Component):
         return {}
 
     def _validator_confirm(self):
+        return {}
+
+    def _validator_get_confirmed(self):
         return {}

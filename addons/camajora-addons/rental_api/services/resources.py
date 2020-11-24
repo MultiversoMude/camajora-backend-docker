@@ -56,6 +56,16 @@ class ResourceService(Component):
             'setup': resource_id.type_id.setup_id.name,
             'size': resource_id.type_id.size_id.name,
             'instance_count': resource_id.instance_count,
+            'instances': self._serialize_instances(resource_id),
+        }
+
+    def _serialize_instances(self, resource_id):
+        return [self._serialize_instance(instance_id) for instance_id in resource_id.instances_ids]
+
+    def _serialize_instance(self, instance_id):
+        return {
+            'id': instance_id.id,
+            'code': instance_id.code
         }
 
     # VALIDATORS
@@ -112,5 +122,15 @@ class ResourceService(Component):
                 'required': True,
                 'empty': False,
             },
-            'instance_count': {'type': 'integer', 'required': True}
+            'instance_count': {'type': 'integer', 'required': True},
+            'instances': {
+                'type': 'list',
+                'schema': {
+                    'type': 'dict',
+                    'schema': {
+                        'id': {'type': 'integer', 'required': True},
+                        'code': {'type': 'string', 'required': True},
+                    }
+                }
+            }
         }
