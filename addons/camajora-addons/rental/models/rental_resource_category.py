@@ -11,3 +11,4 @@ class RentalResourceCategory(models.Model):
 
     name = fields.Char(string=_('Name'))
     description = fields.Char(string=_('Description'))
+    image = fields.Binary(string=_('Image'))
