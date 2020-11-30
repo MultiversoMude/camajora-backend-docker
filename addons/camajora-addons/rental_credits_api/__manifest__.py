@@ -12,6 +12,7 @@
         'api_key_auth',
         'rental_api',
         'rental_credits',
+        'rest_shop',
     ],
     'data': [],
     'demo': [],
