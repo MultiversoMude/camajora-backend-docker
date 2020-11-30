@@ -1,29 +1,30 @@
 # Copyright 2020 Metadonors Srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
 from odoo import api, models
 
+log = logging.getLogger(__name__)
 
-class AccountInvoice(models.Model):
 
-    _inherit = 'account.invoice'
+class PaymentTransaction(models.Model):
+    _inherit = 'payment.transaction'
 
     @api.multi
-    def action_invoice_paid(self):
-        res = super().action_invoice_paid()
-        for invoice in self:
-            invoice._generate_credit_order()
-
+    def _reconcile_after_transaction_done(self):
+        log.debug('################################## CULONE')
+        res = super()._reconcile_after_transaction_done()
+        for trans in self.filtered(lambda t: t.sale_order_ids):
+            for sale_order_id in trans.sale_order_ids:
+                self._generate_credit_order(sale_order_id)
         return res
 
-    @api.multi
-    def _generate_credit_order(self):
+    def _generate_credit_order(self, sale_order_id):
         """
             This method is called upon payment of an order.
             It checks every single line of the sale order and if it finds a credit package
             assign the number of credits to the buyer.
         """
-        sale_order_id = self.env['sale.order'].search([('name', '=', self.origin)])
         credits_to_add = 0
 
         for line in sale_order_id.order_line:
@@ -32,6 +33,9 @@ class AccountInvoice(models.Model):
                     line.product_id.product_tmpl_id.credits_value * int(line.product_uom_qty)
                 )
 
+        log.debug('################################## GENERATE CREDIT ORDER::')
+        log.debug(credits_to_add)
+        log.debug('################################## GENERATE CREDIT ORDER::')
         sale_order_id.partner_id.write({
             'credits': sale_order_id.partner_id.credits + credits_to_add
         })
