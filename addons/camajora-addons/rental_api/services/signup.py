@@ -16,9 +16,14 @@ class SignupService(Component):
         Register a new user
         """
 
+        country_id = self.env['res.country'].sudo().search([
+            ('code', '=', 'IT')
+        ], limit=1)
+
         partner_id = self.env['res.partner'].sudo().create({
             'name': values['name'],
-            'email': values['email']
+            'email': values['email'],
+            'country_id': country_id.id
         })
 
         user_id = self.env['res.users'].sudo().create({
