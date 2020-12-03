@@ -5,7 +5,7 @@
     <field name="name">rental.resource.instance.wizard.form</field>
     <field name="model">rental.resource.instance.wizard</field>
     <field name="arch" type="xml">
-      <form string="Generate Coupons">
+      <form string="Generate Instances">
         <group>
           <field name="count" />
           <field name="equipments_ids" />
