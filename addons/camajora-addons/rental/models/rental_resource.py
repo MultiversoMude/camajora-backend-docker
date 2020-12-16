@@ -22,10 +22,11 @@ class RentalResource(models.Model):
 
     def _compute_name(self):
         for record in self:
-            record.name = ' '.join([
-                record.type_id.category_id.name,
-                record.location_id.name
-            ])
+            if record.type_id and record.type_id.category_id and record.location_id:
+                record.name = ' '.join([
+                    record.type_id.category_id.name,
+                    record.location_id.name
+                ])
 
     def _compute_instance_count(self):
         for record in self:
