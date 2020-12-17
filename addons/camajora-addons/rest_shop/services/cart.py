@@ -229,14 +229,6 @@ class CartService(Component):
                     .play_onchanges(vals, vals.keys())
                 )
                 vals.update(new_values)
-                # As the frontend could be in several languages but we have only
-                # one anonymous parnter with his language set, we need to ensure
-                # that description on the line is in the right language
-                partner = cart.partner_id
-                ctx_lang = self.env.context.get("lang", partner.lang)
-                if partner.lang != ctx_lang:
-                    product_id = vals["product_id"]
-                    vals["name"] = self._get_sale_order_line_name(product_id)
                 self.env["sale.order.line"].sudo().create(vals)
             cart.recompute()
 
