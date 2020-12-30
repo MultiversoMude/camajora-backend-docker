@@ -1,8 +1,10 @@
-
 # Copyright 2020 Metadonors Srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.addons.component.core import Component
+
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class ResourceService(Component):
@@ -21,11 +23,23 @@ class ResourceService(Component):
 
         return self._to_json(resource_id)
 
-    def search(self):
+    def search(self, **params):
         """
         Get all Resources
         """
-        resource_ids = self.env['rental.resource'].sudo().search([])
+        where_search_value = params.pop("where", None)
+        when_search_value = params.pop("when", None)
+        what_search_value = params.pop("what", None)
+
+        domain = []
+        if where_search_value:
+            domain.append(('location_id.name', '=ilike', where_search_value))
+        if when_search_value:
+            domain.append(('location_id.name', '=ilike', when_search_value))
+        if what_search_value:
+            domain.append(('type_id.category_id.name', '=ilike', what_search_value))
+
+        resource_ids = self.env['rental.resource'].sudo().search(domain)
         return self._to_json(resource_ids, many=True)
 
     # SERIALIZERS
@@ -70,6 +84,13 @@ class ResourceService(Component):
         }
 
     # VALIDATORS
+
+    def _validator_search(self):
+        return {
+            "where": {"type": "string", "required": False},
+            "when": {"type": "string", "required": False},
+            "what": {"type": "string", "required": False},
+        }
 
     def _get_object_schema(self):
         return {
