@@ -12,3 +12,7 @@ class RentalLocation(models.Model):
     name = fields.Char(string=_('Name'))
     description = fields.Char(string=_('Description'))
     partner_id = fields.Many2one('res.partner', string=_('Owner'))
+
+    city = fields.Char(track_visibility='onchange', string=_('City'))
+    state_id = fields.Many2one("res.country.state", string=_('State'))
+    country_id = fields.Many2one('res.country', string=_('Country'))
