@@ -50,7 +50,7 @@ class ResourceService(Component):
             'code': resource_id.code,
             'location': resource_id.location_id.name,
             'type': resource_id.type_id.category_id.name,
-            'description': resource_id.type_id.description,
+            'description': resource_id.type_id.description if resource_id.type_id.description else "",
             'image': resource_image_url,
             'performance': resource_id.type_id.performance_id.name,
             'price': resource_id.type_id.price,
@@ -95,8 +95,9 @@ class ResourceService(Component):
             },
             'description': {
                 'type': 'string',
-                'required': True,
-                'empty': False,
+                'required': False,
+                'empty': True,
+                'nullable': True,
             },
             'image': {
                 'type': 'string',
