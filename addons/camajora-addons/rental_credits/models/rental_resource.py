@@ -8,4 +8,10 @@ class RentalResource(models.Model):
 
     _inherit = 'rental.resource'
 
+    _sql_constraints = [(
+        'positive_credit_cost',
+        'check(credit_cost > 0)',
+        _('Credit cost must be positive')
+    )]
+
     credit_cost = fields.Integer(string=_('Credit Cost'), required=True)
