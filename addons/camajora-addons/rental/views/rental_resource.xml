@@ -28,8 +28,8 @@
           </div>
           <group>
             <group>
-              <field name="type_id" />
               <field name="code" />
+              <field name="type_id" />
             </group>
             <group>
               <field name="location_id" />
