@@ -8,7 +8,9 @@ class RentalResourceCategory(models.Model):
 
     _name = 'rental.resource.category'
     _description = 'Rental Resource Category'
+    _order = 'sequence'
 
     name = fields.Char(string=_('Name'))
     description = fields.Char(string=_('Description'))
     image = fields.Binary(string=_('Image'))
+    sequence = fields.Integer(default=0)
