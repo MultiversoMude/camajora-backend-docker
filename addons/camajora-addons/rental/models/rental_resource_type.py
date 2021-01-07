@@ -13,7 +13,7 @@ class RentalResourceType(models.Model):
     description = fields.Char(string=_('Description'))
     active = fields.Boolean(default=True, string=_('Active'))
 
-    price = fields.Integer(default=0, help='Price...')
+    # price = fields.Integer(default=0, help='Price...')
     image = fields.Binary(string=_('Image'))
 
     category_id = fields.Many2one('rental.resource.category', string=_('Category'))
