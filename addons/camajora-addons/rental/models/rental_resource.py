@@ -10,8 +10,16 @@ class RentalResource(models.Model):
     _description = 'Rental Resource'
 
     name = fields.Char(string=_('Name'), readonly=True, default=lambda self: _('New'), compute='_compute_name')
+    description = fields.Char(string=_('Description'), related='type_id.description')
     code = fields.Char(string=_('Code'), required=True, copy=False, readonly=True, index=True)
     active = fields.Boolean(default=True, string=_('Active'))
+
+    category_id = fields.Many2one('rental.resource.category', string=_('Category'), related='type_id.category_id')
+    setup_id = fields.Many2one('rental.resource.setup', string=_('Setup'), related='type_id.setup_id')
+    size_id = fields.Many2one('rental.resource.size', string=_('Size'), related='type_id.size_id')
+    performance_id = fields.Many2one('rental.resource.performance', string=_('Performance'), related='type_id.performance_id')
+    availability_id = fields.Many2one('rental.availability', string=_('Availability'), related='type_id.availability_id')
+    duration_id = fields.Many2one('rental.duration', string=_('Duration'), related='type_id.duration_id')
 
     type_id = fields.Many2one('rental.resource.type', string=_('Type'), required=True)
     location_id = fields.Many2one('rental.location', string=_('Location'), required=True)
