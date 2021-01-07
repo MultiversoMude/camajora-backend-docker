@@ -30,13 +30,22 @@
             <group>
               <field name="code" />
               <field name="type_id" />
-            </group>
-            <group>
               <field name="location_id" />
               <field name="partner_id" />
             </group>
+            <group>
+              <field name="category_id" />
+              <field name="setup_id" />
+              <field name="size_id" />
+              <field name="performance_id" />
+              <field name="availability_id" />
+              <field name="duration_id" />
+            </group>
           </group>
           <notebook>
+            <page string="Description">
+              <field name="description" />
+            </page>
             <page string="Instances">
               <field name="instances_ids" context="{'default_resource_id': active_id}">
                 <tree>

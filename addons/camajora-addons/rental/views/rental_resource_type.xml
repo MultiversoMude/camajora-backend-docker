@@ -21,7 +21,6 @@
           </div>
           <group>
             <field name="description" />
-            <field name="price" />
           </group>
           <group>
             <group>
