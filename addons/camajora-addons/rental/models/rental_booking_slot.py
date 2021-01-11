@@ -154,9 +154,11 @@ class RentalBookingSlot(models.Model):
 
     @api.depends('booking_id')
     def _compute_unlock_link(self):
+        base_url = self.env['ir.config_parameter'].sudo().get_param('web.app.url')
+
         for record in self:
             record.unlock_link = '{}/api/v1/unlock/?token={}&sku={}'.format(
-                self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
+                base_url,
                 record.booking_id.token,
                 record.resource_instance_id.code,
             )

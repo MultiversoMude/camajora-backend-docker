@@ -10,11 +10,13 @@
     'author': 'Metadonors srl',
     'website': 'https://www.metadonors.it',
     'depends': [
+        'mail',
         'base_rest',
     ],
     'data': [
         'security/auth_api_token.xml',
         'views/auth_api_token.xml',
+        'data/user_password_reset_email.xml',
     ],
     'demo': [],
 }

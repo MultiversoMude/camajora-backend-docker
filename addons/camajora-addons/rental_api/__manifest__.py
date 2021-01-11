@@ -10,6 +10,7 @@
     'website': 'https://www.metadonors.it',
     'depends': [
         'api_base',
+        'rental',
     ],
     'data': [],
     'demo': [],

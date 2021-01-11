@@ -1,14 +1,14 @@
-import logging
+# Copyright 2020 Metadonors srl
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.addons.component.core import Component
 
-_logger = logging.getLogger(__name__)
-
 
 class SignupService(Component):
-    _inherit = 'base.rest.public.service'
+    _inherit = 'base.rest.service'
     _name = 'signup.service'
     _usage = 'signup'
+    _collection = 'rest.auth.public.services'
     _description = 'Camajora public services: signup user'
 
     def create(self, **values):
