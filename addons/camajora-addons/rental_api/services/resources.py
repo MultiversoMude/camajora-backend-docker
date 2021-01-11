@@ -33,11 +33,13 @@ class ResourceService(Component):
 
         domain = []
         if where_search_value:
-            domain.append(('location_id.name', '=ilike', where_search_value))
+            domain.append('|')
+            domain.append(('location_id.name', 'ilike', where_search_value))
+            domain.append(('location_id.city', 'ilike', where_search_value))
         if when_search_value:
-            domain.append(('location_id.name', '=ilike', when_search_value))
+            domain.append(('location_id.name', 'ilike', when_search_value))
         if what_search_value:
-            domain.append(('type_id.category_id.name', '=ilike', what_search_value))
+            domain.append(('type_id.category_id.name', 'ilike', what_search_value))
 
         resource_ids = self.env['rental.resource'].sudo().search(domain)
         return self._to_json(resource_ids, many=True)
@@ -67,7 +69,7 @@ class ResourceService(Component):
             'description': resource_id.type_id.description if resource_id.type_id.description else "",
             'image': resource_image_url,
             'performance': resource_id.type_id.performance_id.name,
-            'price': resource_id.type_id.price,
+            'credit_cost': resource_id.credit_cost,
             'setup': resource_id.type_id.setup_id.name,
             'size': resource_id.type_id.size_id.name,
             'instance_count': resource_id.instance_count,
@@ -130,7 +132,7 @@ class ResourceService(Component):
                 'required': True,
                 'empty': False,
             },
-            'price': {
+            'credit_cost': {
                 'type': 'float',
                 'required': True,
                 'empty': False,

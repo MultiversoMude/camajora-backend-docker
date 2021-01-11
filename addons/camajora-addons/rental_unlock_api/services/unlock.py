@@ -11,14 +11,13 @@ class UnlockService(Component):
     _usage = 'unlock'
     _description = 'Camajora private services: unlock Resource by token'
 
-    def create(self, token, sku):
+    def create(self, token):
         """
-        Get booking slot informations from booking token and resource SKU
+        Get booking slot informations from booking token
         """
         booking_slot_id = self.env['rental.booking.slot'].sudo().search([
             ('booking_id.state', '=', 'confirmed'),
             ('booking_id.token', '=', token),
-            ('resource_instance_id.code', '=', sku),
         ])
 
         if not booking_slot_id:
@@ -32,6 +31,8 @@ class UnlockService(Component):
         data = {}
         data['dt_start'] = record.dt_start
         data['dt_end'] = record.dt_end
+        data['resource_sku'] = record.resource_instance_id.code
+        data['location_id'] = record.resource_instance_id.resource_id.location_id.id
         return data
 
     # VALIDATORS
@@ -39,11 +40,12 @@ class UnlockService(Component):
     def _validator_create(self):
         return {
             'token': {'type': 'string', 'required': True, 'empty': False},
-            'sku': {'type': 'string', 'required': True, 'empty': False}
         }
 
     def _validator_return_create(self):
         return {
             'dt_start': {'type': 'datetime', 'required': True},
             'dt_end': {'type': 'datetime', 'required': True},
+            'resource_sku': {'type': 'string', 'required': True},
+            'location_id': {'type': 'integer', 'required': True},
         }
