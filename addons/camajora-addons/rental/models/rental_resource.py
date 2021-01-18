@@ -11,7 +11,7 @@ class RentalResource(models.Model):
 
     name = fields.Char(string=_('Name'), readonly=True, default=lambda self: _('New'), compute='_compute_name')
     description = fields.Char(string=_('Description'), related='type_id.description')
-    code = fields.Char(string=_('Code'), required=True, copy=False, readonly=True, index=True)
+    code = fields.Char(string=_('Code'), required=False, copy=False, readonly=True, index=True)
     active = fields.Boolean(default=True, string=_('Active'))
 
     category_id = fields.Many2one('rental.resource.category', string=_('Category'), related='type_id.category_id')
