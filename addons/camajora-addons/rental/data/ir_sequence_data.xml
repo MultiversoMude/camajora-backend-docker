@@ -6,7 +6,7 @@
       <field name="name">Booking sequence</field>
       <field name="code">rental.booking.sku</field>
       <field name="active">TRUE</field>
-      <field name="prefix">SKU</field>
+      <field name="prefix">BKN</field>
       <field name="padding">5</field>
       <field name="number_next">1</field>
       <field name="number_increment">1</field>
@@ -24,7 +24,7 @@
       <field name="name">Resource Instance equence</field>
       <field name="code">rental.resource.instance.code</field>
       <field name="active">TRUE</field>
-      <field name="prefix">SKU</field>
+      <field name="prefix">-</field>
       <field name="padding">5</field>
       <field name="number_next">1</field>
       <field name="number_increment">1</field>
