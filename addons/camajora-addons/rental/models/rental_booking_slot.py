@@ -136,6 +136,8 @@ class RentalBookingSlot(models.Model):
             # Starting date must be prior to the ending date
             dt_start = record.dt_start
             dt_end = record.dt_end
+            if dt_start < fields.Datetime.today():
+                raise ValidationError(_('The starting date must not be in the past.'))
             if dt_end < dt_start:
                 raise ValidationError(_('The ending date must not be prior to the starting date.'))
 
