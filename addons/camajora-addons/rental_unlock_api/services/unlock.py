@@ -23,9 +23,16 @@ class UnlockService(Component):
         if not booking_slot_id:
             raise MissingError('Invalid or expired token')
 
-        return self._serialize(booking_slot_id)
+        return self._to_json(booking_slot_id)
 
-    # PRIVATE  METHODS
+    # PRIVATE METHODS
+
+    def _to_json(self, payload):
+        data = payload or []
+        return {
+            'count': len(data),
+            'results': [self._serialize(record_id) for record_id in data],
+        }
 
     def _serialize(self, record):
         data = {}
@@ -44,8 +51,18 @@ class UnlockService(Component):
 
     def _validator_return_create(self):
         return {
-            'dt_start': {'type': 'datetime', 'required': True},
-            'dt_end': {'type': 'datetime', 'required': True},
-            'resource_sku': {'type': 'string', 'required': True},
-            'location_id': {'type': 'integer', 'required': True},
+            'count': {'type': 'integer', 'required': True},
+            'results': {
+                'type': 'list',
+                'required': True,
+                'schema': {
+                    'type': 'dict',
+                    'schema': {
+                        'dt_start': {'type': 'datetime', 'required': True},
+                        'dt_end': {'type': 'datetime', 'required': True},
+                        'resource_sku': {'type': 'string', 'required': True},
+                        'location_id': {'type': 'integer', 'required': True},
+                    }
+                },
+            },
         }
