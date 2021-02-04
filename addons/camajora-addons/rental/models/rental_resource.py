@@ -8,6 +8,7 @@ class RentalResource(models.Model):
 
     _name = 'rental.resource'
     _description = 'Rental Resource'
+    _order = 'create_date DESC'
 
     name = fields.Char(string=_('Name'), readonly=True, default=lambda self: _('New'), compute='_compute_name')
     description = fields.Char(string=_('Description'), related='type_id.description')

@@ -16,5 +16,5 @@ class ResourceImageService(Component):
         """
         Get mode image
         """
-        if model in ['rental.resource.type', 'rental.resource.category']:
+        if model in ['rental.resource.type', 'rental.resource.category', 'rental.website.home']:
             return self._get_image_response(_id, model)
