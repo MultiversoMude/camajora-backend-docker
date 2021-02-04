@@ -11,3 +11,4 @@ from . import rental_resource_size
 from . import rental_resource_type
 from . import rental_booking
 from . import rental_booking_slot
+from . import res_partner

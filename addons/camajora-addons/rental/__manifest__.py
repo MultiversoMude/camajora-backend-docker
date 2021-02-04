@@ -33,6 +33,7 @@
         'views/rental_resource_instance.xml',
         'views/rental_booking_slot.xml',
         'views/rental_booking.xml',
+        'views/res_partner.xml',
         'views/menu.xml',
         'data/rental_availability_data.xml',
         'data/rental_duration_data.xml',

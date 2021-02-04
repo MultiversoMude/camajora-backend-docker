@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record model="ir.ui.view" id="rental_partner_form_view">
+    <field name="name">res.partner.form (in rental)</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="arch" type="xml">
+      <field name="vat" position="after">
+        <field name="fiscal_code" />
+        <field name="invoice_recipient_code" />
+        <field name="pec_address" />
+      </field>
+    </field>
+  </record>
+
+</odoo>
