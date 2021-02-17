@@ -148,9 +148,9 @@ class RentalBookingSlot(models.Model):
                 '&', ('dt_start', '<=', record.dt_start), ('dt_end', '>=', record.dt_end),
             ]
 
-            if self.search_count(domain) > 0:
-                raise ValidationError(_('You can not have an overlap between two booking slots of the same resource.\n'
-                                        'Please correct the start and/or end dates of your booking slot.'))
+            # if self.search_count(domain) > 0:
+            #     raise ValidationError(_('You can not have an overlap between two booking slots of the same resource.\n'
+            #                             'Please correct the start and/or end dates of your booking slot.'))
 
     @api.depends('booking_id')
     def _compute_unlock_link(self):
