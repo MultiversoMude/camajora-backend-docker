@@ -3,9 +3,14 @@
 
 import calendar
 import datetime
+import logging
+import pytz
 
 from odoo.addons.component.core import Component
 from odoo.exceptions import MissingError
+
+_logger = logging.getLogger(__name__)
+timezone = pytz.timezone('Europe/Rome')
 
 
 def unpack_calendar_param(param):
@@ -54,19 +59,25 @@ class CalendarService(Component):
 
     def _get_busy_days(self, resource_id, year, month, start, end):
         busy = []
-        for day in range(1, calendar.monthrange(year, month)[1]):
-            target_start = datetime.datetime(year, month, day, start)
-            target_end = datetime.datetime(year, month, day, end)
+
+        for day in range(1, calendar.monthrange(year, month)[1] + 1):
+            target_start = datetime.datetime(year, month, day, start, 0)
+            target_end = datetime.datetime(year, month, day, end - 1, 59)
+
+            utc_target_start = timezone.localize(target_start).astimezone(pytz.utc).replace(tzinfo=None)
+            utc_target_end = timezone.localize(target_end).astimezone(pytz.utc).replace(tzinfo=None)
 
             domain = [
                 ('resource_instance_id', '=', resource_id.id),
-                '|', '|',
-                '&', ('dt_start', '<=', target_start), ('dt_end', '>=', target_start),
-                '&', ('dt_start', '<=', target_end), ('dt_end', '>=', target_end),
-                '&', ('dt_start', '<=', target_start), ('dt_end', '>=', target_end),
+                '|',
+                    '&', ('dt_start', '<=', utc_target_start), ('dt_end', '>=', utc_target_end),
+                    '|',
+                        '&', ('dt_start', '<=', utc_target_start), ('dt_end', '>=', utc_target_start),
+                        '&', ('dt_start', '<=', utc_target_end), ('dt_end', '>=', utc_target_end),
+                    
             ]
 
             if self.env['rental.booking.slot'].sudo().search_count(domain) > 0:
-                busy.append('{}-{}-{}'.format(year, month, day))
+                busy.append('{}-{:02}-{:02}'.format(year, month, day))
 
         return busy
