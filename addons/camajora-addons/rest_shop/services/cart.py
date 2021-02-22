@@ -185,7 +185,7 @@ class CartService(Component):
             "partner_shipping_id": partner.id,
             "partner_invoice_id": partner.id,
         }
-        vals.update(self.env["sale.order"].play_onchanges(vals, vals.keys()))
+        vals.update(self.env["sale.order"].sudo().play_onchanges(vals, vals.keys()))
 
         vals['user_id'] = False
 

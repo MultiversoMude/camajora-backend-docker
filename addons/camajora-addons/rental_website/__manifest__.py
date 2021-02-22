@@ -8,7 +8,6 @@
     'license': 'AGPL-3',
     'author': 'Metadonors Srl',
     'website': 'https://www.metadonors.it',
-    'application': True,
     'depends': [
         'api_base',
     ],

@@ -28,32 +28,13 @@
     </field>
   </record>
 
-  <record model="ir.ui.view" id="home_config_search_view">
-    <field name="name">rental.website.home.search (in rental)</field>
-    <field name="model">rental.website.home</field>
-    <field name="arch" type="xml">
-      <search>
-        <field name="title" />
-      </search>
-    </field>
-  </record>
-
-  <record model="ir.ui.view" id="home_config_tree_view">
-    <field name="name">rental.website.home.tree (in rental)</field>
-    <field name="model">rental.website.home</field>
-    <field name="arch" type="xml">
-      <tree>
-        <field name="title" />
-      </tree>
-    </field>
-  </record>
-
   <record model="ir.actions.act_window" id="home_config_act_window">
     <field name="name">Home Configuration</field>
     <field name="res_model">rental.website.home</field>
-    <field name="view_mode">tree,form,pivot</field>
+    <field name="res_id" ref="home_placeholder_data"></field>
+    <field name="view_mode">form</field>
     <field name="domain">[]</field>
-    <field name="context">{}</field>
+    <field name="target">inline</field>
   </record>
 
 </odoo>

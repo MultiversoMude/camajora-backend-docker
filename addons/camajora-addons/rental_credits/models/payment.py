@@ -12,7 +12,6 @@ class PaymentTransaction(models.Model):
 
     @api.multi
     def _reconcile_after_transaction_done(self):
-        log.debug('################################## CULONE')
         res = super()._reconcile_after_transaction_done()
         for trans in self.filtered(lambda t: t.sale_order_ids):
             for sale_order_id in trans.sale_order_ids:
@@ -33,9 +32,6 @@ class PaymentTransaction(models.Model):
                     line.product_id.product_tmpl_id.credits_value * int(line.product_uom_qty)
                 )
 
-        log.debug('################################## GENERATE CREDIT ORDER::')
-        log.debug(credits_to_add)
-        log.debug('################################## GENERATE CREDIT ORDER::')
         sale_order_id.partner_id.write({
             'credits': sale_order_id.partner_id.credits + credits_to_add
         })
