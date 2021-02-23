@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20200629\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-03 13:39+0000\n"
-"PO-Revision-Date: 2020-12-03 13:39+0000\n"
+"POT-Creation-Date: 2021-02-23 13:35+0000\n"
+"PO-Revision-Date: 2021-02-23 13:35+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,12 @@ msgid "14:00 - 19:00"
 msgstr ""
 
 #. module: rental
-#: code:addons/rental/models/rental_resource.py:14
+#: model:res.groups,name:rental.group_rental_api
+msgid "API"
+msgstr ""
+
+#. module: rental
+#: code:addons/rental/models/rental_resource.py:16
 #: code:addons/rental/models/rental_resource_instance.py:17
 #: code:addons/rental/models/rental_resource_type.py:14
 #: model:ir.model.fields,field_description:rental.field_rental_resource__active
@@ -52,15 +57,22 @@ msgstr "Attivo"
 #: selection:rental.booking,rent_channel:0
 #, python-format
 msgid "App"
-msgstr "App"
+msgstr ""
 
 #. module: rental
+#: code:addons/rental/models/rental_resource.py:22
 #: code:addons/rental/models/rental_resource_type.py:23
+#: model:ir.model.fields,field_description:rental.field_rental_resource__availability_id
 #: model:ir.model.fields,field_description:rental.field_rental_resource_type__availability_id
 #: model:ir.ui.menu,name:rental.rental_availability_menu
 #, python-format
 msgid "Availability"
 msgstr "Orario Disponibilità"
+
+#. module: rental
+#: model:res.groups,name:rental.group_rental_backoffice
+msgid "Backoffice"
+msgstr ""
 
 #. module: rental
 #: code:addons/rental/models/rental_booking_slot.py:38
@@ -112,7 +124,9 @@ msgid "Cancelled"
 msgstr "Annullata"
 
 #. module: rental
+#: code:addons/rental/models/rental_resource.py:18
 #: code:addons/rental/models/rental_resource_type.py:19
+#: model:ir.model.fields,field_description:rental.field_rental_resource__category_id
 #: model:ir.model.fields,field_description:rental.field_rental_resource_type__category_id
 #: model:ir.ui.menu,name:rental.rental_resource_category_menu
 #, python-format
@@ -120,7 +134,14 @@ msgid "Category"
 msgstr "Categoria"
 
 #. module: rental
-#: code:addons/rental/models/rental_resource.py:13
+#: code:addons/rental/models/rental_location.py:16
+#: model:ir.model.fields,field_description:rental.field_rental_location__city
+#, python-format
+msgid "City"
+msgstr "Città"
+
+#. module: rental
+#: code:addons/rental/models/rental_resource.py:15
 #: model:ir.model.fields,field_description:rental.field_rental_resource__code
 #, python-format
 msgid "Code"
@@ -140,6 +161,18 @@ msgstr "Conferma"
 #: selection:rental.booking,state:0
 msgid "Confirmed"
 msgstr "Confermata"
+
+#. module: rental
+#: model:ir.model,name:rental.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: rental
+#: code:addons/rental/models/rental_location.py:18
+#: model:ir.model.fields,field_description:rental.field_rental_location__country_id
+#, python-format
+msgid "Country"
+msgstr "Nazione"
 
 #. module: rental
 #: model:ir.model.fields,field_description:rental.field_rental_availability__create_uid
@@ -178,6 +211,11 @@ msgid "Created on"
 msgstr "Creato il"
 
 #. module: rental
+#: model:res.groups,name:rental.group_rental_customer
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: rental
 #: code:addons/rental/models/rental_booking_slot.py:44
 #: code:addons/rental/models/rental_duration.py:25
 #: selection:rental.duration,type:0
@@ -196,7 +234,8 @@ msgstr "Data"
 #: code:addons/rental/models/rental_availability.py:13
 #: code:addons/rental/models/rental_duration.py:19
 #: code:addons/rental/models/rental_location.py:13
-#: code:addons/rental/models/rental_resource_category.py:13
+#: code:addons/rental/models/rental_resource.py:14
+#: code:addons/rental/models/rental_resource_category.py:14
 #: code:addons/rental/models/rental_resource_equipment.py:13
 #: code:addons/rental/models/rental_resource_performance.py:14
 #: code:addons/rental/models/rental_resource_setup.py:14
@@ -205,12 +244,14 @@ msgstr "Data"
 #: model:ir.model.fields,field_description:rental.field_rental_availability__description
 #: model:ir.model.fields,field_description:rental.field_rental_duration__description
 #: model:ir.model.fields,field_description:rental.field_rental_location__description
+#: model:ir.model.fields,field_description:rental.field_rental_resource__description
 #: model:ir.model.fields,field_description:rental.field_rental_resource_category__description
 #: model:ir.model.fields,field_description:rental.field_rental_resource_equipment__description
 #: model:ir.model.fields,field_description:rental.field_rental_resource_performance__description
 #: model:ir.model.fields,field_description:rental.field_rental_resource_setup__description
 #: model:ir.model.fields,field_description:rental.field_rental_resource_size__description
 #: model:ir.model.fields,field_description:rental.field_rental_resource_type__description
+#: model_terms:ir.ui.view,arch_db:rental.rental_resource_form_view
 #, python-format
 msgid "Description"
 msgstr "Descrizione"
@@ -247,8 +288,10 @@ msgstr "Bozza"
 
 #. module: rental
 #: code:addons/rental/models/rental_booking_slot.py:40
+#: code:addons/rental/models/rental_resource.py:23
 #: code:addons/rental/models/rental_resource_type.py:24
 #: model:ir.model.fields,field_description:rental.field_rental_booking_slot__duration_id
+#: model:ir.model.fields,field_description:rental.field_rental_resource__duration_id
 #: model:ir.model.fields,field_description:rental.field_rental_resource_type__duration_id
 #: model:ir.ui.menu,name:rental.rental_duration_menu
 #, python-format
@@ -299,16 +342,20 @@ msgid "External Site"
 msgstr "Sito Esterno"
 
 #. module: rental
+#: code:addons/rental/models/res_partner.py:11
+#: model:ir.model.fields,field_description:rental.field_res_partner__fiscal_code
+#: model:ir.model.fields,field_description:rental.field_res_users__fiscal_code
+#, python-format
+msgid "Fiscal Code"
+msgstr "Codice Fiscale"
+
+#. module: rental
 #: model_terms:ir.ui.view,arch_db:rental.generate_instances_wizard_view_form
 msgid "Generate"
 msgstr "Genera"
 
 #. module: rental
 #: model_terms:ir.ui.view,arch_db:rental.generate_instances_wizard_view_form
-msgid "Generate Instances"
-msgstr "Genera Istanze"
-
-#. module: rental
 #: model_terms:ir.ui.view,arch_db:rental.rental_resource_form_view
 msgid "Generate Instances"
 msgstr "Genera Istanze"
@@ -352,10 +399,10 @@ msgstr "Oraria"
 #: model:ir.model.fields,field_description:rental.field_rental_resource_size__id
 #: model:ir.model.fields,field_description:rental.field_rental_resource_type__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: rental
-#: code:addons/rental/models/rental_resource_category.py:14
+#: code:addons/rental/models/rental_resource_category.py:15
 #: code:addons/rental/models/rental_resource_type.py:17
 #: model:ir.model.fields,field_description:rental.field_rental_resource_category__image
 #: model:ir.model.fields,field_description:rental.field_rental_resource_type__image
@@ -364,12 +411,28 @@ msgid "Image"
 msgstr "Immagine"
 
 #. module: rental
-#: code:addons/rental/models/rental_resource.py:19
+#: code:addons/rental/models/rental_resource.py:28
 #: model:ir.model.fields,field_description:rental.field_rental_resource__instances_ids
 #: model_terms:ir.ui.view,arch_db:rental.rental_resource_form_view
 #, python-format
 msgid "Instances"
 msgstr "Istanze"
+
+#. module: rental
+#: code:addons/rental/models/res_partner.py:12
+#: model:ir.model.fields,field_description:rental.field_res_partner__invoice_recipient_code
+#: model:ir.model.fields,field_description:rental.field_res_users__invoice_recipient_code
+#, python-format
+msgid "Invoice Recipient Code"
+msgstr "Codice Destinatario"
+
+#. module: rental
+#: code:addons/rental/models/res_partner.py:15
+#: model:ir.model.fields,field_description:rental.field_res_partner__is_owner
+#: model:ir.model.fields,field_description:rental.field_res_users__is_owner
+#, python-format
+msgid "Is Owner"
+msgstr "È Owner"
 
 #. module: rental
 #: model:ir.model.fields,field_description:rental.field_rental_availability____last_update
@@ -427,18 +490,18 @@ msgstr "Ultimo aggiornamento il"
 
 #. module: rental
 #: code:addons/rental/models/rental_booking.py:26
-#: code:addons/rental/models/rental_resource.py:17
+#: code:addons/rental/models/rental_resource.py:26
 #: model:ir.model.fields,field_description:rental.field_rental_resource__location_id
 #: selection:rental.booking,rent_channel:0
 #, python-format
 msgid "Location"
-msgstr "Location"
+msgstr "Luogo"
 
 #. module: rental
 #: model:ir.actions.act_window,name:rental.rental_location_act_window
 #: model:ir.ui.menu,name:rental.rental_location_menu
 msgid "Locations"
-msgstr "Locations"
+msgstr ""
 
 #. module: rental
 #: code:addons/rental/models/rental_booking.py:23
@@ -446,6 +509,11 @@ msgstr "Locations"
 #, python-format
 msgid "Main Site"
 msgstr "Sito Principale"
+
+#. module: rental
+#: model:res.groups,name:rental.group_rental_manager
+msgid "Manager"
+msgstr "Supervisore"
 
 #. module: rental
 #: code:addons/rental/models/rental_booking_slot.py:46
@@ -459,8 +527,8 @@ msgstr "Mensile"
 #: code:addons/rental/models/rental_availability.py:12
 #: code:addons/rental/models/rental_duration.py:18
 #: code:addons/rental/models/rental_location.py:12
-#: code:addons/rental/models/rental_resource.py:12
-#: code:addons/rental/models/rental_resource_category.py:12
+#: code:addons/rental/models/rental_resource.py:13
+#: code:addons/rental/models/rental_resource_category.py:13
 #: code:addons/rental/models/rental_resource_equipment.py:12
 #: code:addons/rental/models/rental_resource_instance.py:15
 #: code:addons/rental/models/rental_resource_performance.py:13
@@ -483,12 +551,12 @@ msgid "Name"
 msgstr "Nome"
 
 #. module: rental
-#: code:addons/rental/models/rental_resource.py:12
-#: code:addons/rental/models/rental_resource.py:66
+#: code:addons/rental/models/rental_resource.py:13
+#: code:addons/rental/models/rental_resource.py:76
 #: code:addons/rental/models/rental_resource_instance.py:15
 #, python-format
 msgid "New"
-msgstr "Nuovo"
+msgstr "Nuova"
 
 #. module: rental
 #: code:addons/rental/wizards/generate_instances_wizard.py:14
@@ -505,15 +573,26 @@ msgstr "Numero di Istanze da Generare"
 
 #. module: rental
 #: code:addons/rental/models/rental_location.py:14
-#: code:addons/rental/models/rental_resource.py:18
+#: code:addons/rental/models/rental_resource.py:27
 #: model:ir.model.fields,field_description:rental.field_rental_location__partner_id
 #: model:ir.model.fields,field_description:rental.field_rental_resource__partner_id
+#: model:res.groups,name:rental.group_rental_owner
 #, python-format
 msgid "Owner"
 msgstr "Proprietario"
 
 #. module: rental
+#: code:addons/rental/models/res_partner.py:13
+#: model:ir.model.fields,field_description:rental.field_res_partner__pec_address
+#: model:ir.model.fields,field_description:rental.field_res_users__pec_address
+#, python-format
+msgid "PEC Address"
+msgstr "Indirizzo PEC"
+
+#. module: rental
+#: code:addons/rental/models/rental_resource.py:21
 #: code:addons/rental/models/rental_resource_type.py:22
+#: model:ir.model.fields,field_description:rental.field_rental_resource__performance_id
 #: model:ir.model.fields,field_description:rental.field_rental_resource_type__performance_id
 #: model:ir.ui.menu,name:rental.rental_resource_performance_menu
 #, python-format
@@ -526,16 +605,6 @@ msgstr "Resa Acustica"
 #, python-format
 msgid "Phone"
 msgstr "Telefono"
-
-#. module: rental
-#: model:ir.model.fields,field_description:rental.field_rental_resource_type__price
-msgid "Price"
-msgstr "Prezzo"
-
-#. module: rental
-#: model:ir.model.fields,help:rental.field_rental_resource_type__price
-msgid "Price..."
-msgstr "Prezzo..."
 
 #. module: rental
 #: code:addons/rental/models/rental_booking.py:40
@@ -552,9 +621,10 @@ msgid "Rent Channel"
 msgstr "Canale Prenotazione"
 
 #. module: rental
+#: model:ir.module.category,name:rental.rental_groups
 #: model:ir.ui.menu,name:rental.rental_main_menu
 msgid "Rental"
-msgstr "Rental"
+msgstr ""
 
 #. module: rental
 #: model:ir.actions.act_window,name:rental.rental_availability_act_window
@@ -678,12 +748,14 @@ msgstr "Dimensioni Risorsa"
 
 #. module: rental
 #: model:ir.actions.act_window,name:rental.rental_resource_type_act_window
+#: model:ir.ui.menu,name:rental.rental_resource_type_menu
 msgid "Resource Types"
 msgstr "Tipologia Risorsa"
 
 #. module: rental
 #: model:ir.actions.act_window,name:rental.rental_resource_act_window
 #: model:ir.ui.menu,name:rental.rental_resource_main_menu
+#: model:ir.ui.menu,name:rental.rental_resource_menu
 msgid "Resources"
 msgstr "Risorse"
 
@@ -696,7 +768,7 @@ msgstr "Risorse"
 #: model:ir.model.fields,field_description:rental.field_rental_resource_instance__code
 #, python-format
 msgid "SKU"
-msgstr "SKU"
+msgstr ""
 
 #. module: rental
 #: code:addons/rental/models/rental_booking.py:39
@@ -706,6 +778,7 @@ msgid "Secret Token"
 msgstr "Token Segreto"
 
 #. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_resource_category__sequence
 #: model:ir.model.fields,field_description:rental.field_rental_resource_performance__sequence
 #: model:ir.model.fields,field_description:rental.field_rental_resource_setup__sequence
 #: model:ir.model.fields,field_description:rental.field_rental_resource_size__sequence
@@ -713,7 +786,9 @@ msgid "Sequence"
 msgstr "Sequenza"
 
 #. module: rental
+#: code:addons/rental/models/rental_resource.py:19
 #: code:addons/rental/models/rental_resource_type.py:20
+#: model:ir.model.fields,field_description:rental.field_rental_resource__setup_id
 #: model:ir.model.fields,field_description:rental.field_rental_resource_type__setup_id
 #: model:ir.ui.menu,name:rental.rental_resource_setup_menu
 #, python-format
@@ -721,7 +796,9 @@ msgid "Setup"
 msgstr "Allestimento"
 
 #. module: rental
+#: code:addons/rental/models/rental_resource.py:20
 #: code:addons/rental/models/rental_resource_type.py:21
+#: model:ir.model.fields,field_description:rental.field_rental_resource__size_id
 #: model:ir.model.fields,field_description:rental.field_rental_resource_type__size_id
 #: model:ir.ui.menu,name:rental.rental_resource_size_menu
 #, python-format
@@ -735,7 +812,7 @@ msgstr "Dimensione"
 #: model_terms:ir.ui.view,arch_db:rental.rental_booking_slot_calendar_view
 #, python-format
 msgid "Slots"
-msgstr "Slots"
+msgstr ""
 
 #. module: rental
 #: code:addons/rental/models/rental_booking_slot.py:49
@@ -752,6 +829,13 @@ msgid "Start Time"
 msgstr "Ora Inizio"
 
 #. module: rental
+#: code:addons/rental/models/rental_location.py:17
+#: model:ir.model.fields,field_description:rental.field_rental_location__state_id
+#, python-format
+msgid "State"
+msgstr "Provincia"
+
+#. module: rental
 #: model:ir.model.fields,field_description:rental.field_rental_booking__state
 msgid "Status"
 msgstr "Stato"
@@ -763,6 +847,12 @@ msgid "The ending date must not be prior to the starting date."
 msgstr "La data di fine non può essere antecedente a quella di inizio."
 
 #. module: rental
+#: code:addons/rental/models/rental_booking_slot.py:170
+#, python-format
+msgid "The starting date must not be in the past."
+msgstr "La data di inizio non può essere passata."
+
+#. module: rental
 #: code:addons/rental/models/rental_booking_slot.py:60
 #: model:ir.model.fields,field_description:rental.field_rental_booking_slot__total_hours
 #, python-format
@@ -770,7 +860,7 @@ msgid "Total Hours"
 msgstr "Totale Ore"
 
 #. module: rental
-#: code:addons/rental/models/rental_resource.py:21
+#: code:addons/rental/models/rental_resource.py:30
 #: model:ir.model.fields,field_description:rental.field_rental_resource__instance_count
 #, python-format
 msgid "Total Instances"
@@ -785,7 +875,7 @@ msgstr "Totale Slots"
 
 #. module: rental
 #: code:addons/rental/models/rental_duration.py:28
-#: code:addons/rental/models/rental_resource.py:16
+#: code:addons/rental/models/rental_resource.py:25
 #: model:ir.model.fields,field_description:rental.field_rental_duration__type
 #: model:ir.model.fields,field_description:rental.field_rental_resource__type_id
 #, python-format
@@ -805,6 +895,11 @@ msgstr "Link Sblocco"
 #, python-format
 msgid "User"
 msgstr "Utente"
+
+#. module: rental
+#: model:ir.module.category,description:rental.rental_groups
+msgid "User access level for Rental app"
+msgstr "Livelli di accesso utente per app Rental"
 
 #. module: rental
 #: code:addons/rental/models/rental_booking_slot.py:45
