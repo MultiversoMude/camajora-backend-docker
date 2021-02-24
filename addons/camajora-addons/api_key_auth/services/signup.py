@@ -29,8 +29,12 @@ class SignupService(Component):
         user_id = self.env['res.users'].sudo().create({
             'partner_id': partner_id.id,
             'login': values['email'],
-            'new_password': values['password']
+            'new_password': values['password'],
+            'share': True
         })
+
+        group_customer = self.env.ref('rental.group_rental_customer')
+        user_id.write({'groups_id': [(6, 0, [group_customer.id])]})
 
         api_key_id = self.env['auth.api.token'].sudo().retrieve_from_user(user_id)
 

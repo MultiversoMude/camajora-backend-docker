@@ -39,6 +39,8 @@ class UnlockService(Component):
         data['dt_start'] = record.dt_start
         data['dt_end'] = record.dt_end
         data['resource_sku'] = record.resource_instance_id.code
+        data['user_id'] = record.booking_id.user_id.id
+        data['email'] = record.booking_id.user_id.email
         data['location_id'] = record.resource_instance_id.resource_id.location_id.id
         return data
 
@@ -61,6 +63,8 @@ class UnlockService(Component):
                         'dt_start': {'type': 'datetime', 'required': True},
                         'dt_end': {'type': 'datetime', 'required': True},
                         'resource_sku': {'type': 'string', 'required': True},
+                        'user_id': {'type': 'integer', 'required': True},
+                        'email': {'type': 'string', 'required': True},
                         'location_id': {'type': 'integer', 'required': True},
                     }
                 },

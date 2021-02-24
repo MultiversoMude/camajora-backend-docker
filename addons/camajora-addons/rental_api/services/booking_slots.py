@@ -12,10 +12,9 @@ class BookingSlotsService(Component):
         """
         Get specific booking slot
         """
-        slot_id = self.env['rental.booking.slot'].sudo().search([
+        slot_id = self.env['rental.booking.slot'].search([
             ('id', '=', _id),
             ('booking_id.state', 'in', ['confirmed']),
-            ('booking_id.user_id', '=', self.env.user.partner_id.id)
         ])
         response = self._to_json(slot_id)
         response['qr_code'] = slot_id.booking_id.qr_code.decode('utf-8')
@@ -25,9 +24,8 @@ class BookingSlotsService(Component):
         """
         Get all user's confirmed orders
         """
-        slot_ids = self.env['rental.booking.slot'].sudo().search([
+        slot_ids = self.env['rental.booking.slot'].search([
             ('booking_id.state', 'in', ['confirmed']),
-            ('booking_id.user_id', '=', self.env.user.partner_id.id)
         ])
         return self._to_json(slot_ids, many=True)
 

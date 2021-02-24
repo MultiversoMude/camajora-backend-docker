@@ -164,7 +164,7 @@ class BookingService(Component):
         if not resource_instance_id:
             raise UserError(_('Resource not found'))
 
-        duration_id = self.env['rental.duration'].sudo().search([('id', '=', params['duration_id'])])
+        duration_id = self.env['rental.duration'].sudo().search([('type', '=', params['duration'])])
         if not duration_id:
             raise UserError(_('Duration not found'))
 
@@ -210,11 +210,7 @@ class BookingService(Component):
                 'coerce': to_int,
                 'required': True,
             },
-            'duration_id': {
-                'type': 'integer',
-                'coerce': to_int,
-                'required': True,
-            },
+            'duration': {'type': 'string', 'required': True},
             'start_date': {'type': 'string', 'required': True},
             'end_date': {'type': 'string', 'required': False, 'nullable': True},
             'start_time': {'type': 'string', 'required': False, 'nullable': True},

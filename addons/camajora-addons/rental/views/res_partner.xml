@@ -10,6 +10,7 @@
         <field name="fiscal_code" />
         <field name="invoice_recipient_code" />
         <field name="pec_address" />
+        <field name="is_owner" />
       </field>
     </field>
   </record>
