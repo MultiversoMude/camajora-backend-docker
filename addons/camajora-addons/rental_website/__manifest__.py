@@ -12,10 +12,10 @@
         'api_base',
     ],
     'data': [
+        'data/home_config_data.xml',
         'security/home_config.xml',
         'views/home_config.xml',
         'views/menu.xml',
-        'data/home_config_data.xml',
     ],
     'demo': []
 }
