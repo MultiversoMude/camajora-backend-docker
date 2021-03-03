@@ -54,13 +54,6 @@ class ResourceService(Component):
             resource_id.type_id.id,
         )
 
-        """ NOT WORKING IF NOT LOGGED
-        resource_image_url = '{}/website/image/rental.resource.type/{}/image/500x0'.format(
-            base_url,
-            resource_id.type_id.id,
-        )
-        """
-
         return {
             'name': resource_id.name,
             'code': resource_id.code,
