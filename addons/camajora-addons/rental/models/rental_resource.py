@@ -2,6 +2,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models, _
+from .rental_booking_slot import compute_range
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class RentalResource(models.Model):
@@ -75,3 +79,34 @@ class RentalResource(models.Model):
     def create(self, vals):
         vals['code'] = self.env['ir.sequence'].next_by_code('rental.resource.code') or _('New')
         return super().create(vals)
+
+    def get_best_instance_match(self, **kwargs):
+        slot_range = compute_range(
+            kwargs['duration'],
+            fields.Date.from_string(kwargs['start_date']),
+            fields.Date.from_string(kwargs['end_date']),
+            kwargs['start_time'],
+            kwargs['end_time'],
+            kwargs['half_day_type'],
+        )
+
+        dt_start = slot_range['dt_start']
+        dt_end = slot_range['dt_end']
+
+        for record in self:
+            domain = [
+                ('resource_id', '=', record.id),
+                '|', 
+                    '|',
+                        '&', ('booking_slots_ids.dt_start', '>', dt_start), ('booking_slots_ids.dt_start', '>', dt_end),
+                        '&', ('booking_slots_ids.dt_end', '<', dt_start), ('booking_slots_ids.dt_end', '<', dt_end),
+                    ('booking_slots_ids', '=', False)
+
+            ]
+            matches = self.env['rental.resource.instance'].sudo().search(domain, order='booking_slots_ids desc', limit=1)
+
+            if len(matches) < 1:
+                _logger.error('No free instances found, should always be at least one')
+                return
+
+            return matches[0].id

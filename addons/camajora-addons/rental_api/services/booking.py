@@ -160,17 +160,19 @@ class BookingService(Component):
         if cart.state != 'draft':
             raise UserError(_('You can\'t add item in this cart'))
 
-        resource_instance_id = self.env['rental.resource.instance'].sudo().search([('id', '=', params['resource_instance_id'])])
-        if not resource_instance_id:
+        resource_id = self.env['rental.resource'].sudo().search([('id', '=', params['resource_id'])])
+        if not resource_id:
             raise UserError(_('Resource not found'))
 
         duration_id = self.env['rental.duration'].sudo().search([('type', '=', params['duration'])])
         if not duration_id:
             raise UserError(_('Duration not found'))
 
+        resource_instance_id = resource_id.get_best_instance_match(**params)
+
         self.env['rental.booking.slot'].sudo().create({
             'booking_id': cart.id,
-            'resource_instance_id': resource_instance_id.id,
+            'resource_instance_id': resource_instance_id,
             'duration_id': duration_id.id,
             'start_date':  params['start_date'],
             'end_date':  params['end_date'],
@@ -205,7 +207,7 @@ class BookingService(Component):
 
     def _validator_add_item(self):
         return {
-            'resource_instance_id': {
+            'resource_id': {
                 'type': 'integer',
                 'coerce': to_int,
                 'required': True,

@@ -4,7 +4,7 @@
 from odoo import api, fields, models, _
 import logging
 
-log = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 class RentalResourceInstance(models.Model):
@@ -18,6 +18,10 @@ class RentalResourceInstance(models.Model):
 
     resource_id = fields.Many2one('rental.resource', string=_('Resource'), required=True, ondelete='cascade')
     equipments_ids = fields.Many2many('rental.resource.equipment', string=_('Equipments'))
+
+    booking_slots_ids = fields.One2many(
+        'rental.booking.slot', 'resource_instance_id', string=_('Booking Slots')
+    )
 
     def _compute_name(self):
         for record in self:

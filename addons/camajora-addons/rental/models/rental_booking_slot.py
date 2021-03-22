@@ -9,19 +9,6 @@ import pytz
 timezone = pytz.timezone('Europe/Rome')
 
 
-def last_day_of_month(any_day):
-    next_month = any_day.replace(day=28) + timedelta(days=4)  # this will never fail
-    return next_month - timedelta(days=next_month.day)
-
-
-def get_monday(day):
-    return day - timedelta(days=(day.weekday() % 7))
-
-
-def get_sunday(day):
-    return day + timedelta(days=(6 - (day.weekday() % 7)))
-
-
 class RentalBookingSlot(models.Model):
 
     _name = 'rental.booking.slot'
@@ -73,52 +60,17 @@ class RentalBookingSlot(models.Model):
     )
     def _compute_range(self):
         for record in self:
-            duration = record.duration or 'hourly'
-            start_date = record.start_date or fields.Date.today()
-            end_date = record.end_date or fields.Date.today()
-            start_time = record.start_time or 0
-            end_time = record.end_time or 0
-            half_day_type = record.half_day_type or 'morning'
-            day_hours = 0
-            dt_start = None
-            dt_end = None
-
-            if duration == 'hourly':
-                day_hours = end_time - start_time
-                dt_start = datetime.combine(start_date, time(start_time, 0))
-                dt_end = datetime.combine(start_date, time(end_time, 0))
-
-            elif duration == 'half_daily':
-                day_hours = 4 if half_day_type != 'day' else 8
-                if half_day_type == 'morning':
-                    dt_start = datetime.combine(start_date, time(9, 0))
-                    dt_end = datetime.combine(start_date, time(13, 59))
-                if half_day_type == 'afternoon':
-                    dt_start = datetime.combine(start_date, time(14, 0))
-                    dt_end = datetime.combine(start_date, time(18, 59))
-                if half_day_type == 'day':
-                    dt_start = datetime.combine(start_date, time(9, 0))
-                    dt_end = datetime.combine(start_date, time(18, 59))
-
-            elif duration == 'daily':
-                day_hours = 10
-                dt_start = datetime.combine(start_date, time(0, 0))
-                dt_end = datetime.combine(end_date, time(23, 59))
-
-            elif duration == 'weekly':
-                day_hours = 10
-                dt_start = datetime.combine(get_monday(start_date), time(0, 0))
-                dt_end = datetime.combine(get_sunday(end_date), time(23, 59))
-
-            elif duration == 'monthly':
-                day_hours = 10
-                dt_start = datetime.combine(start_date.replace(day=1), time(0, 0))
-                dt_end = datetime.combine(last_day_of_month(end_date), time(23, 59))
-
-            number_of_days = (dt_end - dt_start).days + 1
-            record.total_hours = number_of_days * day_hours
-            record.dt_start = timezone.localize(dt_start).astimezone(pytz.utc).replace(tzinfo=None)
-            record.dt_end = timezone.localize(dt_end).astimezone(pytz.utc).replace(tzinfo=None)
+            slot_range = compute_range(
+                record.duration,
+                record.start_date,
+                record.end_date,
+                record.start_time,
+                record.end_time,
+                record.half_day_type,
+            )
+            record.total_hours = slot_range['total_hours']
+            record.dt_start = slot_range['dt_start']
+            record.dt_end = slot_range['dt_end']
 
     @api.constrains('resource_instance_id', 'dt_start', 'dt_end')
     def _check_dates(self):
@@ -169,3 +121,71 @@ class RentalBookingSlot(models.Model):
         if record.start_date < fields.Date.today():
             raise ValidationError(_('The starting date must not be in the past.'))
         return record
+
+
+# ------------
+
+
+def last_day_of_month(any_day):
+    next_month = any_day.replace(day=28) + timedelta(days=4)  # this will never fail
+    return next_month - timedelta(days=next_month.day)
+
+
+def get_monday(day):
+    return day - timedelta(days=(day.weekday() % 7))
+
+
+def get_sunday(day):
+    return day + timedelta(days=(6 - (day.weekday() % 7)))
+
+
+def compute_range(duration, start_date, end_date, start_time, end_time, half_day_type):
+    duration = duration or 'hourly'
+    start_date = start_date or fields.Date.today()
+    end_date = end_date or fields.Date.today()
+    start_time = start_time or 0
+    end_time = end_time or 0
+    half_day_type = half_day_type or 'morning'
+    day_hours = 0
+    dt_start = None
+    dt_end = None
+
+    if duration == 'hourly':
+        day_hours = end_time - start_time
+        dt_start = datetime.combine(start_date, time(start_time, 0))
+        dt_end = datetime.combine(start_date, time(end_time, 0))
+
+    elif duration == 'half_daily':
+        day_hours = 4 if half_day_type != 'day' else 8
+        if half_day_type == 'morning':
+            dt_start = datetime.combine(start_date, time(9, 0))
+            dt_end = datetime.combine(start_date, time(13, 59))
+        if half_day_type == 'afternoon':
+            dt_start = datetime.combine(start_date, time(14, 0))
+            dt_end = datetime.combine(start_date, time(18, 59))
+        if half_day_type == 'day':
+            dt_start = datetime.combine(start_date, time(9, 0))
+            dt_end = datetime.combine(start_date, time(18, 59))
+
+    elif duration == 'daily':
+        day_hours = 10
+        dt_start = datetime.combine(start_date, time(0, 0))
+        dt_end = datetime.combine(end_date, time(23, 59))
+
+    elif duration == 'weekly':
+        day_hours = 10
+        dt_start = datetime.combine(get_monday(start_date), time(0, 0))
+        dt_end = datetime.combine(get_sunday(end_date), time(23, 59))
+
+    elif duration == 'monthly':
+        day_hours = 10
+        dt_start = datetime.combine(start_date.replace(day=1), time(0, 0))
+        dt_end = datetime.combine(last_day_of_month(end_date), time(23, 59))
+
+    number_of_days = (dt_end - dt_start).days + 1
+
+    total_hours = number_of_days * day_hours
+    dt_start = timezone.localize(dt_start).astimezone(pytz.utc).replace(tzinfo=None)
+    dt_end = timezone.localize(dt_end).astimezone(pytz.utc).replace(tzinfo=None)
+
+    return {'total_hours': total_hours, 'dt_start': dt_start, 'dt_end': dt_end}

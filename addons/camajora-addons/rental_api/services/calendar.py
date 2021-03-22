@@ -30,7 +30,7 @@ class CalendarService(Component):
         """
         Get busy days by resource, target (YYYY-MM) and slots ([0-24]-[0-24])
         """
-        resource_id = self.env['rental.resource.instance'].sudo().search([('id', '=', _id)])
+        resource_id = self.env['rental.resource'].sudo().search([('id', '=', _id)])
 
         if not resource_id:
             raise MissingError('Resource not found')
@@ -68,7 +68,7 @@ class CalendarService(Component):
             utc_target_end = timezone.localize(target_end).astimezone(pytz.utc).replace(tzinfo=None)
 
             domain = [
-                ('resource_instance_id', '=', resource_id.id),
+                ('resource_instance_id', 'in', resource_id.instances_ids.ids),
                 '|',
                     '&', ('dt_start', '<=', utc_target_start), ('dt_end', '>=', utc_target_end),
                     '|',
@@ -76,8 +76,7 @@ class CalendarService(Component):
                         '&', ('dt_start', '<=', utc_target_end), ('dt_end', '>=', utc_target_end),
                     
             ]
-
-            if self.env['rental.booking.slot'].sudo().search_count(domain) > 0:
+            if self.env['rental.booking.slot'].sudo().search_count(domain) >= len(resource_id.instances_ids):
                 busy.append('{}-{:02}-{:02}'.format(year, month, day))
 
         return busy
