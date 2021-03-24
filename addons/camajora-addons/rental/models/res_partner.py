@@ -1,7 +1,7 @@
 # Copyright 2020 Metadonors Srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models, _
+from odoo import api, fields, models, _
 
 
 class ResPartner(models.Model):
@@ -13,7 +13,8 @@ class ResPartner(models.Model):
     pec_address = fields.Char(string=_('PEC Address'), required=False)
     is_owner = fields.Boolean(
         string=_('Is Owner'),
-        compute="_compute_is_owner"
+        compute="_compute_is_owner",
+        store=True
     )
 
     booking_ids = fields.One2many('rental.booking', 'user_id', string=_('Bookings'))
@@ -23,6 +24,7 @@ class ResPartner(models.Model):
         compute="_compute_booking_users"
     )
 
+    @api.depends('user_ids.groups_id')
     def _compute_is_owner(self):
         for record in self:
             record.is_owner = record.user_ids and (

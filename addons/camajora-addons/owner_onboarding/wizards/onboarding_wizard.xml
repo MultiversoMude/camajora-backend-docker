@@ -10,16 +10,10 @@
     <field name="model">owner.onboarding.wizard</field>
     <field name="arch" type="xml">
       <form string="Grant Owner Access">
-        <div>
-          Select which contacts should be owners in the list below.
-          The email address of each selected contact must be valid and unique.
-          If necessary, you can fix any contact's email address directly in the list.
-        </div>
         <field name="user_ids">
           <tree string="Contacts" editable="bottom" create="false" delete="false">
             <field name="partner_id" force_save="1" />
             <field name="email" />
-            <field name="is_owner" />
           </tree>
         </field>
         <field name="welcome_message" placeholder="This text is included in the email sent to new owners." />

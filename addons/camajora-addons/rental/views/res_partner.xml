@@ -15,4 +15,15 @@
     </field>
   </record>
 
+  <record model="ir.ui.view" id="rental_partner_search_view">
+    <field name="name">res.partner.search (in rental)</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter" />
+    <field name="arch" type="xml">
+      <filter name="customer" position="after">
+        <filter string="Owner" name="owner" domain="[('is_owner','=',True)]" help="Owner" />
+      </filter>
+    </field>
+  </record>
+
 </odoo>

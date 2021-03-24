@@ -90,7 +90,6 @@ class OwnerWizardUser(models.TransientModel):
     )
 
     email = fields.Char(_("Email"))
-    is_owner = fields.Boolean(_("Is Owner"))
     user_id = fields.Many2one(comodel_name="res.users", string=_("Login User"))
 
     @api.multi
@@ -119,39 +118,34 @@ class OwnerWizardUser(models.TransientModel):
                 wizard_user.partner_id.write({"email": wizard_user.email})
 
             # add owner group to relative user of selected partners
-            if wizard_user.is_owner:
-                user_owner = None
-                # create a user if necessary, and make sure it is in the portal group
-                if not user:
-                    if wizard_user.partner_id.company_id:
-                        company_id = wizard_user.partner_id.company_id.id
-                    else:
-                        company_id = (
-                            self.env["res.company"]._company_default_get("res.users").id
-                        )
-                    user_owner = (
-                        wizard_user.sudo()
-                        .with_context(company_id=company_id)
-                        ._create_user()
-                    )
+            user_owner = None
+            # create a user if necessary, and make sure it is in the portal group
+            if not user:
+                if wizard_user.partner_id.company_id:
+                    company_id = wizard_user.partner_id.company_id.id
                 else:
-                    user_owner = user
-                wizard_user.write({"user_id": user_owner.id})
-                if (
-                    not wizard_user.user_id.active
-                    or group_owner not in wizard_user.user_id.groups_id
-                ):
-                    wizard_user.user_id.write(
-                        {"active": True, "groups_id": [(4, group_owner.id)]}
+                    company_id = (
+                        self.env["res.company"]._company_default_get("res.users").id
                     )
-                    # prepare for the signup process
-                    wizard_user.user_id.partner_id.signup_prepare()
-                wizard_user.with_context(active_test=True)._send_email()
-                wizard_user.refresh()
+                user_owner = (
+                    wizard_user.sudo()
+                    .with_context(company_id=company_id)
+                    ._create_user()
+                )
             else:
-                # remove the user (if it exists) from the owner group
-                if user and group_owner in user.groups_id:
-                    user.write({"groups_id": [(3, group_owner.id)]})
+                user_owner = user
+
+            wizard_user.write({"user_id": user_owner.id})
+
+            if group_owner not in wizard_user.user_id.groups_id:
+                wizard_user.user_id.write(
+                    {"active": True, "groups_id": [(6, 0, [group_owner.id])]}
+                )
+                # prepare for the signup process
+                wizard_user.user_id.partner_id.signup_prepare()
+
+            # wizard_user.with_context(active_test=True)._send_email()
+            wizard_user.refresh()
 
     @api.multi
     def _create_user(self):
@@ -197,7 +191,7 @@ class OwnerWizardUser(models.TransientModel):
             if template:
                 template.with_context(
                     dbname=self._cr.dbname, portal_url=portal_url, lang=lang
-                ).send_mail(wizard_line.id, force_send=True)
+                ).send_mail(wizard_line.user_id.id, force_send=True)
             else:
                 _logger.warning(
                     "No email template found for sending email to the portal user"

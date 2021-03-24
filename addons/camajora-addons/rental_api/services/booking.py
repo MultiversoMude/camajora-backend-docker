@@ -48,6 +48,7 @@ class BookingService(Component):
     def confirm(self):
         """
         Set current cart state to 'confirmed'
+        WITHOUT CHECKING CREDITS!!
         """
         cart = self._get()
         cart.write({'state': 'confirmed'})

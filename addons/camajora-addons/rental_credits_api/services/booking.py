@@ -15,7 +15,7 @@ class BookingService(Component):
         # Call action confirm on Booking model to check credits
         cart = self._get()
         cart.action_confirm()
-        return super().confirm()
+        return self._to_json(cart)
 
     def _serialize(self, record):
         data = super()._serialize(record)
