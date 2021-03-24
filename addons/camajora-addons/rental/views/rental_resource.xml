@@ -75,7 +75,7 @@
     <field name="name">rental.resource.tree (in rental)</field>
     <field name="model">rental.resource</field>
     <field name="arch" type="xml">
-      <tree>
+      <tree decoration-danger="instance_count == 0">
         <field name="code" />
         <field name="name" />
         <field name="type_id" />

@@ -31,7 +31,8 @@ class ResourceService(Component):
         when_search_value = params.pop("when", None)
         what_search_value = params.pop("what", None)
 
-        domain = []
+        domain = [('instances_ids', '!=', False)]
+
         if where_search_value:
             domain.append('|')
             domain.append(('location_id.name', 'ilike', where_search_value))
