@@ -14,9 +14,11 @@ addons_path:
     - /mnt/bundle-addons/queue 
     - /mnt/bundle-addons/rest-framework
     - /mnt/bundle-addons/server-tools
+    - /mnt/bundle-addons/server-env
     - /mnt/bundle-addons/server-ux
     - /mnt/bundle-addons/web
     - /mnt/bundle-addons/website
+    - /mnt/bundle-addons/storage
     - /mnt/bundle-addons/camajora-addons
     
 admin_passwd: admin

@@ -19,16 +19,16 @@ class RentalResource(models.Model):
     code = fields.Char(string=_('Code'), required=False, copy=False, readonly=True, index=True)
     active = fields.Boolean(default=True, string=_('Active'))
 
-    category_id = fields.Many2one('rental.resource.category', string=_('Category'), related='type_id.category_id')
-    setup_id = fields.Many2one('rental.resource.setup', string=_('Setup'), related='type_id.setup_id')
-    size_id = fields.Many2one('rental.resource.size', string=_('Size'), related='type_id.size_id')
-    performance_id = fields.Many2one('rental.resource.performance', string=_('Performance'), related='type_id.performance_id')
-    availability_id = fields.Many2one('rental.availability', string=_('Availability'), related='type_id.availability_id')
-    duration_id = fields.Many2one('rental.duration', string=_('Duration'), related='type_id.duration_id')
+    category_id = fields.Many2one('rental.resource.category', string=_('Category'), store=True, related='type_id.category_id')
+    setup_id = fields.Many2one('rental.resource.setup', string=_('Setup'), store=True, related='type_id.setup_id')
+    size_id = fields.Many2one('rental.resource.size', string=_('Size'), store=True, related='type_id.size_id')
+    performance_id = fields.Many2one('rental.resource.performance', string=_('Performance'), related='type_id.performance_id', store=True,)
+    availability_id = fields.Many2one('rental.availability', string=_('Availability'), related='type_id.availability_id', store=True,)
+    duration_id = fields.Many2one('rental.duration', string=_('Duration'), related='type_id.duration_id', store=True,)
 
     type_id = fields.Many2one('rental.resource.type', string=_('Type'), required=True)
     location_id = fields.Many2one('rental.location', string=_('Location'), required=True)
-    partner_id = fields.Many2one('res.partner', related='location_id.partner_id', string=_('Owner'), required=True)
+    partner_id = fields.Many2one('res.partner', related='location_id.partner_id', store=True, string=_('Owner'), required=True)
     instances_ids = fields.One2many('rental.resource.instance', 'resource_id', string=_('Instances'), required=True)
 
     instance_count = fields.Integer(string=_('Total Instances'), compute='_compute_instance_count')

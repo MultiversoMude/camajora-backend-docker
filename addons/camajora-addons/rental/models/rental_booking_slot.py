@@ -22,9 +22,13 @@ class RentalBookingSlot(models.Model):
     """
 
     name = fields.Char(related='resource_instance_id.name', string=_('SKU'))
+    partner_id = fields.Many2one(related="booking_id.user_id", store=True, string=_("Customer"))
     booking_id = fields.Many2one('rental.booking', string=_('Booking'), required=True, ondelete='cascade')
     resource_instance_id = fields.Many2one('rental.resource.instance', string=_('Resource Instance'), required=True)
+    resource_id = fields.Many2one('rental.resource', related="resource_instance_id.resource_id", store=True, string=_('Resource'))
+    location_id = fields.Many2one('rental.location', related="resource_id.location_id", store=True, string=_('Location'))
     duration_id = fields.Many2one('rental.duration', string=_('Duration'), required=True)
+    state = fields.Selection(related="booking_id.state", string="State")
     duration = fields.Selection([
         ('hourly', _('Hourly')),
         ('half_daily', _('Half daily')),

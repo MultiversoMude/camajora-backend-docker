@@ -41,6 +41,9 @@
         <field name="city" />
         <field name="state_id" />
         <field name="country_id" />
+
+        <filter name="group_location_partner" string="Proprietario" context="{'group_by':'partner_id'}"/>
+
       </search>
     </field>
   </record>

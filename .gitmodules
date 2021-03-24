@@ -1,0 +1,4 @@
+[submodule "community-addons/storage"]
+	path = community-addons/storage
+	url = https://github.com/OCA/storage.git
+	branch = 12.0

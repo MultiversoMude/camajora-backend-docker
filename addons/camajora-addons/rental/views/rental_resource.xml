@@ -67,6 +67,21 @@
     <field name="arch" type="xml">
       <search>
         <field name="name" />
+        <field name="code" />
+        <field name="type_id" />
+        <field name="location_id" />
+        <field name="partner_id" />
+        <field name="category_id" />
+        <field name="setup_id" />
+        <field name="size_id" />
+        <field name="performance_id" />
+        <field name="availability_id" />
+        <field name="duration_id" />
+
+        <filter name="group_resource_type" string="Tipo" context="{'group_by':'type_id'}"/>
+        <filter name="group_resource_location" string="Location" context="{'group_by':'location_id'}"/>
+        <filter name="group_resource_category" string="Categoria" context="{'group_by':'category_id'}"/>
+        <filter name="group_resource_partner" string="Proprietario" context="{'group_by':'partner_id'}"/>
       </search>
     </field>
   </record>

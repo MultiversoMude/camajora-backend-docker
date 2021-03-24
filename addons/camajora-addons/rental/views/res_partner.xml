@@ -6,6 +6,16 @@
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="base.view_partner_form" />
     <field name="arch" type="xml">
+      <button name="toggle_active" position="before">
+        <button class="oe_stat_button" type="object" name="action_slots" groups="rental.group_rental_api,rental.group_rental_owner" attrs="{'invisible': [('customer', '=', False)]}" icon="fa-bookmark">
+            <field string="Bookings" name="booking_count" widget="statinfo"/>
+        </button>
+
+        <button class="oe_stat_button" type="object" name="action_booking_slots" groups="rental.group_rental_api,rental.group_rental_owner" attrs="{'invisible': [('customer', '=', False)]}" icon="fa-bookmark-o">
+            <field string="Bookings Slot" name="booking_slot_count" widget="statinfo"/>
+        </button>
+      </button>
+
       <field name="vat" position="after">
         <field name="fiscal_code" />
         <field name="invoice_recipient_code" />
