@@ -10,6 +10,7 @@ COPY ./conf/default-site.conf /etc/nginx/conf.d/default.conf
 COPY conf/odoo_conf.yaml /mnt/utils/scripts/conf/odoo_conf.yaml
 
 COPY ./addons/ /mnt/bundle-addons/
+COPY ./community-addons/ /mnt/bundle-addons/
 
 RUN chown -R odoo.odoo /mnt/bundle-addons/camajora-addons
 

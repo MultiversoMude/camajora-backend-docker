@@ -1,5 +1,5 @@
 markdown
-python-slugify
+python-slugify==4.0.1
 tomd
 html2text
 stripe

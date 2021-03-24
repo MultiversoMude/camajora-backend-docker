@@ -54,10 +54,15 @@
     <field name="arch" type="xml">
       <search>
         <field name="name" />
+
+        <filter string="Data Prenotazione" name="date" date="date" default_period="today"/>
+        <separator/>
         
         <filter name="draft" string="Bozza" domain="[('state','=','draft')]"/>
         <filter name="confirmed" string="Confermati" domain="[('state','=','confirmed')]"/>
         <filter name="canceled" string="Cancellati" domain="[('state','=','canceled')]"/>
+
+        <filter name="group_booking_partner" string="Cliente" context="{'group_by':'user_id'}"/>
 
       </search>
     </field>
@@ -72,12 +77,13 @@
         <field name="date" />
         <field name="user_id" />
         <field name="rent_channel" />
+        <field name="state" />
       </tree>
     </field>
   </record>
 
   <record model="ir.actions.act_window" id="rental_booking_act_window">
-    <field name="name">Bookings</field>
+    <field name="name">Prenotazioni</field>
     <field name="res_model">rental.booking</field>
     <field name="view_mode">tree,form,pivot</field>
     <field name="domain">[]</field>

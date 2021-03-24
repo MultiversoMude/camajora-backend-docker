@@ -17,12 +17,40 @@ class ResPartner(models.Model):
         store=True
     )
 
-    booking_ids = fields.One2many('rental.booking', 'user_id', string=_('Bookings'))
+    booking_ids = fields.One2many(
+        'rental.booking',
+        'user_id',
+        string=_("Bookings"))
+
+    booking_count = fields.Integer(
+        compute="_compute_booking_count",
+        string=_("Total Bookings"))
+
+    booking_slot_ids = fields.One2many(
+        'rental.booking.slot',
+        'partner_id',
+        string=_("Bookings"))
+
+    booking_slot_count = fields.Integer(
+        compute="_compute_booking_count",
+        string=_("Total Bookings Slots"))
 
     booking_users = fields.Many2many(
         string=_('Booking Users'),
         compute="_compute_booking_users"
     )
+
+    def action_slots(self):
+        pass
+    
+    def action_booking_slots(self):
+        pass
+
+    @api.depends('booking_ids', 'booking_ids.slot_ids')
+    def _compute_booking_count(self):
+        for record in self:
+            record.booking_count = len(record.booking_ids.filtered(lambda b: b.state == 'confirmed'))
+            record.booking_slot_count = len(record.booking_slot_ids.filtered(lambda b: b.state == 'confirmed'))
 
     @api.depends('user_ids.groups_id')
     def _compute_is_owner(self):
