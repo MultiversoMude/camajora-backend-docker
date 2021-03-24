@@ -16,9 +16,11 @@
           <group>
             <field name="partner_id" />
             <field name="description" />
-            <field name="city"/>
-            <field name="state_id"/>
-            <field name="country_id"/>
+            <field name="address" />
+            <field name="postal_code" />
+            <field name="city" />
+            <field name="state_id" />
+            <field name="country_id" />
           </group>
         </sheet>
         <div class="oe_chatter"></div>
@@ -34,9 +36,11 @@
         <field name="name" />
         <field name="partner_id" />
         <field name="description" />
-        <field name="city"/>
-        <field name="state_id"/>
-        <field name="country_id"/>
+        <field name="address" />
+        <field name="postal_code" />
+        <field name="city" />
+        <field name="state_id" />
+        <field name="country_id" />
       </search>
     </field>
   </record>
@@ -49,9 +53,11 @@
         <field name="name" />
         <field name="partner_id" />
         <field name="description" />
-        <field name="city"/>
-        <field name="state_id"/>
-        <field name="country_id"/>
+        <field name="address" />
+        <field name="postal_code" />
+        <field name="city" />
+        <field name="state_id" />
+        <field name="country_id" />
       </tree>
     </field>
   </record>
