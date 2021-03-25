@@ -96,6 +96,7 @@ class BookingService(Component):
 
         return {
             'id': line.id,
+            'name': line.resource_instance_id.resource_id.name,
             'sku': line.name,
             'total_hours': line.total_hours,
             'image': image,
@@ -123,6 +124,7 @@ class BookingService(Component):
                             'schema': {
                                 'id': {'type': 'integer', 'required': True},
                                 'sku': {'type': 'string', 'required': True},
+                                'name': {'type': 'string', 'required': True},
                                 'total_hours': {'type': 'integer', 'required': True},
                                 'image': {'type': 'string', 'required': False, 'empty': True, 'nullable': True},
                                 'dt_start': {'type': 'datetime', 'required': True},
