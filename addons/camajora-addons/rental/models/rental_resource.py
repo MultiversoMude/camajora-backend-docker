@@ -14,8 +14,9 @@ class RentalResource(models.Model):
     _description = 'Rental Resource'
     _order = 'create_date DESC'
 
+    image = fields.Binary(string=_('Image'))
     name = fields.Char(string=_('Name'), readonly=True, default=lambda self: _('New'), compute='_compute_name')
-    description = fields.Char(string=_('Description'), related='type_id.description')
+    description = fields.Char(string=_('Description'))
     code = fields.Char(string=_('Code'), required=False, copy=False, readonly=True, index=True)
     active = fields.Boolean(default=True, string=_('Active'))
 
@@ -96,7 +97,7 @@ class RentalResource(models.Model):
         for record in self:
             domain = [
                 ('resource_id', '=', record.id),
-                '|', 
+                '|',
                     '|',
                         '&', ('booking_slots_ids.dt_start', '>', dt_start), ('booking_slots_ids.dt_start', '>', dt_end),
                         '&', ('booking_slots_ids.dt_end', '<', dt_start), ('booking_slots_ids.dt_end', '<', dt_end),
