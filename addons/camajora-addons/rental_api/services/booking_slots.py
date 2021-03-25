@@ -32,9 +32,9 @@ class BookingSlotsService(Component):
     # PRIVATE  METHODS
 
     def _serialize(self, record):
-        image = '{}/website/image/rental.resource.type/{}/image/200x0'.format(
+        image = '{}/api/v1/public/images/{}?model=rental.resource.type'.format(
             self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
-            record.resource_instance_id.resource_id.type_id.id
+            record.resource_instance_id.resource_id.type_id.id,
         )
 
         today = datetime.today()
@@ -48,6 +48,7 @@ class BookingSlotsService(Component):
 
         return {
             'id': record.id,
+            'name': record.resource_instance_id.resource_id.name,
             'sku': record.name,
             'total_hours': record.total_hours,
             'image': image,
@@ -61,6 +62,7 @@ class BookingSlotsService(Component):
         return {
             'id': {'type': 'integer', 'required': True},
             'sku': {'type': 'string', 'required': True},
+            'name': {'type': 'string', 'required': True},
             'total_hours': {'type': 'integer', 'required': True},
             'image': {'type': 'string', 'required': False, 'empty': True, 'nullable': True},
             'dt_start': {'type': 'datetime', 'required': True},
