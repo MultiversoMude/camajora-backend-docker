@@ -32,9 +32,11 @@ class BookingSlotsService(Component):
     # PRIVATE  METHODS
 
     def _serialize(self, record):
-        image = '{}/website/image/rental.resource.type/{}/image/200x0'.format(
-            self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
-            record.resource_instance_id.resource_id.type_id.id
+        base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
+
+        image = '{}/api/v1/public/images/{}?model=rental.resource.type'.format(
+            base_url,
+            record.resource_instance_id.resource_id.type_id.id,
         )
 
         today = datetime.today()

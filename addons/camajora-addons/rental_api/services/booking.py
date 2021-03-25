@@ -89,9 +89,11 @@ class BookingService(Component):
         return {'count': cart.slot_count, 'items': items}
 
     def _serialize_one_slot(self, line):
-        image = '{}/website/image/rental.resource.type/{}/image/200x0'.format(
-            self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
-            line.resource_instance_id.resource_id.type_id.id
+        base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
+
+        image = '{}/api/v1/public/images/{}?model=rental.resource.type'.format(
+            base_url,
+            line.resource_instance_id.resource_id.type_id.id,
         )
 
         return {
