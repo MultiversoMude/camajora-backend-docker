@@ -12,18 +12,22 @@ class ResourceService(Component):
 
     def _serialize(self, resource_id):
         serialized = super()._serialize(resource_id)
-        # serialized.pop('image', False)  # remove old serialized image URL
-        serialized['image'] = resource_id.image_medium_url or ""
+
+        if resource_id.image_medium_url:
+            serialized['image'] = resource_id.image_medium_url or ""
+
         serialized['image_gallery'] = [i.image_id.file_id.url for i in resource_id.image_ids]
+
         return serialized
 
     def _get_object_schema(self):
         schema = super()._get_object_schema()
-        # schema.pop('image', False)  # remove old schema image field
+
         schema['image_gallery'] = {
             'type': 'list',
             'schema': {
                 'type': 'string', 'required': False, 'empty': True, 'nullable': True
             }
         }
+
         return schema
