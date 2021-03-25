@@ -13,8 +13,8 @@ class ResourceService(Component):
     def _serialize(self, resource_id):
         serialized = super()._serialize(resource_id)
 
-        if resource_id.image_medium_url:
-            serialized['image'] = resource_id.image_medium_url or ""
+        if resource_id.image_ids:
+            serialized['image'] = resource_id.image_ids[0].image_id.file_id.url
 
         serialized['image_gallery'] = [i.image_id.file_id.url for i in resource_id.image_ids]
 
