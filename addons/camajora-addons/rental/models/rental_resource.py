@@ -104,7 +104,7 @@ class RentalResource(models.Model):
                     ('booking_slots_ids', '=', False)
 
             ]
-            matches = self.env['rental.resource.instance'].sudo().search(domain, order='booking_slots_ids desc', limit=1)
+            matches = self.env['rental.resource.instance'].sudo().search(domain, order='booking_slots_count desc', limit=1)
 
             if len(matches) < 1:
                 _logger.error('No free instances found, should always be at least one')
