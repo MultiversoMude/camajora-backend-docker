@@ -8,9 +8,10 @@
     'license': 'AGPL-3',
     'author': 'Metadonors Srl',
     'website': 'https://www.metadonors.it',
-    'depends': ['rental'],
+    'depends': ['rental', 'mail'],
     'data': [
         'wizards/onboarding_wizard.xml',
+        'data/onboarding_mail_template.xml',
     ],
     'demo': []
 }
