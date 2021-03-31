@@ -13,6 +13,7 @@
         <p>${object.user_id.name},</p>
         <p>Ora hai accesso come owner su Boxy</p>
         <p><a href="${object.user_id.signup_url}">Clicca qua per accedere</a></p>
+        <p>${object.wizard_id.welcome_message or ''}</p>
       </field>
     </record>
 
