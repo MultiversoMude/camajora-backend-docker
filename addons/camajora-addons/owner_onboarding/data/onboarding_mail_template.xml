@@ -3,9 +3,9 @@
   <data noupdate="0">
     <record id="onboarding_mail_template" model="mail.template">
       <field name="name">Boxy: Owner Onboarding</field>
-      <field name="model_id" ref="owner_onboarding.model_owner_onboarding_wizard_user"/>
+      <field name="model_id" ref="owner_onboarding.model_owner_onboarding_wizard_user" />
       <field name="subject">Boxy: accesso owner</field>
-      <field name="email_from">gate@lepark.space</field>
+      <field name="email_from">${object.env["ir.config_parameter"].get_param("welcome.email.address")}</field>
       <field name="email_to">${object.user_id.email_formatted | safe}</field>
       <field name="auto_delete" eval="True" />
       <field name="user_signature" eval="False" />
@@ -16,6 +16,5 @@
         <p>${object.wizard_id.welcome_message or ''}</p>
       </field>
     </record>
-
   </data>
 </odoo>
