@@ -15,7 +15,7 @@ class RentalResource(models.Model):
     _order = 'create_date DESC'
 
     image = fields.Binary(string=_('Image'))
-    name = fields.Char(string=_('Name'), readonly=True, default=lambda self: _('New'), compute='_compute_name')
+    name = fields.Char(string=_('Name'), required=True)
     description = fields.Char(string=_('Description'))
     code = fields.Char(string=_('Code'), required=False, copy=False, readonly=True, index=True)
     active = fields.Boolean(default=True, string=_('Active'))
