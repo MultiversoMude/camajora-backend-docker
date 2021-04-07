@@ -110,4 +110,20 @@
     <field name="sequence" eval="70" />
   </record>
 
+  <record model="ir.ui.menu" id="crm.crm_menu_root">
+    <field name="groups_id" eval="[(6,0,[ref('rental.group_rental_backoffice'), ref('rental.group_rental_manager')])]" />
+  </record>
+  <record model="ir.ui.menu" id="website.menu_website_configuration">
+    <field name="groups_id" eval="[(6,0,[ref('rental.group_rental_backoffice'), ref('rental.group_rental_manager')])]" />
+  </record>
+  <record model="ir.ui.menu" id="project.menu_main_pm">
+    <field name="groups_id" eval="[(6,0,[ref('rental.group_rental_backoffice'), ref('rental.group_rental_manager')])]" />
+  </record>
+  <record model="ir.ui.menu" id="utm.menu_link_tracker_root">
+    <field name="groups_id" eval="[(6,0,[ref('rental.group_rental_backoffice'), ref('rental.group_rental_manager')])]" />
+  </record>
+  <record model="ir.ui.menu" id="base_rest.menu_rest_api">
+    <field name="groups_id" eval="[(6,0,[ref('rental.group_rental_backoffice'), ref('rental.group_rental_manager')])]" />
+  </record>
+
 </odoo>

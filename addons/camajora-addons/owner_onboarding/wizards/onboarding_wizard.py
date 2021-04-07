@@ -144,7 +144,7 @@ class OwnerWizardUser(models.TransientModel):
                 # prepare for the signup process
                 wizard_user.user_id.partner_id.signup_prepare()
 
-            # wizard_user.with_context(active_test=True)._send_email()
+            wizard_user.with_context(active_test=True)._send_email()
             wizard_user.refresh()
 
     @api.multi
@@ -169,7 +169,6 @@ class OwnerWizardUser(models.TransientModel):
 
     @api.multi
     def _send_email(self):
-        """ send notification email to a new portal user """
         if not self.env.user.email:
             raise UserError(
                 _(
@@ -177,24 +176,9 @@ class OwnerWizardUser(models.TransientModel):
                 )
             )
 
-        # determine subject and body in the portal user's language
-        template = self.env.ref("portal.mail_template_data_portal_welcome")
+        template = self.env.ref("owner_onboarding.onboarding_mail_template")
+
         for wizard_line in self:
-            lang = wizard_line.user_id.lang
-            partner = wizard_line.user_id.partner_id
-
-            portal_url = partner.with_context(
-                signup_force_type_in_url="", lang=lang
-            )._get_signup_url_for_action()[partner.id]
-            partner.signup_prepare()
-
-            if template:
-                template.with_context(
-                    dbname=self._cr.dbname, portal_url=portal_url, lang=lang
-                ).send_mail(wizard_line.user_id.id, force_send=True)
-            else:
-                _logger.warning(
-                    "No email template found for sending email to the portal user"
-                )
+            self.env["mail.template"].browse(template.id).send_mail(wizard_line.id, force_send=True)
 
         return True

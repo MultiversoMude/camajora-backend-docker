@@ -23,12 +23,19 @@ class RentalResourceInstance(models.Model):
         'rental.booking.slot', 'resource_instance_id', string=_('Booking Slots')
     )
 
+    booking_slots_count = fields.Integer(string=_('Total Slots'), compute='_compute_booking_slots_count', store=True)
+
     def _compute_name(self):
         for record in self:
             record.name = ' '.join([
                 record.resource_id.name,
                 record.code
             ])
+
+    @api.depends('booking_slots_ids')
+    def _compute_booking_slots_count(self):
+        for record in self:
+            record.booking_slots_count = len(record.booking_slots_ids)
 
     @api.model
     def create(self, vals):

@@ -49,6 +49,7 @@
       <tree>
         <field name="name" />
         <field name="resource_id" />
+        <field name="booking_slots_count" />
         <field name="equipments_ids" />
       </tree>
     </field>
