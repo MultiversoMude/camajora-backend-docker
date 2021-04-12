@@ -7,4 +7,5 @@ from . import resources
 from . import users
 from . import locations
 from . import resource_types
-from . import search_autocomplete
+from . import autocomplete_locations
+from . import autocomplete_resource_types

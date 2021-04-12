@@ -44,7 +44,7 @@ class ResourceService(Component):
         if when_search_value:
             domain.append(('location_id.name', 'ilike', when_search_value))
         if what_search_value:
-            domain.append(('type_id.category_id.name', 'ilike', what_search_value))
+            domain.append(('type_id.name', 'ilike', what_search_value))
 
         resource_ids = self.env['rental.resource'].sudo().search(domain)
         return self._to_json(resource_ids, many=True)

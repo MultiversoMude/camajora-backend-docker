@@ -7,11 +7,11 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class AutocompleteService(Component):
+class AutocompleteLocationService(Component):
     _inherit = 'base.rest.public.service'
-    _name = 'autocomplete.service'
-    _usage = 'autocomplete'
-    _description = 'Camajora public services: autocomplete'
+    _name = 'autocomplete_locations.service'
+    _usage = 'autocomplete_locations'
+    _description = 'Camajora public services: autocomplete locations'
 
     # OPERATIONS
 
@@ -23,6 +23,7 @@ class AutocompleteService(Component):
         domain = []
 
         term = params.pop("term", None)
+
         if term:
             domain.append(('country_id.code', '=', 'IT'))
             domain.append(('name', 'ilike', term))
