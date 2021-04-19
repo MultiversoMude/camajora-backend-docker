@@ -29,7 +29,7 @@ class RentalResource(models.Model):
 
     type_id = fields.Many2one('rental.resource.type', string=_('Type'), required=True)
     location_id = fields.Many2one('rental.location', string=_('Location'), required=True)
-    partner_id = fields.Many2one('res.partner', related='location_id.partner_id', store=True, string=_('Owner'), required=True)
+    partner_id = fields.Many2one('res.partner', related='location_id.partner_id', store=True, string=_('Owner'))
     instances_ids = fields.One2many('rental.resource.instance', 'resource_id', string=_('Instances'), required=True)
 
     instance_count = fields.Integer(string=_('Total Instances'), compute='_compute_instance_count')
