@@ -1,35 +1,28 @@
 kind: pipeline
-name: production
+name: staging
 steps:
   - name: submodules
     image: alpine/git
+    environment:
+      SSH_KEY: 
+        from_secret: bitbucket_ssh_key
     commands:
-      - git submodule update --recursive --remote
+      - mkdir -p $HOME/.ssh
+      - echo -e "$SSH_KEY\n" > $HOME/.ssh/id_rsa
+      - chmod 600 $HOME/.ssh/id_rsa
+      - ssh-keyscan bitbucket.org > /root/.ssh/known_hosts
+      - git submodule update --init --recursive --depth=1
       
   - name: docker  
     image: plugins/docker
     settings:
       repo: metadonors/mtd-odoo
       tags: 
-        - latest
+        - staging
       username:
-        from_secret: docker_login
+        from_secret: docker_username
       password:
         from_secret: docker_password
-  
-  - name: update-production-service 
-    image: peloton/drone-rancher
-    settings:
-      service: Metadonors/odoo
-      docker_image: metadonors/mtd-odoo:latest
-      start_first: false
-      confirm: true
-      timeout: 300
-      url: https://ops.metaserver.it
-      access_key:
-        from_secret: rancher_access_key
-      secret_key:
-        from_secret: rancher_secret_key
   
   - name: slack
     image: plugins/slack
@@ -48,38 +41,45 @@ trigger:
     - push
 
 ---
-kind: secret
-name: docker_login
-get:
-    path: ci/docker
-    name: username
-  
----
-kind: secret
-name: docker_password
-get:
-    path: ci/docker
-    name: password
-  
-  
----
-kind: secret
-name: rancher_access_key
-get:
-    path: ci/rancher
-    name: access_key
-  
----
-kind: secret
-name: rancher_secret_key
-get:
-    path: ci/rancher
-    name: secret_key
 
+kind: pipeline
+name: production
+steps:
+  - name: submodules
+    image: alpine/git
+    environment:
+      SSH_KEY: 
+        from_secret: bitbucket_ssh_key
+    commands:
+      - mkdir -p $HOME/.ssh
+      - echo -e "$SSH_KEY\n" > $HOME/.ssh/id_rsa
+      - chmod 600 $HOME/.ssh/id_rsa
+      - ssh-keyscan bitbucket.org > /root/.ssh/known_hosts
+      - git submodule update --init --recursive --depth=1
+      
+  - name: docker  
+    image: plugins/docker
+    settings:
+      repo: metadonors/mtd-odoo
+      tags: 
+        - latest
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
   
----
-kind: secret
-name: slack_hook
-get:
-    path: ci/slack  
-    name: webhook_metaface
+  - name: slack
+    image: plugins/slack
+    settings:
+      username: Marvin il DevOps
+      icon_url: https://cdn4.iconfinder.com/data/icons/free-large-android-icons/512/Paranoid_android_with_shadow.png
+      webhook: 
+        from_secret: slack_hook
+      channel: dev_metaface
+      template: Odoo Metadonors aggiornato
+      
+trigger:
+  branch:
+    - master
+  event:
+    - push
