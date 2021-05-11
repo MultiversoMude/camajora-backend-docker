@@ -16,7 +16,7 @@ steps:
   - name: docker  
     image: plugins/docker
     settings:
-      repo: metadonors/mtd-odoo
+      repo: metadonors/camajora-odoo
       tags: 
         - staging
       username:
@@ -31,7 +31,7 @@ steps:
       icon_url: https://cdn4.iconfinder.com/data/icons/free-large-android-icons/512/Paranoid_android_with_shadow.png
       webhook: 
         from_secret: slack_hook
-      template: Odoo Metadonors aggiornato
+      template: Immagine Camajora _staging_ aggiornata
       
 trigger:
   branch:
@@ -59,7 +59,7 @@ steps:
   - name: docker  
     image: plugins/docker
     settings:
-      repo: metadonors/mtd-odoo
+      repo: metadonors/camajora-odoo
       tags: 
         - latest
       username:
@@ -74,8 +74,7 @@ steps:
       icon_url: https://cdn4.iconfinder.com/data/icons/free-large-android-icons/512/Paranoid_android_with_shadow.png
       webhook: 
         from_secret: slack_hook
-      channel: dev_metaface
-      template: Odoo Metadonors aggiornato
+      template: Immagine Camajora _latest_ aggiornata
       
 trigger:
   branch:
