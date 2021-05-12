@@ -28,10 +28,18 @@ steps:
     image: plugins/slack
     settings:
       username: Marvin il DevOps
-      icon_url: https://cdn4.iconfinder.com/data/icons/free-large-android-icons/512/Paranoid_android_with_shadow.png
       webhook: 
         from_secret: slack_hook
-      template: Immagine Camajora _staging_ aggiornata
+      template: > 
+        {{#success build.status}}
+          Build del branch {{ build.branch }} di {{ repo.name}} completata
+        {{else}}
+          Errore nella build del branch {{ build.branch }} di {{ repo.name}}
+        {{/succcess}}
+    when:
+      status:
+      - failure
+      - success
       
 trigger:
   branch:
@@ -71,10 +79,18 @@ steps:
     image: plugins/slack
     settings:
       username: Marvin il DevOps
-      icon_url: https://cdn4.iconfinder.com/data/icons/free-large-android-icons/512/Paranoid_android_with_shadow.png
       webhook: 
         from_secret: slack_hook
-      template: Immagine Camajora _latest_ aggiornata
+      template: > 
+        {{#success build.status}}
+          Build del branch {{ build.branch }} di {{ repo.name}} completata
+        {{else}}
+          Errore nella build del branch {{ build.branch }} di {{ repo.name}}
+        {{/succcess}}
+    when:
+      status:
+      - failure
+      - success
       
 trigger:
   branch:
