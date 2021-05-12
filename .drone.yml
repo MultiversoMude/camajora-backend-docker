@@ -32,10 +32,10 @@ steps:
         from_secret: slack_hook
       template: > 
         {{#success build.status}}
-          Build del branch {{ build.branch }} di {{ repo.name}} completata
+          `{{repo.name}}/{{build.branch}}`: #{{build.number}} successful
         {{else}}
-          Errore nella build del branch {{ build.branch }} di {{ repo.name}}
-        {{/succcess}}
+          `{{repo.name}}/{{build.branch}}`: #{{build.number}} failed
+        {{/success}}
     when:
       status:
       - failure
@@ -83,10 +83,10 @@ steps:
         from_secret: slack_hook
       template: > 
         {{#success build.status}}
-          Build del branch {{ build.branch }} di {{ repo.name}} completata
+          `{{repo.name}}/{{build.branch}}`: #{{build.number}} successful
         {{else}}
-          Errore nella build del branch {{ build.branch }} di {{ repo.name}}
-        {{/succcess}}
+          `{{repo.name}}/{{build.branch}}`: #{{build.number}} failed
+        {{/success}}
     when:
       status:
       - failure
