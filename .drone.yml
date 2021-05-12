@@ -8,7 +8,7 @@ steps:
         from_secret: bitbucket_ssh_key
     commands:
       - mkdir -p $HOME/.ssh
-      - echo -e "$SSH_KEY\n" > $HOME/.ssh/id_rsa
+      - echo -e "$SSH_KEY" > $HOME/.ssh/id_rsa
       - chmod 600 $HOME/.ssh/id_rsa
       - ssh-keyscan bitbucket.org > /root/.ssh/known_hosts
       - git submodule update --init --recursive --depth=1
@@ -59,7 +59,7 @@ steps:
         from_secret: bitbucket_ssh_key
     commands:
       - mkdir -p $HOME/.ssh
-      - echo -e "$SSH_KEY\n" > $HOME/.ssh/id_rsa
+      - echo -e "$SSH_KEY" > $HOME/.ssh/id_rsa
       - chmod 600 $HOME/.ssh/id_rsa
       - ssh-keyscan bitbucket.org > /root/.ssh/known_hosts
       - git submodule update --init --recursive --depth=1
