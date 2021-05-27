@@ -102,6 +102,10 @@ class BookingService(Component):
             'image': image,
             'dt_start': line.dt_start,
             'dt_end': line.dt_end,
+            'start_date': line.start_date,
+            'end_date': line.end_date,
+            'start_time': line.start_time,
+            'end_time': line.end_time,
         }
 
     def _get_object_schema(self):
@@ -129,6 +133,10 @@ class BookingService(Component):
                                 'image': {'type': 'string', 'required': False, 'empty': True, 'nullable': True},
                                 'dt_start': {'type': 'datetime', 'required': True},
                                 'dt_end': {'type': 'datetime', 'required': True},
+                                'start_date': {'type': 'date', 'required': True},
+                                'end_date': {'type': 'date', 'required': True},
+                                'start_time': {'type': 'integer', 'required': True},
+                                'end_time': {'type': 'integer', 'required': True},
                             }
                         }
                     }
