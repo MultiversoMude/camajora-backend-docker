@@ -10,6 +10,12 @@
         <field name="is_credits" />
         <field name="credits_value" attrs="{'invisible': [('is_credits','=',False)]}" />
       </field>
+      <xpath expr="//div[@name='options']" position="inside">
+        <div>
+          <field name="website_ok"/>
+          <label for="website_ok"/>
+        </div>
+      </xpath>
     </field>
   </record>
 
