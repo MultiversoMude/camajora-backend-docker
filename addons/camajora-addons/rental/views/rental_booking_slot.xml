@@ -58,6 +58,7 @@
         <field name="name" />
         <field name="partner_id" />
         <field name="location_id" />
+        <field name="owner_id" />
         <field name="resource_id" />
         <field name="booking_id" />
 
@@ -68,6 +69,9 @@
         <filter name="group_slot_location" string="Location" context="{'group_by':'location_id'}"/>
         <filter name="group_slot_resource" string="Risorsa" context="{'group_by':'resource_id'}"/>
         <filter name="group_slot_booking" string="Prenotazione" context="{'group_by':'booking_id'}"/>
+
+        <separator/>
+        <filter string="Date" name="create_date" date="create_date" default_period="last_month"/>
 
       </search>
     </field>
@@ -105,10 +109,11 @@
   <record model="ir.actions.act_window" id="rental_booking_slot_act_window">
     <field name="name">Booking Slots</field>
     <field name="res_model">rental.booking.slot</field>
-    <field name="view_mode">tree,form,pivot,calendar</field>
+    <field name="view_mode">pivot,tree,form,calendar</field>
     <field name="domain">[]</field>
     <field name="context">{
-      'search_default_confirmed': 1
+      'search_default_confirmed': 1,
+      'search_default_create_date': 1
     }</field>
   </record>
 

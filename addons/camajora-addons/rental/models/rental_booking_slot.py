@@ -27,6 +27,7 @@ class RentalBookingSlot(models.Model):
     resource_instance_id = fields.Many2one('rental.resource.instance', string=_('Resource Instance'), required=True)
     resource_id = fields.Many2one('rental.resource', related="resource_instance_id.resource_id", store=True, string=_('Resource'))
     location_id = fields.Many2one('rental.location', related="resource_id.location_id", store=True, string=_('Location'))
+    owner_id = fields.Many2one('res.partner', related="resource_id.location_id.partner_id", store=True, string=_('Owner'))
     duration_id = fields.Many2one('rental.duration', string=_('Duration'), required=True)
     state = fields.Selection(related="booking_id.state", string="State")
     duration = fields.Selection([

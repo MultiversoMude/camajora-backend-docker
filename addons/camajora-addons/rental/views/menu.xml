@@ -20,7 +20,7 @@
     <field name="action" ref="rental_booking_act_window" />
     <field name="sequence" eval="10" />
   </record>
-  <record model="ir.ui.menu" id="rental_booking_slot_menu">
+  <record model="ir.ui.menu" id="rental_booking_slot_report_menu">
     <field name="name">Booking Slots</field>
     <field name="parent_id" ref="rental_booking_menu" />
     <field name="action" ref="rental_booking_slot_act_window" />

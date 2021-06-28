@@ -13,4 +13,16 @@
     </field>
   </record>
 
+  <record id="rental_booking_slot_pivot_view" model="ir.ui.view">
+      <field name="name">rental.booking.slot.pivot</field>
+      <field name="model">rental.booking.slot</field>
+      <field name="arch" type="xml">
+          <pivot string="Slots" disable_linking="True">
+              <field name="create_date" type="row"/>
+              <field name="owner_id" type="row"/>
+              <field name="credit_total" type="measure"/>
+          </pivot>
+      </field>
+  </record>
+
 </odoo>
