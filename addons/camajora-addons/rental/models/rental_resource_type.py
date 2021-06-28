@@ -22,3 +22,14 @@ class RentalResourceType(models.Model):
     performance_id = fields.Many2one('rental.resource.performance', string=_('Performance'))
     availability_id = fields.Many2one('rental.availability', string=_('Availability'))
     duration_id = fields.Many2one('rental.duration', string=_('Duration'))
+
+    resources_ids = fields.One2many('rental.resource', 'type_id', string=_('Resources'))
+
+    slots_count = fields.Integer(compute='_compute_slots_count', store=True)
+
+    def _compute_slots_count(self):
+        for record in self:
+            instances = self.env['rental.resource.instance'].search(
+                [('resource_id', 'in', record.resources_ids.ids)]
+            )
+            record.slots_count = sum([r.booking_slots_count for r in instances])
