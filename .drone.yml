@@ -8,7 +8,7 @@ steps:
         from_secret: bitbucket_ssh_key
     commands:
       - mkdir -p $HOME/.ssh
-      - echo -e "$SSH_KEY\n" > $HOME/.ssh/id_rsa
+      - echo -e "$SSH_KEY" > $HOME/.ssh/id_rsa
       - chmod 600 $HOME/.ssh/id_rsa
       - ssh-keyscan bitbucket.org > /root/.ssh/known_hosts
       - git submodule update --init --recursive --depth=1
@@ -16,7 +16,7 @@ steps:
   - name: docker  
     image: plugins/docker
     settings:
-      repo: metadonors/mtd-odoo
+      repo: metadonors/camajora-odoo
       tags: 
         - staging
       username:
@@ -28,14 +28,22 @@ steps:
     image: plugins/slack
     settings:
       username: Marvin il DevOps
-      icon_url: https://cdn4.iconfinder.com/data/icons/free-large-android-icons/512/Paranoid_android_with_shadow.png
       webhook: 
         from_secret: slack_hook
-      template: Odoo Metadonors aggiornato
+      template: > 
+        {{#success build.status}}
+          `{{repo.name}}/{{build.branch}}`: #{{build.number}} successful
+        {{else}}
+          `{{repo.name}}/{{build.branch}}`: #{{build.number}} failed
+        {{/success}}
+    when:
+      status:
+      - failure
+      - success
       
 trigger:
   branch:
-    - master
+    - develop
   event:
     - push
 
@@ -51,7 +59,7 @@ steps:
         from_secret: bitbucket_ssh_key
     commands:
       - mkdir -p $HOME/.ssh
-      - echo -e "$SSH_KEY\n" > $HOME/.ssh/id_rsa
+      - echo -e "$SSH_KEY" > $HOME/.ssh/id_rsa
       - chmod 600 $HOME/.ssh/id_rsa
       - ssh-keyscan bitbucket.org > /root/.ssh/known_hosts
       - git submodule update --init --recursive --depth=1
@@ -59,7 +67,7 @@ steps:
   - name: docker  
     image: plugins/docker
     settings:
-      repo: metadonors/mtd-odoo
+      repo: metadonors/camajora-odoo
       tags: 
         - latest
       username:
@@ -71,11 +79,18 @@ steps:
     image: plugins/slack
     settings:
       username: Marvin il DevOps
-      icon_url: https://cdn4.iconfinder.com/data/icons/free-large-android-icons/512/Paranoid_android_with_shadow.png
       webhook: 
         from_secret: slack_hook
-      channel: dev_metaface
-      template: Odoo Metadonors aggiornato
+      template: > 
+        {{#success build.status}}
+          `{{repo.name}}/{{build.branch}}`: #{{build.number}} successful
+        {{else}}
+          `{{repo.name}}/{{build.branch}}`: #{{build.number}} failed
+        {{/success}}
+    when:
+      status:
+      - failure
+      - success
       
 trigger:
   branch:
