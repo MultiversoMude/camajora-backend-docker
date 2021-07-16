@@ -10,3 +10,4 @@ class ProductTemplate(models.Model):
 
     is_credits = fields.Boolean(string=_("Is credits product"), default=False)
     credits_value = fields.Integer(string=_("Credits value"))
+    website_ok = fields.Boolean('Can be viewed in Website', default=True)

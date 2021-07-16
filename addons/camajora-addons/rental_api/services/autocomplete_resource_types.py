@@ -15,7 +15,7 @@ class AutocompleteResourceTypeService(Component):
 
     # OPERATIONS
 
-    def search(self, offset=0, limit=None, **params):
+    def search(self, offset=0, limit=10, **params):
         """
         Get all Resource Types
         """
@@ -28,7 +28,7 @@ class AutocompleteResourceTypeService(Component):
             domain.append(('name', 'ilike', term))
 
         location_ids = (
-            self.env["rental.resource.type"].sudo().search(domain, offset=offset, limit=limit)
+            self.env["rental.resource.type"].sudo().search(domain, offset=offset, limit=limit, order='slots_count desc')
         )
 
         return self._to_json(location_ids, many=True, offset=offset)

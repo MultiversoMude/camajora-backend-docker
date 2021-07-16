@@ -18,7 +18,7 @@
         'views/res_partner.xml',
         'views/product_template.xml',
         'views/rental_resource.xml',
-        # 'views/rental_booking_slot.xml',
+        'views/rental_booking_slot.xml',
         'views/rental_booking.xml',
         'data/product_template_data.xml',
     ],

@@ -42,7 +42,8 @@ class ResourceService(Component):
             domain.append(('location_id.city', 'ilike', where_search_value))
             domain.append(('location_id.state_id.name', 'ilike', where_search_value))
         if when_search_value:
-            domain.append(('location_id.name', 'ilike', when_search_value))
+            pass
+            # domain.append(('location_id.name', 'ilike', when_search_value))
         if what_search_value:
             domain.append(('type_id.name', 'ilike', what_search_value))
 

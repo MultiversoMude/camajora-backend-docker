@@ -4,32 +4,44 @@
 from odoo.addons.component.core import Component
 
 import logging
+
 _logger = logging.getLogger(__name__)
 
 
 class AutocompleteLocationService(Component):
-    _inherit = 'base.rest.public.service'
-    _name = 'autocomplete_locations.service'
-    _usage = 'autocomplete_locations'
-    _description = 'Camajora public services: autocomplete locations'
+    _inherit = "base.rest.public.service"
+    _name = "autocomplete_locations.service"
+    _usage = "autocomplete_locations"
+    _description = "Camajora public services: autocomplete locations"
 
     # OPERATIONS
 
-    def search(self, offset=0, limit=None, **params):
+    def search(self, offset=0, limit=10, **params):
         """
         Get all Locations
         """
+        location_data = (
+            self.env["rental.location"]
+            .sudo()
+            .read_group(
+                domain=[],
+                fields=["state_id"],
+                groupby=["state_id"],
+            )
+        )
 
-        domain = []
+        state_ids = [l["state_id"][0] for l in location_data]
+
+        domain = [("id", "in", state_ids), ("country_id.code", "=", "IT")]
 
         term = params.pop("term", None)
-
         if term:
-            domain.append(('country_id.code', '=', 'IT'))
-            domain.append(('name', 'ilike', term))
+            domain.append(("name", "ilike", term))
 
         location_ids = (
-            self.env["res.country.state"].sudo().search(domain, offset=offset, limit=limit)
+            self.env["res.country.state"]
+            .sudo()
+            .search(domain, offset=offset, limit=limit)
         )
 
         return self._to_json(location_ids, many=True, offset=offset)
@@ -38,7 +50,7 @@ class AutocompleteLocationService(Component):
 
     def _serialize(self, state_id):
         return {
-            'name': state_id.name,
+            "name": state_id.name,
         }
 
     # VALIDATORS
@@ -50,5 +62,5 @@ class AutocompleteLocationService(Component):
 
     def _get_object_schema(self):
         return {
-            'name': {'type': 'string', 'required': True, 'empty': False},
+            "name": {"type": "string", "required": True, "empty": False},
         }

@@ -8,8 +8,8 @@ class RentalBookingSlot(models.Model):
 
     _inherit = 'rental.booking.slot'
 
-    credit_cost = fields.Integer(related='resource_instance_id.resource_id.credit_cost', readonly=True, string=_('Credit Cost'))
-    credit_total = fields.Integer(string=_('Total'), compute='_compute_total')
+    credit_cost = fields.Integer(related='resource_instance_id.resource_id.credit_cost', readonly=True, string=_('Credit Cost'), store=True)
+    credit_total = fields.Integer(string=_('Total'), compute='_compute_total', store=True)
 
     def _compute_total(self):
         for record in self:

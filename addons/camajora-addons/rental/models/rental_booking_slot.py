@@ -27,6 +27,7 @@ class RentalBookingSlot(models.Model):
     resource_instance_id = fields.Many2one('rental.resource.instance', string=_('Resource Instance'), required=True)
     resource_id = fields.Many2one('rental.resource', related="resource_instance_id.resource_id", store=True, string=_('Resource'))
     location_id = fields.Many2one('rental.location', related="resource_id.location_id", store=True, string=_('Location'))
+    owner_id = fields.Many2one('res.partner', related="resource_id.location_id.partner_id", store=True, string=_('Owner'))
     duration_id = fields.Many2one('rental.duration', string=_('Duration'), required=True)
     state = fields.Selection(related="booking_id.state", string="State")
     duration = fields.Selection([
@@ -147,8 +148,8 @@ def compute_range(duration, start_date, end_date, start_time, end_time, half_day
     duration = duration or 'hourly'
     start_date = start_date or fields.Date.today()
     end_date = end_date or fields.Date.today()
-    start_time = start_time or 0
-    end_time = end_time or 0
+    start_time = int(start_time) or 0
+    end_time = int(end_time) or 0
     half_day_type = half_day_type or 'morning'
     day_hours = 0
     dt_start = None
