@@ -148,8 +148,8 @@ def compute_range(duration, start_date, end_date, start_time, end_time, half_day
     duration = duration or 'hourly'
     start_date = start_date or fields.Date.today()
     end_date = end_date or fields.Date.today()
-    start_time = int(start_time) or 0
-    end_time = int(end_time) or 0
+    start_time = int(start_time or 0)
+    end_time = int(end_time or 0)
     half_day_type = half_day_type or 'morning'
     day_hours = 0
     dt_start = None

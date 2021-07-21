@@ -69,12 +69,8 @@ class CalendarService(Component):
 
             domain = [
                 ('resource_instance_id', 'in', resource_id.instances_ids.ids),
-                '|',
-                    '&', ('dt_start', '<=', utc_target_start), ('dt_end', '>=', utc_target_end),
-                    '|',
-                        '&', ('dt_start', '<=', utc_target_start), ('dt_end', '>=', utc_target_start),
-                        '&', ('dt_start', '<=', utc_target_end), ('dt_end', '>=', utc_target_end),
-                    
+                ('dt_start', '<=', utc_target_end),
+                ('dt_end', '>=', utc_target_start),
             ]
             if self.env['rental.booking.slot'].sudo().search_count(domain) >= len(resource_id.instances_ids):
                 busy.append('{}-{:02}-{:02}'.format(year, month, day))

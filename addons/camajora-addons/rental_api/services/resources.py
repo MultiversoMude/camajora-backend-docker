@@ -3,8 +3,12 @@
 
 from odoo.addons.component.core import Component
 
+import calendar
+import datetime
 import logging
+import pytz
 _logger = logging.getLogger(__name__)
+timezone = pytz.timezone('Europe/Rome')
 
 
 class ResourceService(Component):
@@ -28,7 +32,8 @@ class ResourceService(Component):
         Get all Resources
         """
         where_search_value = params.pop("where", None)
-        when_search_value = params.pop("when", None)
+        from_search_value = params.pop("from", None)
+        to_search_value = params.pop("to", None)
         what_search_value = params.pop("what", None)
 
         domain = [('instances_ids', '!=', False)]
@@ -41,13 +46,29 @@ class ResourceService(Component):
             domain.append(('location_id.address', 'ilike', where_search_value))
             domain.append(('location_id.city', 'ilike', where_search_value))
             domain.append(('location_id.state_id.name', 'ilike', where_search_value))
-        if when_search_value:
-            pass
-            # domain.append(('location_id.name', 'ilike', when_search_value))
         if what_search_value:
             domain.append(('type_id.name', 'ilike', what_search_value))
 
         resource_ids = self.env['rental.resource'].sudo().search(domain)
+
+        if from_search_value and to_search_value:
+            free_resources_ids = []
+
+            chunks = from_search_value.split('/')
+            target_start = datetime.datetime(int(chunks[2]), int(chunks[1]), int(chunks[0]), 0, 0)
+
+            chunks = to_search_value.split('/')
+            target_end = datetime.datetime(int(chunks[2]), int(chunks[1]), int(chunks[0]), 23, 59)
+
+            utc_target_start = timezone.localize(target_start).astimezone(pytz.utc).replace(tzinfo=None)
+            utc_target_end = timezone.localize(target_end).astimezone(pytz.utc).replace(tzinfo=None)
+
+            for resource in resource_ids:
+                if resource.is_free(utc_target_start, utc_target_end):
+                    free_resources_ids.append(resource)
+
+            return self._to_json(free_resources_ids, many=True)
+
         return self._to_json(resource_ids, many=True)
 
     # SERIALIZERS
@@ -99,7 +120,8 @@ class ResourceService(Component):
     def _validator_search(self):
         return {
             "where": {"type": "string", "required": False},
-            "when": {"type": "string", "required": False},
+            "from": {"type": "string", "required": False},
+            "to": {"type": "string", "required": False},
             "what": {"type": "string", "required": False},
         }
 

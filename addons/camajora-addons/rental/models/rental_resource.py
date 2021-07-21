@@ -111,3 +111,15 @@ class RentalResource(models.Model):
                 return
 
             return matches[0].id
+
+    def is_free(self, dt_start, dt_end):
+        for record in self:
+            domain = [
+                ('resource_instance_id', 'in', record.instances_ids.ids),
+                ('dt_start', '<=', dt_end),
+                ('dt_end', '>=', dt_start),
+            ]
+
+            if self.env['rental.booking.slot'].sudo().search_count(domain) >= len(record.instances_ids):
+                return False
+            return True
