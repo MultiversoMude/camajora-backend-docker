@@ -1,3 +1,12 @@
-# Metadonors Odoo image
+# Camajora Odoo image
 
-https://github.com/odoo/odoo/blob/12.0/odoo/models.py#L1809
+Per lanciare il progetto
+
+```
+$ docker-compose up
+```
+
+Per aggiornare i moduli
+```
+$ docker-compose run odoo upgrade <modulo1>,<modulo2>
+```
