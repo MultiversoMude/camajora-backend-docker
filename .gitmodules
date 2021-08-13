@@ -4,51 +4,51 @@
 	branch = 12.0
 [submodule "community-addons/account-invoicing"]
 	path = community-addons/account-invoicing
-	url = git@github.com:OCA/account-invoicing.git
+	url = https://github.com/OCA/account-invoicing.git
 	branch = 12.0
 [submodule "community-addons/connector"]
 	path = community-addons/connector
-	url = git@github.com:OCA/connector.git
+	url = https://github.com/OCA/connector.git
 	branch = 12.0
 [submodule "community-addons/l10n-italy"]
 	path = community-addons/l10n-italy
-	url = git@github.com:OCA/l10n-italy.git
+	url = https://github.com/OCA/l10n-italy.git
 	branch = 12.0
 [submodule "community-addons/partner-contact"]
 	path = community-addons/partner-contact
-	url = git@github.com:OCA/partner-contact.git
+	url = https://github.com/OCA/partner-contact.git
 	branch = 12.0
 [submodule "community-addons/project"]
 	path = community-addons/project
-	url = git@github.com:OCA/project.git
+	url = https://github.com/OCA/project.git
 	branch = 12.0
 [submodule "community-addons/purchase-workflow"]
 	path = community-addons/purchase-workflow
-	url = git@github.com:OCA/purchase-workflow.git
+	url = https://github.com/OCA/purchase-workflow.git
 	branch = 12.0
 [submodule "community-addons/queue"]
 	path = community-addons/queue
-	url = git@github.com:OCA/queue.git
+	url = https://github.com/OCA/queue.git
 	branch = 12.0
 [submodule "community-addons/rest-framework"]
 	path = community-addons/rest-framework
-	url = git@github.com:OCA/rest-framework.git
+	url = https://github.com/OCA/rest-framework.git
 	branch = 12.0
 [submodule "community-addons/server-tools"]
 	path = community-addons/server-tools
-	url = git@github.com:OCA/server-tools.git
+	url = https://github.com/OCA/server-tools.git
 	branch = 12.0
 [submodule "community-addons/server-env"]
 	path = community-addons/server-env
-	url = git@github.com:OCA/server-env.git
+	url = https://github.com/OCA/server-env.git
 	branch = 12.0
 [submodule "community-addons/server-ux"]
 	path = community-addons/server-ux
-	url = git@github.com:OCA/server-ux.git
+	url = https://github.com/OCA/server-ux.git
 	branch = 12.0
 [submodule "community-addons/web"]
 	path = community-addons/web
-	url = git@github.com:OCA/web.git
+	url = https://github.com/OCA/web.git
 	branch = 12.0
 [submodule "community-addons/muk_base"]
 	path = community-addons/muk_base
