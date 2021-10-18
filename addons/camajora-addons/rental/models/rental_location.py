@@ -5,11 +5,10 @@ from odoo import fields, models, _
 
 
 class RentalLocation(models.Model):
-
     _name = 'rental.location'
     _description = 'Rental Location'
 
-    name = fields.Char(string=_('Name'))
+    name = fields.Char(string=_('Name'), required=True)
     description = fields.Char(string=_('Description'))
     partner_id = fields.Many2one('res.partner', string=_('Owner'))
 
@@ -18,3 +17,5 @@ class RentalLocation(models.Model):
     city = fields.Char(track_visibility='onchange', string=_('City'))
     state_id = fields.Many2one("res.country.state", string=_('State'))
     country_id = fields.Many2one('res.country', string=_('Country'))
+    resource_ids = fields.One2many('rental.resource', 'location_id', string=_('Resources'), required=True)
+

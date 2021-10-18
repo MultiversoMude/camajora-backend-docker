@@ -61,7 +61,8 @@ class RentalBooking(models.Model):
     def action_cancel(self):
         return self.write({'state': 'cancelled'})
 
-    def _generate_token(self):
+    @staticmethod
+    def _generate_token():
         """
         create a token for coupon (lenght 48)
 
@@ -71,7 +72,8 @@ class RentalBooking(models.Model):
         token = "%s%s" % (str(uuid.uuid4()).replace("-", ""), str(random_number))
         return token
 
-    def _generate_qr_code(self, token):
+    @staticmethod
+    def _generate_qr_code(token):
         img = qrcode.make(token)
         buffered = BytesIO()
         img.save(buffered, format='PNG')

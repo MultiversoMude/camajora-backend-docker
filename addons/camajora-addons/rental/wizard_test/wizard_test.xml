@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="my_wizard_form" model="ir.ui.view">
+    <field name="name">my.wizard.form</field>
+    <field name="model">my.wizard</field>
+    <field name="mode">primary</field>
+    <field name="inherit_id" ref="multi_step_wizard.multi_step_wizard_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//footer" position="before">
+        <header>
+        </header>
+        <h1>
+          <field name="location_id"/>
+          <field name="name"
+                attrs="{'readonly': [('state', '!=', 'start')]}"
+                class="oe_inline"
+                placeholder="Name"/>
+        </h1>
+        <group name="configure" attrs="{'invisible': [('state', '!=', 'configure')]}">
+          <group>
+            <field name="resource_ids" widget="many2one_tags"/>
+            <field name="field2"/>
+          </group>
+        </group>
+        <group name="custom" attrs="{'invisible': [('state', '!=', 'custom')]}">
+          <group>
+            <field name="field3"/>
+          </group>
+        </group>
+        <div name="final" attrs="{'invisible': [('state', '!=', 'final')]}">
+          <p>The project is now configured.</p>
+        </div>
+      </xpath>
+    </field>
+  </record>
+
+
+  <act_window id="open_my_wizard"
+              name="Prenotazione"
+              res_model="my.wizard"
+              src_model="rental.location"
+              view_mode="form" target="new" view_type="form" />
+</odoo>

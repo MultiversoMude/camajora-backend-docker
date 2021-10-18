@@ -98,6 +98,12 @@
         <field name="location_id" />
         <field name="partner_id" />
         <field name="instance_count" />
+        <button name="%(open_my_wizard)d"
+                    string="Prenotazione"
+                    type="action"
+                    help="Prenota"
+                    attrs="{'invisible':[('instance_count','=',1)]}"
+                    class="oe_highlight" />
       </tree>
     </field>
   </record>
