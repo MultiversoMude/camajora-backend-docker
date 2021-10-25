@@ -18,12 +18,24 @@ class MyWizard(models.TransientModel):
 
     location_id = fields.Integer(string=_('Id'), default=lambda self: self._default_project_id())
 
-    resource_ids = fields.Many2one('rental.resource', string=_('Resources'))
+    resource_id = fields.Many2one('rental.resource', string=_('Resources'),
+                                  default=lambda self: self._default_resource())
 
-    name = fields.Char(string=_('Name'), default='Test')
-    field1 = fields.Char()
-    field2 = fields.Char()
-    field3 = fields.Char()
+    instances_ids = fields.Many2one('rental.resource.instance', string=_('Instances'))
+
+    name = fields.Char(string=_('SKU'))
+    # Campi per la creazione di una prenotazione
+    user_id = fields.Many2one('res.partner', string=_('User'))
+    date = fields.Date(string=_('Date'), default=lambda self: fields.Date.today())
+
+    # Stati finali
+    token = fields.Char(string=_('Secret Token'), readonly=True)
+    qr_code = fields.Binary(string=_('QR Code'), readonly=True)
+
+    @api.onchange('resource_id')
+    def onchange_resource(self):
+        domain = [('resource_id', '=', self.resource_id.id)]
+        self.instances_ids = self.env['rental.resource.instance'].search(domain)
 
     @api.model
     def _selection_state(self):
@@ -37,7 +49,14 @@ class MyWizard(models.TransientModel):
     @api.model
     def _default_project_id(self):
         log.debug(self, 'active id is %s', self.env.context.get('active_id'))
-        return self.env.context.get('active_id')
+        resource = self.env['rental.resource'].search([('id', '=', self.env.context.get('active_id'))])
+        return resource.location_id
+
+    @api.model
+    def _default_resource(self):
+        selected_ids = self.env.context.get('active_ids', [])
+        selected_records = self.env['rental.resource'].browse(selected_ids)
+        return selected_records
 
     def state_exit_start(self):
         self.state = 'configure'

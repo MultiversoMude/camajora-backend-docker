@@ -9,7 +9,6 @@ _logger = logging.getLogger(__name__)
 
 
 class RentalResource(models.Model):
-
     _name = 'rental.resource'
     _description = 'Rental Resource'
     _order = 'create_date DESC'
@@ -20,19 +19,29 @@ class RentalResource(models.Model):
     code = fields.Char(string=_('Code'), required=False, copy=False, readonly=True, index=True)
     active = fields.Boolean(default=True, string=_('Active'))
 
-    category_id = fields.Many2one('rental.resource.category', string=_('Category'), store=True, related='type_id.category_id')
+    category_id = fields.Many2one('rental.resource.category', string=_('Category'), store=True,
+                                  related='type_id.category_id')
     setup_id = fields.Many2one('rental.resource.setup', string=_('Setup'), store=True, related='type_id.setup_id')
     size_id = fields.Many2one('rental.resource.size', string=_('Size'), store=True, related='type_id.size_id')
-    performance_id = fields.Many2one('rental.resource.performance', string=_('Performance'), related='type_id.performance_id', store=True,)
-    availability_id = fields.Many2one('rental.availability', string=_('Availability'), related='type_id.availability_id', store=True,)
-    duration_id = fields.Many2one('rental.duration', string=_('Duration'), related='type_id.duration_id', store=True,)
+    performance_id = fields.Many2one('rental.resource.performance', string=_('Performance'),
+                                     related='type_id.performance_id', store=True, )
+    availability_id = fields.Many2one('rental.availability', string=_('Availability'),
+                                      related='type_id.availability_id', store=True, )
+    duration_id = fields.Many2one('rental.duration', string=_('Duration'), related='type_id.duration_id', store=True, )
 
     type_id = fields.Many2one('rental.resource.type', string=_('Type'), required=True)
     location_id = fields.Many2one('rental.location', string=_('Location'), required=True)
+
     partner_id = fields.Many2one('res.partner', related='location_id.partner_id', store=True, string=_('Owner'))
     instances_ids = fields.One2many('rental.resource.instance', 'resource_id', string=_('Instances'), required=True)
 
     instance_count = fields.Integer(string=_('Total Instances'), compute='_compute_instance_count')
+
+    def _search_location(self):
+        current_owner = self.env['res.partner'].search([('id', '=', self.env.user.partner_id.id)])
+        args = [('partner_id', '=', current_owner.id)]
+        _logger.debug(args)
+        return self.env['rental.location'].search(args)
 
     def _compute_name(self):
         for record in self:
@@ -98,13 +107,14 @@ class RentalResource(models.Model):
             domain = [
                 ('resource_id', '=', record.id),
                 '|',
-                    '|',
-                        '&', ('booking_slots_ids.dt_start', '>', dt_start), ('booking_slots_ids.dt_start', '>', dt_end),
-                        '&', ('booking_slots_ids.dt_end', '<', dt_start), ('booking_slots_ids.dt_end', '<', dt_end),
-                    ('booking_slots_ids', '=', False)
+                '|',
+                '&', ('booking_slots_ids.dt_start', '>', dt_start), ('booking_slots_ids.dt_start', '>', dt_end),
+                '&', ('booking_slots_ids.dt_end', '<', dt_start), ('booking_slots_ids.dt_end', '<', dt_end),
+                ('booking_slots_ids', '=', False)
 
             ]
-            matches = self.env['rental.resource.instance'].sudo().search(domain, order='booking_slots_count desc', limit=1)
+            matches = self.env['rental.resource.instance'].sudo().search(domain, order='booking_slots_count desc',
+                                                                         limit=1)
 
             if len(matches) < 1:
                 _logger.error('No free instances found, should always be at least one')

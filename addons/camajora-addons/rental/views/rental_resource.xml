@@ -31,7 +31,7 @@
             <group>
               <field name="code" />
               <field name="type_id" />
-              <field name="location_id" options="{'no_quick_create': True, 'no_create_edit' : True}" />
+              <field name="location_id" options="{'no_quick_create': True, 'no_create_edit' : True}" widget="many2one_tags" context="[('location_id.id','=',active_id)]"/>
               <field name="partner_id" />
             </group>
             <group>
@@ -90,8 +90,9 @@
   <record model="ir.ui.view" id="rental_resource_tree_view">
     <field name="name">rental.resource.tree (in rental)</field>
     <field name="model">rental.resource</field>
+    <field name="create">False</field>
     <field name="arch" type="xml">
-      <tree decoration-danger="instance_count == 0">
+      <tree decoration-danger="instance_count == 0"  default_order="name desc">
         <field name="code" />
         <field name="name" />
         <field name="type_id" />
@@ -102,7 +103,7 @@
                     string="Prenotazione"
                     type="action"
                     help="Prenota"
-                    attrs="{'invisible':[('instance_count','=',1)]}"
+                    attrs="{'invisible':[('instance_count','=',0)]}"
                     class="oe_highlight" />
       </tree>
     </field>
