@@ -8,7 +8,6 @@ _logger = logging.getLogger(__name__)
 
 
 class RentalResourceInstance(models.Model):
-
     _name = 'rental.resource.instance'
     _description = 'Rental Resource Instance'
 
@@ -24,6 +23,19 @@ class RentalResourceInstance(models.Model):
     )
 
     booking_slots_count = fields.Integer(string=_('Total Slots'), compute='_compute_booking_slots_count', store=True)
+
+    @api.model
+    def name_search(self, name='', args=None, operator='ilike', limit=100):
+        current_owner = self.env['res.partner'].sudo().search([('id', '=', self.env.user.partner_id.id)])
+        args = [] if args is None else args.copy()
+        args += [('resource_id.partner_id.id', '=', current_owner.id)]
+
+        default_resource_id = self.env.context.get('default_resource_id')
+        _logger.debug("default_resource_id :%s", default_resource_id)
+        if default_resource_id is not None:
+            args.append(('resource_id', '=', default_resource_id))
+
+        return super(RentalResourceInstance, self).name_search(name, args, operator, limit)
 
     def _compute_name(self):
         for record in self:

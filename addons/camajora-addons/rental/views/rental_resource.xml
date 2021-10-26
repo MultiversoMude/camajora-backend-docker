@@ -104,6 +104,7 @@
                     type="action"
                     help="Prenota"
                     attrs="{'invisible':[('instance_count','=',0)]}"
+                    context="{'default_resource_id':True}"
                     class="oe_highlight" />
       </tree>
     </field>

@@ -9,27 +9,33 @@
         <field name="arch" type="xml">
             <xpath expr="//footer" position="before">
                 <header>
+                <h1>Prenotazione</h1>
+                    <field name="state" widget="statusbar" />
                 </header>
-                <h1>
-                    <field name="location_id" attrs="{'readonly': 1}"/>
-                    <field name="name" class="oe_inline" attrs="{'readonly': 1}"/>
-                </h1>
-                <group name="configure" attrs="{'invisible': [('state', '!=', 'configure')]}">
-                    <group>
-                        <field name="resource_id" widget="many2one_tags" attrs="{'readonly': 1}"/>
-                        <field name="instances_ids" widget="many2one_tags" />
-                        <field name="date"/>
-                        <field name="user_id"/>
-                    </group>
-                </group>
-                <group name="custom" attrs="{'invisible': [('state', '!=', 'custom')]}">
-                    <group>
 
+                <group name="initial">
+                    <group>
+                        <field name="location_id" attrs="{'readonly': 1}"/>
+                        <field name="name" class="oe_inline" attrs="{'readonly': 1}"/>
+                        <field name="resource_id" widget="many2one_tags" attrs="{'readonly': 1}"/>
+                        <field name="instances_ids" widget="many2one_tags" domain="[('resource_id.id', '=', context.get('default_resource_id'))]"/>
                     </group>
                 </group>
-                <div name="final" attrs="{'invisible': [('state', '!=', 'final')]}">
-                    <p>The project is now configured.</p>
-                </div>
+                <group>
+                        <field name="date" attrs="{'invisible': 1}"/>
+                        <field name="user_id"/>
+                        <field name="duration" attrs="{'invisible': 1}" />
+                        <field name="duration_id" />
+                        <field name="start_date" />
+                        <field name="end_date" attrs="{'invisible': [('duration','in',['hourly', 'half_daily'])]}" />
+                        <field name="start_time" attrs="{'invisible': [('duration','!=','hourly')]}" />
+                        <field name="end_time" attrs="{'invisible': [('duration','!=','hourly')]}" />
+                        <field name="half_day_type" attrs="{'invisible': [('duration','!=','half_daily')]}" />
+                        <field name="total_hours" />
+                       <field name="dt_start" />
+                       <field name="dt_end" />
+                </group>
+
             </xpath>
         </field>
     </record>
@@ -39,5 +45,8 @@
                 name="Prenotazione"
                 res_model="my.wizard"
                 src_model="rental.location"
-                view_mode="form" target="new" view_type="form" />
+                view_mode="form"
+                target="new"
+                view_type="form"
+                context="{'default_resource_id':active_id}"/>
 </odoo>
