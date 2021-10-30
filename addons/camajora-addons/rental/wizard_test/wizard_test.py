@@ -169,15 +169,30 @@ class MyWizard(models.TransientModel):
             'date': self.start_date,
             'user_id': self.user_id.id,
             'rent_channel': 'main_site',
-            'state': dict(self._fields['state'].selection).get(self.state),
+            'state': 'confirmed',
             'slot_ids': [
                 (0, 0, slot)
             ]
         }
-        self.env['rental.booking'].create(pronation)
+
+        boking = self.env['rental.booking'].create(pronation)
+        self.state = 'final'
+
+        vals = {
+            'subject': 'Test invio email',
+            'body_html': "<body><p> <img src=\"data:image/png;base64,\"" + boking.qr_code.decode("utf-8") +
+                         "style=\"width: 370px;height: 370px;\" /> </p></body>",
+            'email_to': 'ariannagiacomo@gmail.com',
+            'email_cc': 'giacomo.arianna@eng.it',
+            'auto_delete': False,
+            'email_from': 'service@multiverso.biz',
+        }
+
+        mail_id = self.env['mail.mail'].sudo().create(vals)
+        mail_id.sudo().send()
 
     def state_exit_error(self):
-        self.step = 'error'
+        self.state = 'error'
 
     @api.model
     def _compute_current_id(self):
