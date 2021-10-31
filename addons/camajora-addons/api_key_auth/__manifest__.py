@@ -17,7 +17,6 @@
         'security/auth_api_token.xml',
         'views/auth_api_token.xml',
         'data/user_password_reset_email.xml',
-        'data/reservation.xml',
     ],
     'demo': [],
 }

@@ -58,6 +58,7 @@ class MyWizard(models.TransientModel):
     # Stati finali
     token = fields.Char(string=_('Secret Token'), readonly=True)
     qr_code = fields.Binary(string=_('QR Code'), readonly=True)
+    booking_id = fields.Integer(string=_('Booking ID'))
 
     @api.depends(
         'duration',
@@ -175,21 +176,16 @@ class MyWizard(models.TransientModel):
             ]
         }
 
-        boking = self.env['rental.booking'].create(pronation)
+        booking = self.env['rental.booking'].create(pronation)
+        self.env.cr.commit()
+        self.booking_id = booking.slot_ids[0].id
         self.state = 'final'
 
-        vals = {
-            'subject': 'Test invio email',
-            'body_html': "<body><p> <img src=\"data:image/png;base64,\"" + boking.qr_code.decode("utf-8") +
-                         "style=\"width: 370px;height: 370px;\" /> </p></body>",
-            'email_to': 'ariannagiacomo@gmail.com',
-            'email_cc': 'giacomo.arianna@eng.it',
-            'auto_delete': False,
-            'email_from': 'service@multiverso.biz',
-        }
-
-        mail_id = self.env['mail.mail'].sudo().create(vals)
-        mail_id.sudo().send()
+    def send_mail(self):
+        log.debug("Invia email Reservation slot :%s", self.booking_id)
+        template_ids = self.env.ref('rental.reservation_confirm_email').id
+        if template_ids:
+            self.env['mail.template'].browse(template_ids).send_mail(self.booking_id, force_send=True)
 
     def state_exit_error(self):
         self.state = 'error'

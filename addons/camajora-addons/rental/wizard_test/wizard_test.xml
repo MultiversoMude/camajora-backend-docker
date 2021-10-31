@@ -35,6 +35,15 @@
                        <field name="dt_start" />
                        <field name="dt_end" />
                 </group>
+                <group name="final"   attrs="{'invisible': [('state', '!=', 'final')]}">
+                    <button
+                            name="send_mail"
+                            string="Invia mail"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible': [('state', '!=', 'final')]}"
+                        />
+                </group>
 
             </xpath>
         </field>
