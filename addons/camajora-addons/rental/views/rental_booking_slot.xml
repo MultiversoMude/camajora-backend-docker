@@ -102,6 +102,9 @@
     <field name="arch" type="xml">
       <calendar color="name" date_start="dt_start" date_stop="dt_end" string="Slots">
         <field name="name" />
+        <field name="location_id" />
+        <field name="partner_id" />
+        <field name="total_hours" />
       </calendar>
     </field>
   </record>
