@@ -6,7 +6,9 @@
     <field name="model">rental.location</field>
     <field name="arch" type="xml">
       <form>
-        <header></header>
+        <header>
+
+        </header>
         <sheet>
           <div class="oe_title">
             <h1>
@@ -14,13 +16,14 @@
             </h1>
           </div>
           <group>
-            <field name="partner_id" />
+            <field name="partner_id"  readonly="1"/>
             <field name="description" />
             <field name="address" />
             <field name="postal_code" />
             <field name="city" />
             <field name="state_id" />
             <field name="country_id" />
+            <field name="resource_ids"/>
           </group>
         </sheet>
         <div class="oe_chatter"></div>
@@ -69,8 +72,6 @@
     <field name="name">Locations</field>
     <field name="res_model">rental.location</field>
     <field name="view_mode">tree,form</field>
-    <field name="domain">[]</field>
-    <field name="context">{}</field>
   </record>
 
 </odoo>
