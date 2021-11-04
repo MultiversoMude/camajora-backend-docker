@@ -25,9 +25,12 @@ class RentalBookingSlot(models.Model):
     partner_id = fields.Many2one(related="booking_id.user_id", store=True, string=_("Customer"))
     booking_id = fields.Many2one('rental.booking', string=_('Booking'), required=True, ondelete='cascade')
     resource_instance_id = fields.Many2one('rental.resource.instance', string=_('Resource Instance'), required=True)
-    resource_id = fields.Many2one('rental.resource', related="resource_instance_id.resource_id", store=True, string=_('Resource'))
-    location_id = fields.Many2one('rental.location', related="resource_id.location_id", store=True, string=_('Location'))
-    owner_id = fields.Many2one('res.partner', related="resource_id.location_id.partner_id", store=True, string=_('Owner'))
+    resource_id = fields.Many2one('rental.resource', related="resource_instance_id.resource_id", store=True,
+                                  string=_('Resource'))
+    location_id = fields.Many2one('rental.location', related="resource_id.location_id", store=True,
+                                  string=_('Location'))
+    owner_id = fields.Many2one('res.partner', related="resource_id.location_id.partner_id", store=True,
+                               string=_('Owner'))
     duration_id = fields.Many2one('rental.duration', string=_('Duration'), required=True)
     state = fields.Selection(related="booking_id.state", string="State")
     duration = fields.Selection([
@@ -103,11 +106,12 @@ class RentalBookingSlot(models.Model):
                 '&', ('dt_start', '<=', record.dt_start), ('dt_end', '>=', record.dt_start),
                 '&', ('dt_start', '<=', record.dt_end), ('dt_end', '>=', record.dt_end),
                 '&', ('dt_start', '<=', record.dt_start), ('dt_end', '>=', record.dt_end),
+                '&', ('dt_start', '>=', record.dt_start), ('dt_end', '<=', record.dt_end),
             ]
 
-            # if self.search_count(domain) > 0:
-            #     raise ValidationError(_('You can not have an overlap between two booking slots of the same resource.\n'
-            #                             'Please correct the start and/or end dates of your booking slot.'))
+            if self.search_count(domain) > 0:
+                raise ValidationError(_('You can not have an overlap between two booking slots of the same resource.\n'
+                                        'Please correct the start and/or end dates of your booking slot.'))
 
     @api.depends('booking_id')
     def _compute_unlock_link(self):

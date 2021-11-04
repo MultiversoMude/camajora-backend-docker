@@ -14,7 +14,7 @@
             </h1>
           </div>
           <group>
-            <field name="partner_id" />
+            <field name="partner_id"  readonly="1"/>
             <field name="description" />
             <field name="address" />
             <field name="postal_code" />

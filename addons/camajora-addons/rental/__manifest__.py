@@ -9,7 +9,7 @@
     'author': 'Metadonors Srl',
     'website': 'https://www.metadonors.it',
     'application': True,
-    'depends': ['base'],
+    'depends': ['base','mail'],
     'data': [
         'security/groups.xml',
         'security/rental_availability.xml',
@@ -49,6 +49,7 @@
         'data/rental_resource_setup_data.xml',
         'data/rental_resource_size_data.xml',
         'data/ir_sequence_data.xml',
+        'data/reservation.xml',
     ],
     'demo': []
 }
