@@ -10,6 +10,7 @@ timezone = pytz.timezone('Europe/Rome')
 
 
 class RentalBookingSlot(models.Model):
+
     _name = 'rental.booking.slot'
     _description = 'Rental Booking Slot'
     """ :(
