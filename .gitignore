@@ -1,3 +1,7 @@
 .python-version
 deploy-key*
 __pycache__
+/.project
+/.pydevproject
+/.idea/
+/camajora-backend-docker.iml
