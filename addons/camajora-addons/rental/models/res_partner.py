@@ -36,6 +36,7 @@ class ResPartner(models.Model):
         string=_("Total Bookings Slots"))
 
     booking_users = fields.Many2many(
+        'res.partner',
         string=_('Booking Users'),
         compute="_compute_booking_users"
     )
@@ -55,10 +56,13 @@ class ResPartner(models.Model):
     @api.depends('user_ids.groups_id')
     def _compute_is_owner(self):
         for record in self:
-            record.is_owner = record.user_ids and (
-                self.env.ref("rental.group_rental_owner")
-                in record.user_ids[0].groups_id
-            )
+            try:
+                record.is_owner = record.user_ids and (
+                    self.env.ref("rental.group_rental_owner")
+                    in record.user_ids[0].groups_id
+                )
+            except:
+                record.is_owner = False
 
     def _compute_booking_users(self):
         for record in self:
