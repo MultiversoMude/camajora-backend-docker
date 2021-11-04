@@ -9,7 +9,7 @@
     'author': 'Metadonors Srl',
     'website': 'https://www.metadonors.it',
     'application': True,
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail','multi_setp_wizard'],
     'data': [
         'security/groups.xml',
         'security/rental_availability.xml',
