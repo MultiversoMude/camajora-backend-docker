@@ -15,7 +15,7 @@
 
                 <group name="initial">
                     <group>
-                        <field name="location_id" attrs="{'readonly': 1}"/>
+                        <field name="location_id" attrs="{'readonly': 1,'invisible': 1}"/>
                         <field name="name" class="oe_inline" attrs="{'readonly': 1}"/>
                         <field name="resource_id" widget="many2one_tags" attrs="{'readonly': 1}"/>
                         <field name="instances_ids" widget="many2one_tags" domain="[('resource_id.id', '=', context.get('default_resource_id'))]"/>
@@ -36,13 +36,7 @@
                        <field name="dt_end" />
                 </group>
                 <group name="final"   attrs="{'invisible': [('state', '!=', 'final')]}">
-                    <button
-                            name="send_mail"
-                            string="Invia mail"
-                            type="object"
-                            class="btn-primary"
-                            attrs="{'invisible': [('state', '!=', 'final')]}"
-                        />
+
                 </group>
 
             </xpath>
