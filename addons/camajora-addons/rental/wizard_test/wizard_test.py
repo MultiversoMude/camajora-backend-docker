@@ -29,7 +29,7 @@ class MyWizard(models.TransientModel):
 
     name = fields.Char(string=_('SKU'))
     # Campi per la creazione di una prenotazione
-    user_id = fields.Many2one('res.partner', string=_('User'))
+    user_id = fields.Many2one('res.partner', string=_('User'), required=True)
     date = fields.Date(string=_('Date'), default=lambda self: fields.Date.today())
     duration_id = fields.Many2one('rental.duration', string=_('Duration'), required=True)
 

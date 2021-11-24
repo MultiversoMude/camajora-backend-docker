@@ -5,9 +5,10 @@
     <field name="name">rental.resource.form (in rental)</field>
     <field name="model">rental.resource</field>
     <field name="arch" type="xml">
-      <form>
+      <form create="false" edit="false">
         <header>
-          <button type="action" name="%(rental.generate_instances_wizard_action)d" string="Generate Instances" attrs="{'invisible': [('active', '=', False)]}" class="btn-primary" />
+          <button type="action" name="%(rental.generate_instances_wizard_action)d" string="Generate Instances"
+                  attrs="{'invisible': ['|',('active', '=', False),('instance_count','=',1)]}" class="btn-primary" />
         </header>
         <sheet>
           <div class="oe_button_box" name="button_box">
@@ -46,14 +47,6 @@
           <notebook>
             <page name="description" string="Description">
               <field name="description" widget="html" />
-            </page>
-            <page name="instances" string="Instances">
-              <field name="instances_ids" context="{'default_resource_id': active_id}">
-                <tree>
-                  <field name="code" />
-                  <field name="equipments_ids" widget="many2many_tags" />
-                </tree>
-              </field>
             </page>
           </notebook>
         </sheet>

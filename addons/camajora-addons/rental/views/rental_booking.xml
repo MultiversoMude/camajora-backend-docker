@@ -5,7 +5,7 @@
     <field name="name">rental.booking.form (in rental)</field>
     <field name="model">rental.booking</field>
     <field name="arch" type="xml">
-      <form>
+      <form create="false" edit="false">
         <header>
           <button name="action_confirm" states="draft" type="object" string="Confirm" class="btn-primary" />
           <button name="action_cancel" states="draft" type="object" string="Cancel" />
@@ -72,7 +72,7 @@
     <field name="name">rental.booking.tree (in rental)</field>
     <field name="model">rental.booking</field>
     <field name="arch" type="xml">
-      <tree>
+      <tree create="false" edit="false">
         <field name="name" />
         <field name="date" />
         <field name="user_id" />

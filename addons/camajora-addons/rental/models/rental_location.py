@@ -25,6 +25,7 @@ class RentalLocation(models.Model):
 
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):
+
         current_owner = self.env['res.partner'].search([('id', '=', self.env.user.partner_id.id)])
 
         if current_owner:

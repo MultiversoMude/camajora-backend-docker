@@ -5,7 +5,7 @@
     <field name="name">rental.booking.slot.form (in rental)</field>
     <field name="model">rental.booking.slot</field>
     <field name="arch" type="xml">
-      <form>
+      <form create="false" edit="false">
         <header>
           <field name="state" widget="statusbar"/>
         </header>
@@ -112,11 +112,10 @@
   <record model="ir.actions.act_window" id="rental_booking_slot_act_window">
     <field name="name">Booking Slots</field>
     <field name="res_model">rental.booking.slot</field>
-    <field name="view_mode">pivot,tree,form,calendar</field>
+    <field name="view_mode">calendar,pivot,tree,form</field>
     <field name="domain">[]</field>
     <field name="context">{
-      'search_default_confirmed': 1,
-      'search_default_create_date': 1
+      'search_default_confirmed': 1
     }</field>
   </record>
 

@@ -21,9 +21,9 @@
     <field name="sequence" eval="10" />
   </record>
   <record model="ir.ui.menu" id="rental_booking_slot_report_menu">
-    <field name="name">Booking Slots</field>
-    <field name="parent_id" ref="rental_booking_menu" />
+    <field name="name">Calendario Prenotazioni</field>
     <field name="action" ref="rental_booking_slot_act_window" />
+    <field name="parent_id" ref="rental_main_menu" />
     <field name="sequence" eval="11" />
   </record>
   <!-- Resource Menu -->
