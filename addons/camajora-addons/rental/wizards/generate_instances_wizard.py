@@ -20,7 +20,11 @@ class GenerateInstancesWizard(models.TransientModel):
 
         resource = self.env['rental.resource'].browse(self.env.context.get('active_id'))
 
-        for count in range(0, self.count):
+        count = self.env['rental.resource.instance'].search(
+            [('resource_id', '=', resource.id)]
+        )
+
+        if len(count) == 0:
             self.env['rental.resource.instance'].create({
                 'resource_id': resource.id,
                 'equipments_ids': [(6, 0, self.equipments_ids.ids)]
