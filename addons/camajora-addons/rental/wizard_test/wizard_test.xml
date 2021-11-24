@@ -21,6 +21,7 @@
                         <field name="instances_ids" widget="many2one_tags" domain="[('resource_id.id', '=', context.get('default_resource_id'))]"/>
                     </group>
                 </group>
+
                 <group attrs="{'invisible': [('state', '!=', 'start')]}">
                         <field name="date" attrs="{'invisible': 1}"/>
                         <field name="user_id"/>
