@@ -13,7 +13,7 @@ RUN apt-get update \
         sudo \
         pkg-config \
         python3-dev \
-        #libffi-dev \
+        libffi-dev \
         #python3 \
 		#python3-dev python3-pip \
     && rm -rf /var/lib/apt/lists/*
