@@ -45,7 +45,6 @@ class RentalResource(models.Model):
         if current_owner:
             args = [] if args is None else args.copy()
             args.append(('partner_id', '=', current_owner.id))
-            _logger.debug("Args:%s", args)
 
         return super(RentalResource, self).search(args, offset, limit, order, count)
 
