@@ -25,7 +25,7 @@ class MyWizard(models.TransientModel):
     resource_id = fields.Many2one('rental.resource', string=_('Resources'),
                                   default=lambda self: self._default_resource())
 
-    instances_ids = fields.Many2one('rental.resource.instance', string=_('Instances'), strore=True)
+    instances_ids = fields.Many2one('rental.resource.instance', string=_('Instances'), required=True)
 
     name = fields.Char(string=_('SKU'))
     # Campi per la creazione di una prenotazione

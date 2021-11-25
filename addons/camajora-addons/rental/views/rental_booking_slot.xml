@@ -82,10 +82,9 @@
     <field name="model">rental.booking.slot</field>
     <field name="arch" type="xml">
       <tree>
-        <field name="location_id" />
-        <field name="partner_id" />
         <field name="resource_id" />
-        <field name="name" />
+        <filed name="partner_id"/>
+        <field name="location_id" />
         <field name="booking_id" />
         <field name="duration_id" />
         <field name="dt_start" />

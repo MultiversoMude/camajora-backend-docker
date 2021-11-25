@@ -34,6 +34,8 @@
                 <tree>
                   <field name="name" />
                   <field name="resource_instance_id" />
+                  <field name="location_id" />
+                  <field name="partner_id" />
                   <field name="duration_id" />
                   <field name="dt_start" />
                   <field name="dt_end" />
