@@ -48,6 +48,14 @@
             <page name="description" string="Description">
               <field name="description" widget="html" />
             </page>
+            <page name="instances" string="Instances" attrs="{'invisible':True}" >
+              <field name="instances_ids" context="{'default_resource_id': active_id}">
+                <tree>
+                  <field name="code" />
+                  <field name="equipments_ids" widget="many2many_tags" />
+                </tree>
+              </field>
+            </page>
           </notebook>
         </sheet>
         <div class="oe_chatter"></div>

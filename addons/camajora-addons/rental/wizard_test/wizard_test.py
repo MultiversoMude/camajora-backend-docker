@@ -84,7 +84,7 @@ class MyWizard(models.TransientModel):
 
     @api.constrains('instances_ids', 'dt_start', 'dt_end')
     def _check_dates(self):
-      
+
         for record in self:
             # Starting date must be prior to the ending date
             dt_start = record.dt_start
@@ -171,7 +171,7 @@ class MyWizard(models.TransientModel):
         self.env.cr.commit()
         self.booking_id = booking.slot_ids[0].id
         self.send_mail()
-        
+
         self.state = 'final'
 
     def send_mail(self):

@@ -37,6 +37,25 @@ class RentalResource(models.Model):
 
     instance_count = fields.Integer(string=_('Total Instances'), compute='_compute_instance_count')
 
+    @api.model
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+
+        current_owner = self.env['res.partner'].search([('id', '=', self.env.user.partner_id.id)])
+
+        if current_owner:
+            args = [] if args is None else args.copy()
+            args.append(('partner_id', '=', current_owner.id))
+            _logger.debug("Args:%s", args)
+
+        return super(RentalResource, self).search(args, offset, limit, order, count)
+
+    @api.model
+    def name_search(self, name='', args=None, operator='ilike', limit=100):
+        current_owner = self.env['res.partner'].sudo().search([('id', '=', self.env.user.partner_id.id)])
+        args = [] if args is None else args.copy()
+        args += [('partner_id', '=', current_owner.id)]
+        return super(RentalResource, self).name_search(name, args, operator, limit)
+
     def _search_location(self):
         current_owner = self.env['res.partner'].search([('id', '=', self.env.user.partner_id.id)])
         args = [('partner_id', '=', current_owner.id)]
