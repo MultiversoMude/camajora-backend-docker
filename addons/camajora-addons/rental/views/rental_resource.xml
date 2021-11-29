@@ -5,7 +5,7 @@
     <field name="name">rental.resource.form (in rental)</field>
     <field name="model">rental.resource</field>
     <field name="arch" type="xml">
-      <form create="false" edit="false">
+      <form>
         <header>
           <button type="action" name="%(rental.generate_instances_wizard_action)d" string="Generate Instances"
                   attrs="{'invisible': ['|',('active', '=', False),('instance_count','=',1)]}" class="btn-primary" />
