@@ -25,7 +25,9 @@ class MyWizard(models.TransientModel):
     resource_id = fields.Many2one('rental.resource', string=_('Resources'),
                                   default=lambda self: self._default_resource())
 
-    instances_ids = fields.Many2one('rental.resource.instance', string=_('Instances'), required=True)
+    instances_ids = fields.Many2one('rental.resource.instance', string=_('Instances'),
+                                    default=lambda self: self._default_resource_instance(),
+                                    required=True)
 
     name = fields.Char(string=_('SKU'))
     # Campi per la creazione di una prenotazione
@@ -136,6 +138,12 @@ class MyWizard(models.TransientModel):
         selected_ids = self.env.context.get('active_ids', [])
         selected_records = self.env['rental.resource'].browse(selected_ids)
         return selected_records
+
+    @api.model
+    def _default_resource_instance(self):
+        instances = self.env['rental.resource.instance'].search(
+            [('resource_id', '=', self.env.context.get('active_id'))])
+        return instances[0]
 
     def state_exit_start(self):
 

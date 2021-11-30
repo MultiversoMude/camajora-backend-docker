@@ -15,7 +15,7 @@
             <button class="oe_stat_button" icon="fa-calendar" name="action_open_calendar" type="object">
               <field name="instance_count" string="Calendar" widget="statinfo" />
             </button>
-            <button class="oe_stat_button" icon="fa-child" name="action_open_instances" type="object">
+            <button class="oe_stat_button"  attrs="{'invisible':True}" icon="fa-child" name="action_open_instances" type="object">
               <field name="instance_count" string="Instances" widget="statinfo" />
             </button>
             <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-lock">

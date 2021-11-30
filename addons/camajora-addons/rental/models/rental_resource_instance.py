@@ -51,11 +51,6 @@ class RentalResourceInstance(models.Model):
 
     @api.model
     def create(self, vals):
-        resource_id = self.env['rental.resource'].search([
-            ('id', '=', vals['resource_id'])
-        ])
-        vals['code'] = '{}-{}'.format(
-            resource_id.code,
-            self.env['ir.sequence'].next_by_code('rental.resource.instance.code')
-        )
+        vals['code'] = self.env['ir.sequence'].next_by_code('rental.resource.instance.code')
         return super().create(vals)
+

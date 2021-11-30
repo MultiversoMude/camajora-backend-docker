@@ -106,7 +106,13 @@ class RentalResource(models.Model):
     @api.model
     def create(self, vals):
         vals['code'] = self.env['ir.sequence'].next_by_code('rental.resource.code') or _('New')
-        return super().create(vals)
+        resource = super().create(vals)
+
+        self.env['rental.resource.instance'].create({
+            'resource_id': resource.id,
+        })
+
+        return resource
 
     def get_best_instance_match(self, **kwargs):
         slot_range = compute_range(

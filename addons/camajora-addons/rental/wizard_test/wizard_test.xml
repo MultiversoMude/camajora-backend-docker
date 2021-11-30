@@ -38,11 +38,12 @@
                 <group name="final"   attrs="{'invisible': [('state', '!=', 'final')]}">
                         <p>Prentazione inserita con successo</p>
                 </group>
-
+            </xpath>
+            <xpath expr="//button[@name='cancel']" position="attributes">
+                <attribute name="attrs">{'invisible': [('state', '=', 'final')]}</attribute>
             </xpath>
         </field>
     </record>
-
 
     <act_window id="open_my_wizard"
                 name="Prenotazione"
