@@ -30,6 +30,7 @@ class MyWizard(models.TransientModel):
                                     required=True)
 
     name = fields.Char(string=_('SKU'))
+
     # Campi per la creazione di una prenotazione
     user_id = fields.Many2one('res.partner', string=_('User'), required=True)
     date = fields.Date(string=_('Date'), default=lambda self: fields.Date.today())
@@ -41,7 +42,7 @@ class MyWizard(models.TransientModel):
         ('daily', _('Daily')),
         ('weekly', _('Weekly')),
         ('monthly', _('Monthly')),
-    ], related='duration_id.type', string=_('Duration Type'))
+    ], related='duration_id.type', string=_('Duration Type'), default='hourly')
 
     start_date = fields.Date(string=_('Start Date'), required=True)
     end_date = fields.Date(string=_('End Date'), required=False)
@@ -57,6 +58,7 @@ class MyWizard(models.TransientModel):
     total_hours = fields.Integer(string=_('Total Hours'), readonly=True, compute='_compute_range', store=True)
     dt_start = fields.Datetime(string=_('Booking From'), readonly=True, compute='_compute_range', store=True)
     dt_end = fields.Datetime(string=_('Booking To'), readonly=True, compute='_compute_range', store=True)
+
     # Stati finali
     token = fields.Char(string=_('Secret Token'), readonly=True)
     qr_code = fields.Binary(string=_('QR Code'), readonly=True)
@@ -197,6 +199,7 @@ class MyWizard(models.TransientModel):
         return self.env.context.get('active_id')
 
     # ------------
+
 
 
 def compute_range(duration, start_date, end_date, start_time, end_time, half_day_type):
