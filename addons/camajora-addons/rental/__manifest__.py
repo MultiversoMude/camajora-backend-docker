@@ -51,6 +51,7 @@
         'data/rental_resource_size_data.xml',
         'data/ir_sequence_data.xml',
         'data/reservation.xml',
+        'templates/assets.xml'
     ],
     'demo': []
 }

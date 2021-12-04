@@ -57,6 +57,17 @@ class RentalBookingSlot(models.Model):
 
     unlock_link = fields.Char(string=_('Unlock Link'), readonly=True, compute='_compute_unlock_link')
 
+    @api.model
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+
+        current_owner = self.env['res.partner'].search([('id', '=', self.env.user.partner_id.id)])
+
+        if current_owner:
+            args = [] if args is None else args.copy()
+            args.append(('owner_id', '=', current_owner.id))
+
+        return super(RentalBookingSlot, self).search(args, offset, limit, order, count)
+
     @api.depends(
         'duration',
         'start_date',
