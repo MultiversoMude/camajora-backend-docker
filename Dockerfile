@@ -13,8 +13,10 @@ RUN apt-get update \
         sudo \
         pkg-config \
         python3-dev \
-        libffi-dev \
-       # python3 python3-dev python3-pip 
+        #libffi-dev \
+        #python3 \
+		#python3-dev  \
+        #python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
 COPY ./odoo/extra-requirements.txt /mnt/utils/extra-requirements.txt

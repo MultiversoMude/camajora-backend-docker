@@ -46,6 +46,17 @@ class RentalBooking(models.Model):
         vals['qr_code'] = self._generate_qr_code(vals['token'])
         return super().create(vals)
 
+    @api.model
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+
+        current_owner = self.env['res.partner'].search([('id', '=', self.env.user.partner_id.id)])
+
+        if current_owner:
+            args = [] if args is None else args.copy()
+            args.append(('slot_ids.location_id.partner_id', '=', current_owner.id))
+
+        return super(RentalBooking, self).search(args, offset, limit, order, count)
+
     def _compute_slot_count(self):
         for record in self:
             count = self.env['rental.booking.slot'].search(

@@ -17,6 +17,7 @@ addons_path:
     - /mnt/bundle-addons/server-ux
     - /mnt/bundle-addons/web
     - /mnt/bundle-addons/storage
+    - /mnt/bundle-addons/slugify-jackarian
     - /mnt/bundle-addons/camajora-addons
 
 log_level : debug

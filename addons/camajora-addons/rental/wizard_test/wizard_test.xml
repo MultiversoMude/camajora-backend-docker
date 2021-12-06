@@ -13,15 +13,15 @@
                     <field name="state" widget="statusbar" />
                 </header>
 
-                <group name="initial">
+                <group name="initial" attrs="{'invisible': [('state', '!=', 'start')]}">
                     <group>
                         <field name="location_id" attrs="{'readonly': 1,'invisible': 1}"/>
                         <field name="name" class="oe_inline" attrs="{'readonly': 1}"/>
                         <field name="resource_id" widget="many2one_tags" attrs="{'readonly': 1}"/>
-                        <field name="instances_ids" widget="many2one_tags" domain="[('resource_id.id', '=', context.get('default_resource_id'))]"/>
+                        <field name="instances_ids" attrs="{'invisible':True}" widget="many2one_tags" domain="[('resource_id.id', '=', context.get('default_resource_id'))]"/>
                     </group>
                 </group>
-                <group>
+                <group attrs="{'invisible': [('state', '!=', 'start')]}">
                         <field name="date" attrs="{'invisible': 1}"/>
                         <field name="user_id"/>
                         <field name="duration" attrs="{'invisible': 1}" />
@@ -36,13 +36,14 @@
                        <field name="dt_end" />
                 </group>
                 <group name="final"   attrs="{'invisible': [('state', '!=', 'final')]}">
-
+                        <p>Prentazione inserita con successo</p>
                 </group>
-
+            </xpath>
+            <xpath expr="//button[@name='cancel']" position="attributes">
+                <attribute name="attrs">{'invisible': [('state', '=', 'final')]}</attribute>
             </xpath>
         </field>
     </record>
-
 
     <act_window id="open_my_wizard"
                 name="Prenotazione"

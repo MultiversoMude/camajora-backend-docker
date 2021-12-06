@@ -25,11 +25,14 @@ class MyWizard(models.TransientModel):
     resource_id = fields.Many2one('rental.resource', string=_('Resources'),
                                   default=lambda self: self._default_resource())
 
-    instances_ids = fields.Many2one('rental.resource.instance', string=_('Instances'), strore=True)
+    instances_ids = fields.Many2one('rental.resource.instance', string=_('Instances'),
+                                    default=lambda self: self._default_resource_instance(),
+                                    required=True)
 
     name = fields.Char(string=_('SKU'))
+
     # Campi per la creazione di una prenotazione
-    user_id = fields.Many2one('res.partner', string=_('User'))
+    user_id = fields.Many2one('res.partner', string=_('User'), required=True)
     date = fields.Date(string=_('Date'), default=lambda self: fields.Date.today())
     duration_id = fields.Many2one('rental.duration', string=_('Duration'), required=True)
 
@@ -39,7 +42,7 @@ class MyWizard(models.TransientModel):
         ('daily', _('Daily')),
         ('weekly', _('Weekly')),
         ('monthly', _('Monthly')),
-    ], related='duration_id.type', string=_('Duration Type'))
+    ], related='duration_id.type', string=_('Duration Type'), default='hourly')
 
     start_date = fields.Date(string=_('Start Date'), required=True)
     end_date = fields.Date(string=_('End Date'), required=False)
@@ -55,6 +58,7 @@ class MyWizard(models.TransientModel):
     total_hours = fields.Integer(string=_('Total Hours'), readonly=True, compute='_compute_range', store=True)
     dt_start = fields.Datetime(string=_('Booking From'), readonly=True, compute='_compute_range', store=True)
     dt_end = fields.Datetime(string=_('Booking To'), readonly=True, compute='_compute_range', store=True)
+
     # Stati finali
     token = fields.Char(string=_('Secret Token'), readonly=True)
     qr_code = fields.Binary(string=_('QR Code'), readonly=True)
@@ -84,7 +88,7 @@ class MyWizard(models.TransientModel):
 
     @api.constrains('instances_ids', 'dt_start', 'dt_end')
     def _check_dates(self):
-      
+
         for record in self:
             # Starting date must be prior to the ending date
             dt_start = record.dt_start
@@ -137,6 +141,12 @@ class MyWizard(models.TransientModel):
         selected_records = self.env['rental.resource'].browse(selected_ids)
         return selected_records
 
+    @api.model
+    def _default_resource_instance(self):
+        instances = self.env['rental.resource.instance'].search(
+            [('resource_id', '=', self.env.context.get('active_id'))])
+        return instances[0]
+
     def state_exit_start(self):
 
         slot = {
@@ -171,7 +181,7 @@ class MyWizard(models.TransientModel):
         self.env.cr.commit()
         self.booking_id = booking.slot_ids[0].id
         self.send_mail()
-        
+
         self.state = 'final'
 
     def send_mail(self):
@@ -189,6 +199,7 @@ class MyWizard(models.TransientModel):
         return self.env.context.get('active_id')
 
     # ------------
+
 
 
 def compute_range(duration, start_date, end_date, start_time, end_time, half_day_type):

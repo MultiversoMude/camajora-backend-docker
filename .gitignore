@@ -5,3 +5,4 @@ __pycache__
 /.pydevproject
 /.idea/
 /camajora-backend-docker.iml
+/.pytest_cache/
