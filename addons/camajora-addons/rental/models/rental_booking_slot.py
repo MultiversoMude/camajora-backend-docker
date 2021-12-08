@@ -62,13 +62,14 @@ class RentalBookingSlot(models.Model):
 
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):
+        backend = self.env.context.get('backend')
 
-        _logger.debug('Domain  log in search booking slot: %s', args)
-        current_owner = self.env['res.partner'].search([('id', '=', self.env.user.partner_id.id)])
-        filter = None
-        if current_owner:
-            args = [] if args is None else args.copy()
-            args.append(('owner_id', '=', current_owner.id))
+        if backend is not None:
+            current_owner = self.env['res.partner'].search([('id', '=', self.env.user.partner_id.id)])
+
+            if current_owner:
+                args = [] if args is None else args.copy()
+                args.append(('owner_id', '=', current_owner.id))
 
         return super(RentalBookingSlot, self).search(args, offset, limit, order, count)
 

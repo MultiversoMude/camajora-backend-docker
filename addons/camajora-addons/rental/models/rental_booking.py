@@ -11,7 +11,6 @@ from odoo import api, fields, models, _
 
 
 class RentalBooking(models.Model):
-
     _name = 'rental.booking'
     _description = 'Rental Booking'
 
@@ -49,11 +48,14 @@ class RentalBooking(models.Model):
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):
 
-        current_owner = self.env['res.partner'].search([('id', '=', self.env.user.partner_id.id)])
+        backend = self.env.context.get('backend')
 
-        if current_owner:
-            args = [] if args is None else args.copy()
-            args.append(('slot_ids.location_id.partner_id', '=', current_owner.id))
+        if backend is not None:
+            current_owner = self.env['res.partner'].search([('id', '=', self.env.user.partner_id.id)])
+
+            if current_owner:
+                args = [] if args is None else args.copy()
+                args.append(('slot_ids.location_id.partner_id', '=', current_owner.id))
 
         return super(RentalBooking, self).search(args, offset, limit, order, count)
 

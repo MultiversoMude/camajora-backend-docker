@@ -129,7 +129,8 @@
     <field name="view_mode">calendar,calendar_list</field>
     <field name="domain">[]</field>
     <field name="context">{
-      'search_default_confirmed': 1
+      'search_default_confirmed': 1,
+      'backend':True
     }</field>
   </record>
 

@@ -116,7 +116,7 @@
     <field name="res_model">rental.resource</field>
     <field name="view_mode">tree,form</field>
     <field name="domain">[]</field>
-    <field name="context">{}</field>
+    <field name="context">{'backend':True}</field>
   </record>
 
 </odoo>
