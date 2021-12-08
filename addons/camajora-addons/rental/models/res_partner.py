@@ -16,6 +16,10 @@ class ResPartner(models.Model):
         compute="_compute_is_owner",
         store=True
     )
+    is_superuser = fields.Boolean(
+        string=_('Is Superuser'),
+        store=True
+    )
 
     booking_ids = fields.One2many(
         'rental.booking',
