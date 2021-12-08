@@ -62,7 +62,8 @@ class BookingSlotsService(Component):
             'section': section,
         }
 
-    def _get_object_schema(self):
+    @staticmethod
+    def _get_object_schema():
         return {
             'id': {'type': 'integer', 'required': True},
             'sku': {'type': 'string', 'required': True},
@@ -72,7 +73,7 @@ class BookingSlotsService(Component):
             'dt_start': {'type': 'datetime', 'required': True},
             'dt_end': {'type': 'datetime', 'required': True},
             'start_date': {'type': 'date', 'required': True},
-            'end_date': {'type': 'date', 'required': True},
+            'end_date': {'type': 'date', 'required': False},
             'start_time': {'type': 'integer', 'required': True},
             'end_time': {'type': 'integer', 'required': True},
             'token': {'type': 'string', 'required': False, 'empty': True, 'nullable': True},

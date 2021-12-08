@@ -5,8 +5,11 @@ from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 from datetime import datetime, time, timedelta
 import pytz
+import logging
 
 timezone = pytz.timezone('Europe/Rome')
+
+_logger = logging.getLogger(__name__)
 
 
 class RentalBookingSlot(models.Model):
@@ -20,7 +23,7 @@ class RentalBookingSlot(models.Model):
     )]
     """
 
-    name = fields.Char(related='resource_instance_id.name', string=_('SKU'))
+    name = fields.Char(related='resource_instance_id.code', string=_('SKU'))
     partner_id = fields.Many2one(related="booking_id.user_id", store=True, string=_("Customer"))
     booking_id = fields.Many2one('rental.booking', string=_('Booking'), required=True, ondelete='cascade')
     resource_instance_id = fields.Many2one('rental.resource.instance', string=_('Resource Instance'), required=True)
@@ -60,8 +63,9 @@ class RentalBookingSlot(models.Model):
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):
 
+        _logger.debug('Domain  log in search booking slot: %s', args)
         current_owner = self.env['res.partner'].search([('id', '=', self.env.user.partner_id.id)])
-
+        filter = None
         if current_owner:
             args = [] if args is None else args.copy()
             args.append(('owner_id', '=', current_owner.id))
