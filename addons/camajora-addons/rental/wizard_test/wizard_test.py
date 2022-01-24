@@ -89,6 +89,14 @@ class MyWizard(models.TransientModel):
     @api.constrains('instances_ids', 'dt_start', 'dt_end')
     def _check_dates(self):
 
+        sql_check = """
+                    select COUNT(*) from rental_booking_slot rbs 
+                          where id != %s and resource_instance_id = %s 
+                    and ((dt_start <= %s AND dt_end >= %s)
+                    or (dt_start <= %s AND dt_end >= %s)
+                    or (dt_start <= %s AND dt_end >= %s)
+                    or (dt_start >= %s AND dt_end <= %s));"""
+
         for record in self:
             # Starting date must be prior to the ending date
             dt_start = record.dt_start
@@ -106,7 +114,16 @@ class MyWizard(models.TransientModel):
                 '&', ('dt_start', '>=', record.dt_start), ('dt_end', '<=', record.dt_end),
             ]
 
-            if self.env['rental.booking.slot'].sudo().search_count(domain) > 0:
+            self.env.cr.execute(sql_check, (record.id, record.instances_ids.id,
+                                            record.dt_start, record.dt_start,
+                                            record.dt_end, record.dt_end,
+                                            record.dt_start, record.dt_end,
+                                            record.dt_start, record.dt_end))
+
+            reservetion_found = self.env.cr.fetchone()[0]
+            log.debug(self, 'Reservation found: %s', reservetion_found)
+
+            if reservetion_found > 0:
                 raise ValidationError(_('You can not have an overlap between two booking slots of the same resource.\n'
                                         'Please correct the start and/or end dates of your booking slot.'))
 
@@ -199,7 +216,6 @@ class MyWizard(models.TransientModel):
         return self.env.context.get('active_id')
 
     # ------------
-
 
 
 def compute_range(duration, start_date, end_date, start_time, end_time, half_day_type):

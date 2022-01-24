@@ -108,7 +108,8 @@ class BookingService(Component):
             'end_time': line.end_time,
         }
 
-    def _get_object_schema(self):
+    @staticmethod
+    def _get_object_schema():
         return {
             'id': {'type': 'integer', 'required': True, 'empty': False, 'nullable': False},
             'state': {'type': 'string', 'required': True, 'empty': False, 'nullable': False},
@@ -216,7 +217,8 @@ class BookingService(Component):
     def _validator_return_search(self):
         return self._validator_return_get()
 
-    def _validator_add_item(self):
+    @staticmethod
+    def _validator_add_item():
         return {
             'resource_id': {
                 'type': 'integer',
@@ -231,7 +233,8 @@ class BookingService(Component):
             'half_day_type': {'type': 'string', 'required': False, 'nullable': True},  # FIXME LIMIT TO POTENTIAL
         }
 
-    def _validator_remove_item(self):
+    @staticmethod
+    def _validator_remove_item():
         return {
             'slot_id': {'type': 'integer', 'coerce': to_int, 'required': True}
         }

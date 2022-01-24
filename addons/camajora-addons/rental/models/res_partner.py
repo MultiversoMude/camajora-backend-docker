@@ -1,11 +1,10 @@
- # Copyright 2020 Metadonors Srl
+# Copyright 2020 Metadonors Srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models, _
 
 
 class ResPartner(models.Model):
-
     _inherit = 'res.partner'
 
     fiscal_code = fields.Char(string=_('Fiscal Code'), required=False)
@@ -15,6 +14,12 @@ class ResPartner(models.Model):
         string=_('Is Owner'),
         compute="_compute_is_owner",
         store=True
+    )
+
+    is_superuser = fields.Boolean(
+        string=_('Is Superuser'),
+        compute="_compute_is_superuser",
+        store=False
     )
 
     booking_ids = fields.One2many(
@@ -58,11 +63,22 @@ class ResPartner(models.Model):
         for record in self:
             try:
                 record.is_owner = record.user_ids and (
-                    self.env.ref("rental.group_rental_owner")
-                    in record.user_ids[0].groups_id
+                        self.env.ref("rental.group_rental_owner")
+                        in record.user_ids[0].groups_id
                 )
             except:
                 record.is_owner = False
+
+    @api.depends('user_ids.groups_id')
+    def _compute_is_superuser(self):
+        for record in self:
+            try:
+                record.is_superuser = record.user_ids and (
+                        self.env.ref("rental.group_rental_superuser")
+                        in record.user_ids[0].groups_id
+                )
+            except:
+                record.is_superuser = False
 
     def _compute_booking_users(self):
         for record in self:

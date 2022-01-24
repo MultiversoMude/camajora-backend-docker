@@ -21,6 +21,7 @@
         <field name="invoice_recipient_code" />
         <field name="pec_address" />
         <field name="is_owner" />
+        <field name="is_superuser" />
       </field>
     </field>
   </record>

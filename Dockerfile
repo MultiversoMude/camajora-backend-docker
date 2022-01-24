@@ -6,16 +6,16 @@ RUN mkdir -p /mnt/utils /mnt/bundle-addons \
     && chown -R odoo:odoo /mnt/utils /mnt/bundle-addons
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+    && apt-get install -y  \
         vim \
         libtool \
         nginx \
         sudo \
         pkg-config \
         python3-dev \
-        #libffi-dev \
+        libffi-dev \
         #python3 \
-		#python3-dev  \
+		#python3.8-dev  \
         #python3-pip \
     && rm -rf /var/lib/apt/lists/*
 

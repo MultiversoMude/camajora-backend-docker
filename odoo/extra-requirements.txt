@@ -45,7 +45,8 @@ asn1crypto
 requests-futures
 jsondiff
 stripe
-graphene
+graphql-core<3
+graphene<3
 graphql-server-core
 marshmallow-objects>=2.0.0
 apispec
