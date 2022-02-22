@@ -1,4 +1,3 @@
-
 # Copyright 2019 Metadonors Srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -11,8 +10,8 @@ from odoo.osv import expression
 
 _logger = logging.getLogger(__name__)
 
-class SaleOrder(models.Model):
 
+class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     typology = fields.Selection(
@@ -21,12 +20,12 @@ class SaleOrder(models.Model):
     )
     state = fields.Selection([
         ('draft', 'Quotation'),
-        ('review',_('Review')),
+        ('review', _('Review')),
         ('sent', 'Quotation Sent'),
         ('sale', 'Sales Order'),
         ('done', 'Locked'),
         ('cancel', 'Cancelled'),
-        ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='draft')
+    ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='draft')
 
     @api.multi
     def action_confirm_cart(self):
@@ -34,7 +33,7 @@ class SaleOrder(models.Model):
             if record.typology == "sale":
                 # cart is already confirmed
                 continue
-            record.write({"typology": "sale", "state":'review'})
+            record.write({"typology": "sale", "state": 'review'})
 
         return True
 
@@ -43,14 +42,14 @@ class SaleOrder(models.Model):
         """
             Change the state order to 'review'
         """
-        self.state="review"
+        self.state = "review"
 
     @api.multi
     def action_accept_order(self):
         """
             Accept order from review state
         """
-        self.state="sent"
+        self.state = "sent"
         self.force_quotation_send()
 
     @api.multi
@@ -63,7 +62,6 @@ class SaleOrder(models.Model):
             'state': 'draft',
         })
 
-
     @api.multi
     def action_confirm(self):
         res = super(SaleOrder, self).action_confirm()
@@ -71,4 +69,3 @@ class SaleOrder(models.Model):
             if record.typology != "sale":
                 record.typology = "sale"
         return res
-

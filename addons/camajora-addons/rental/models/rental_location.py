@@ -32,8 +32,12 @@ class RentalLocation(models.Model):
 
             if current_owner:
                 args = [] if args is None else args.copy()
-                args.append(('partner_id', '=', current_owner.id))
-                _logger.debug("Args:%s", args)
+                if current_owner.parent_id is not None:
+                    args.append(('partner_id', 'in', [current_owner.id, current_owner.parent_id.id]))
+                else:
+                    args.append(('partner_id', '=', current_owner.id))
+
+                _logger.debug("Location search args in backend mode:%s", args)
 
         return super(RentalLocation, self).search(args, offset, limit, order, count)
 
