@@ -69,7 +69,10 @@ class RentalBookingSlot(models.Model):
 
             if current_owner:
                 args = [] if args is None else args.copy()
-                args.append(('owner_id', '=', current_owner.id))
+                if current_owner.parent_id is not None:
+                    args.append(('owner_id', 'in', [current_owner.id, current_owner.parent_id.id]))
+                else:
+                    args.append(('owner_id', '=', current_owner.id))
 
         return super(RentalBookingSlot, self).search(args, offset, limit, order, count)
 

@@ -47,7 +47,10 @@ class RentalResource(models.Model):
 
             if current_owner:
                 args = [] if args is None else args.copy()
-                args.append(('partner_id', '=', current_owner.id))
+                if current_owner.parent_id is not None:
+                    args.append(('partner_id', 'in', [current_owner.id, current_owner.parent_id.id]))
+                else:
+                    args.append(('partner_id', '=', current_owner.id))
 
         return super(RentalResource, self).search(args, offset, limit, order, count)
 

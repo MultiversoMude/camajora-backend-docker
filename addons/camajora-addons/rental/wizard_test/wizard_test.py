@@ -24,8 +24,16 @@ class MyWizard(models.TransientModel):
 
     resource_id = fields.Many2one('rental.resource', string=_('Resources'),
                                   default=lambda self: self._default_resource())
+
     credit_cost = fields.Integer(related='resource_id.credit_cost', readonly=True,
                                  string=_('Credit Cost'), store=True)
+
+    credit_left = fields.Integer(related='location.partner_id.credits', readonly=True,
+                                 string=_('Credit Left'))
+
+    credits_used = fields.Integer(string=_('Credits Used'),
+                                  readonly=True, compute='_compute_credits_used')
+
     instances_ids = fields.Many2one('rental.resource.instance', string=_('Instances'),
                                     default=lambda self: self._default_resource_instance(),
                                     required=True)
@@ -88,6 +96,20 @@ class MyWizard(models.TransientModel):
             record.dt_end = slot_range['dt_end']
 
         _logger.debug("Date limit calculated:%s", slot_range)
+
+    @api.depends(
+        'total_hours',
+        'resource_id'
+    )
+    def _compute_credits_used(self):
+        for record in self:
+            credit_cost = 0
+            credit_cost += (
+                    self.total_hours *
+                    self.resource_id.credit_cost  # hourly credit cost
+                # applicare sconto
+            )
+            record.credits_used = credit_cost
 
     @api.constrains('instances_ids', 'dt_start', 'dt_end')
     def _check_dates(self):
@@ -160,9 +182,18 @@ class MyWizard(models.TransientModel):
 
     def state_exit_start(self):
 
+        owner = self.location.partner_id
+
+        if owner.credits < self.credits_used:
+            raise ValidationError('Not enough credits')
+
+        owner.sudo().write({
+            'credits': owner.credits - self.credits_used
+        })
+
         slot = {
             'partner_id': self.user_id.id,
-            'owner_id': self.env.user.partner_id.id,
+            'owner_id': self.location.partner_id.id,
             'duration_id': self.duration_id.id,
             'resource_instance_id': self.instances_ids.id,
             'resource_id': self.resource_id.id,
