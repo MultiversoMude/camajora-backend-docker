@@ -19,17 +19,14 @@ class MyWizard(models.TransientModel):
         ondelete='cascade',
         default=lambda self: self._default_project_id(),
     )
-
     location_id = fields.Integer(string=_('Id'), default=lambda self: self._default_project_id())
 
     resource_id = fields.Many2one('rental.resource', string=_('Resources'),
                                   default=lambda self: self._default_resource())
-
-    credit_cost = fields.Integer(related='resource_id.credit_cost', readonly=True,
-                                 string=_('Credit Cost'), store=True)
-
-    credit_left = fields.Integer(related='location.partner_id.credits', readonly=True,
-                                 string=_('Credit Left'))
+    credit_cost = fields.Integer(string=_('Credit Cost'),
+                                 readonly=True, compute='_compute_credits_cost')
+    credit_left = fields.Integer(string=_('Credit Left'),
+                                 readonly=True, compute='_compute_credits_available')
 
     credits_used = fields.Integer(string=_('Credits Used'),
                                   readonly=True, compute='_compute_credits_used')
@@ -96,6 +93,20 @@ class MyWizard(models.TransientModel):
             record.dt_end = slot_range['dt_end']
 
         _logger.debug("Date limit calculated:%s", slot_range)
+
+    @api.depends(
+        'resource_id'
+    )
+    def _compute_credits_cost(self):
+        for record in self:
+            record.credit_cost = record.resource_id.credit_cost
+
+    @api.depends(
+        'location'
+    )
+    def _compute_credits_available(self):
+        for record in self:
+            record.credit_left = record.location.partner_id.credits
 
     @api.depends(
         'total_hours',
