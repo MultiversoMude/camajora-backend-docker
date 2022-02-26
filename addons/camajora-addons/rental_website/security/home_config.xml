@@ -16,8 +16,8 @@
     <field name="model_id" ref="model_rental_website_home" />
     <field name="group_id" ref="rental.group_rental_api" />
     <field name="perm_read" eval="1" />
-    <field name="perm_create" eval="0" />
-    <field name="perm_write" eval="0" />
+    <field name="perm_create" eval="1" />
+    <field name="perm_write" eval="1" />
     <field name="perm_unlink" eval="0" />
   </record>
 

@@ -97,16 +97,15 @@ class RentalBookingSlot(models.Model):
 
     @api.constrains('resource_instance_id', 'dt_start', 'dt_end')
     def _check_dates(self):
-        '''
-        Check for overlapping date between booking slots of the same resource.
-        There are 3 cases to consider:
-        s1   s2   e1   e2
-        (    [----)----]
-        s2   s1   e2   e1
-        [----(----]    )
-        s1   s2   e2   e1
-        (    [----]    )
-        '''
+
+        sql_check = """
+                    select COUNT(*) from rental_booking_slot rbs 
+                          where id != %s and resource_instance_id = %s 
+                    and ((dt_start <= %s AND dt_end >= %s)
+                    or (dt_start <= %s AND dt_end >= %s)
+                    or (dt_start <= %s AND dt_end >= %s)
+                    or (dt_start >= %s AND dt_end <= %s));"""
+
         for record in self:
             # Starting date must be prior to the ending date
             dt_start = record.dt_start
@@ -114,17 +113,16 @@ class RentalBookingSlot(models.Model):
             if dt_end < dt_start:
                 raise ValidationError(_('The ending date must not be prior to the starting date.'))
 
-            domain = [
-                ('id', '!=', record.id),
-                ('resource_instance_id', '=', record.resource_instance_id.id),
-                '|', '|',
-                '&', ('dt_start', '<=', record.dt_start), ('dt_end', '>=', record.dt_start),
-                '&', ('dt_start', '<=', record.dt_end), ('dt_end', '>=', record.dt_end),
-                '&', ('dt_start', '<=', record.dt_start), ('dt_end', '>=', record.dt_end),
-                '&', ('dt_start', '>=', record.dt_start), ('dt_end', '<=', record.dt_end),
-            ]
+            self.env.cr.execute(sql_check, (record.id, record.resource_instance_id.id,
+                                            record.dt_start, record.dt_start,
+                                            record.dt_end, record.dt_end,
+                                            record.dt_start, record.dt_end,
+                                            record.dt_start, record.dt_end))
 
-            if self.search_count(domain) > 0:
+            reservetion_found = self.env.cr.fetchone()[0]
+            _logger.debug(self, 'Reservation found: %s', reservetion_found)
+
+            if reservetion_found > 0:
                 raise ValidationError(_('You can not have an overlap between two booking slots of the same resource.\n'
                                         'Please correct the start and/or end dates of your booking slot.'))
 
@@ -180,7 +178,7 @@ def compute_range(duration, start_date, end_date, start_time, end_time, half_day
         dt_end = datetime.combine(start_date, time(end_time, 0))
 
     elif duration == 'half_daily':
-        day_hours = 4 if half_day_type != 'day' else 8
+        day_hours = 5 if half_day_type != 'day' else 10
         if half_day_type == 'morning':
             dt_start = datetime.combine(start_date, time(9, 0))
             dt_end = datetime.combine(start_date, time(13, 59))
@@ -192,17 +190,17 @@ def compute_range(duration, start_date, end_date, start_time, end_time, half_day
             dt_end = datetime.combine(start_date, time(18, 59))
 
     elif duration == 'daily':
-        day_hours = 10
+        day_hours = 24
         dt_start = datetime.combine(start_date, time(0, 0))
         dt_end = datetime.combine(end_date, time(23, 59))
 
     elif duration == 'weekly':
-        day_hours = 10
+        day_hours = 24
         dt_start = datetime.combine(get_monday(start_date), time(0, 0))
         dt_end = datetime.combine(get_sunday(end_date), time(23, 59))
 
     elif duration == 'monthly':
-        day_hours = 10
+        day_hours = 24
         dt_start = datetime.combine(start_date.replace(day=1), time(0, 0))
         dt_end = datetime.combine(last_day_of_month(end_date), time(23, 59))
 
