@@ -205,7 +205,8 @@ class MyWizard(models.TransientModel):
             'half_day_type': self.half_day_type,
             'total_hours': self.total_hours,
             'dt_start': self.dt_start,
-            'dt_end': self.dt_end
+            'dt_end': self.dt_end,
+            'credit_total': self.credits_used
         }
 
         pronation = {
