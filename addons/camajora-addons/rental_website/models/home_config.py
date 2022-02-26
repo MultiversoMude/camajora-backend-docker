@@ -5,7 +5,6 @@ from odoo import fields, models, _
 
 
 class Homepage(models.Model):
-
     _name = 'rental.website.home'
     _description = 'Homepage configuration'
 

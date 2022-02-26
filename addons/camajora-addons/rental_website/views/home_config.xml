@@ -34,7 +34,7 @@
     <field name="res_id" ref="home_placeholder_data"></field>
     <field name="view_mode">form</field>
     <field name="domain">[]</field>
-    <field name="target">inline</field>
+    <field name="target">current</field>
   </record>
 
 </odoo>
