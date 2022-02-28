@@ -24,12 +24,12 @@ class MyWizard(models.TransientModel):
     resource_id = fields.Many2one('rental.resource', string=_('Resources'),
                                   default=lambda self: self._default_resource())
     credit_cost = fields.Integer(string=_('Credit Cost'),
-                                 readonly=True, compute='_compute_credits_cost')
+                                 readonly=True, compute='_compute_credits_cost', store=True)
     credit_left = fields.Integer(string=_('Credit Left'),
                                  readonly=True, compute='_compute_credits_available')
 
     credits_used = fields.Integer(string=_('Credits Used'),
-                                  readonly=True, compute='_compute_credits_used')
+                                  readonly=True, compute='_compute_credits_used', store=True)
 
     instances_ids = fields.Many2one('rental.resource.instance', string=_('Instances'),
                                     default=lambda self: self._default_resource_instance(),
@@ -217,7 +217,8 @@ class MyWizard(models.TransientModel):
             'total_hours': self.total_hours,
             'dt_start': self.dt_start,
             'dt_end': self.dt_end,
-            'credit_total': self.credits_used
+            'credit_total': self.credits_used,
+            'credit_cost': self.credit_cost
         }
 
         pronation = {
