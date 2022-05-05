@@ -233,7 +233,7 @@ class MyWizard(models.TransientModel):
         }
 
         booking = self.env['rental.booking'].create(pronation)
-        self.env.cr.commit()
+        '''self.env.cr.commit()'''
         self.booking_id = booking.slot_ids[0].id
         self.send_mail()
 

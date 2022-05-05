@@ -47,7 +47,7 @@ class RentalResource(models.Model):
 
             if current_owner:
                 args = [] if args is None else args.copy()
-                if current_owner.parent_id is not None:
+                if current_owner.parent_id is not None and current_owner.parent_id is not False:
                     args.append(('partner_id', 'in', [current_owner.id, current_owner.parent_id.id]))
                 else:
                     args.append(('partner_id', '=', current_owner.id))
