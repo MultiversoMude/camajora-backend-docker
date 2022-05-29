@@ -6,6 +6,7 @@
               inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
           <script type="text/javascript" src="/rental/static/src/js/rental_calendar_view.js"/>
+          <script type="text/javascript" src="/rental/static/src/js/hour_widget.js"/>
         </xpath>
     </template>
 </odoo>

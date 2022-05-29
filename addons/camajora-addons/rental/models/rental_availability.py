@@ -11,3 +11,7 @@ class RentalAvailability(models.Model):
 
     name = fields.Char(string=_('Name'))
     description = fields.Char(string=_('Description'))
+    starthour = fields.Float(string=_('Start Availability'))
+    endhour = fields.Float(string=_('End Availability'))
+
+

@@ -16,8 +16,8 @@ class RentalLocation(models.Model):
     partner_id = fields.Many2one('res.partner', string=_('Owner'), default=lambda self: self.env['res.partner'].search(
         [('id', '=', self.env.user.partner_id.id)]))
 
-    address = fields.Char(string=_("Address"))
-    postal_code = fields.Char(string=_("Zip"))
+    address = fields.Char(string=_("Address"), required=True)
+    postal_code = fields.Char(string=_("Zip"),required=True)
     city = fields.Char(track_visibility='onchange', string=_('City'))
     state_id = fields.Many2one("res.country.state", string=_('State'))
     country_id = fields.Many2one('res.country', string=_('Country'))

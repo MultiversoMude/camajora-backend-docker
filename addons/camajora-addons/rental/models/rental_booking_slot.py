@@ -4,6 +4,9 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 from datetime import datetime, time, timedelta
+import math
+import decimal
+from decimal import Decimal
 import pytz
 import logging
 
@@ -45,8 +48,8 @@ class RentalBookingSlot(models.Model):
 
     start_date = fields.Date(string=_('Start Date'), required=True)
     end_date = fields.Date(string=_('End Date'), required=False)
-    start_time = fields.Integer(string=_('Start Time'), required=False)
-    end_time = fields.Integer(string=_('End Time'), required=False)
+    start_time = fields.Float(string=_('Start Time'), required=False)
+    end_time = fields.Float(string=_('End Time'), required=False)
 
     half_day_type = fields.Selection([
         ('morning', _('09:00 - 14:00')),
@@ -93,6 +96,8 @@ class RentalBookingSlot(models.Model):
                 record.start_time,
                 record.end_time,
                 record.half_day_type,
+                record.resource_id.availability_id.starthour,
+                record.resource_id.availability_id.endhour,
             )
             record.total_hours = slot_range['total_hours']
             record.dt_start = slot_range['dt_start']
@@ -164,48 +169,85 @@ def get_sunday(day):
     return day + timedelta(days=(6 - (day.weekday() % 7)))
 
 
-def compute_range(duration, start_date, end_date, start_time, end_time, half_day_type):
+def conv_flot_totime(t):
+    hour, minute = divmod(t, 1)
+    minute *= 60
+    return int(hour), int(minute)
+
+
+def conv_time_float(value):
+    vals = value.split(':')
+    t, hours = divmod(float(vals[0]), 24)
+    t, minutes = divmod(float(vals[1]), 60)
+    minutes = minutes / 60.0
+    return hours + minutes
+
+
+def second_between_time(start, end):
+    ds = timedelta(hours=start.hour, minutes=start.minute)
+    de = timedelta(hours=end.hour, minutes=end.minute)
+    delta = de - ds
+    return delta.total_seconds()
+
+
+def compute_range(duration, start_date, end_date, start_time, end_time, half_day_type,
+                  start_available, end_available):
     duration = duration or 'hourly'
     start_date = start_date or fields.Date.today()
     end_date = end_date or fields.Date.today()
-    start_time = int(start_time or 0)
-    end_time = int(end_time or 0)
+    """ Conversione delle date in formato float passata dall'applicazione"""
+    start_time_hour, start_time_minute = conv_flot_totime(float(start_time or 0))
+    end_time_hour, end_time_minute = conv_flot_totime(float(end_time or 0))
+
+    start_time_reservation = time(start_time_hour, start_time_minute)
+    end_time_reservation = time(end_time_hour, end_time_minute)
+
     half_day_type = half_day_type or 'morning'
     day_hours = 0
     dt_start = None
     dt_end = None
+    shour, sminute = conv_flot_totime(start_available or 9)
+    ehour, eminute = conv_flot_totime(end_available or 9)
+    location_start = time(shour, sminute)
+    location_end = time(ehour, eminute)
+    secondi_giornalieri_location = second_between_time(location_start, location_end)
 
     if duration == 'hourly':
-        day_hours = end_time - start_time
-        dt_start = datetime.combine(start_date, time(start_time, 0))
-        dt_end = datetime.combine(start_date, time(end_time, 0))
+        day_hours = second_between_time(start_time_reservation, end_time_reservation)
+        dt_start = datetime.combine(start_date, start_time_reservation)
+        dt_end = datetime.combine(start_date, end_time_reservation)
 
     elif duration == 'half_daily':
-        day_hours = 5 if half_day_type != 'day' else 10
+
+        tmp_start = None
+        tmp_end = None
         if half_day_type == 'morning':
-            dt_start = datetime.combine(start_date, time(9, 0))
-            dt_end = datetime.combine(start_date, time(13, 59))
+            tmp_start = time(shour, sminute)
+            tmp_end = time(13, 59)
         if half_day_type == 'afternoon':
-            dt_start = datetime.combine(start_date, time(14, 0))
-            dt_end = datetime.combine(start_date, time(18, 59))
+            tmp_start = time(14, 0)
+            tmp_end = time(ehour, eminute)
         if half_day_type == 'day':
-            dt_start = datetime.combine(start_date, time(9, 0))
-            dt_end = datetime.combine(start_date, time(18, 59))
+            tmp_start = time(shour, sminute)
+            tmp_end = time(ehour, eminute)
+        day_hours = second_between_time(tmp_start, tmp_end)
+        dt_start = datetime.combine(start_date, tmp_start)
+        dt_end = datetime.combine(start_date, tmp_end)
 
     elif duration == 'daily':
-        day_hours = 24
-        dt_start = datetime.combine(start_date, time(0, 0))
-        dt_end = datetime.combine(end_date, time(23, 59))
+        day_hours = secondi_giornalieri_location
+        dt_start = datetime.combine(start_date, time(shour, sminute))
+        dt_end = datetime.combine(end_date, time(ehour, eminute))
 
     elif duration == 'weekly':
-        day_hours = 24
-        dt_start = datetime.combine(get_monday(start_date), time(0, 0))
-        dt_end = datetime.combine(get_sunday(end_date), time(23, 59))
+        day_hours = secondi_giornalieri_location
+        dt_start = datetime.combine(get_monday(start_date), time(shour, sminute))
+        dt_end = datetime.combine(get_sunday(end_date), time(ehour, eminute))
 
     elif duration == 'monthly':
-        day_hours = 24
-        dt_start = datetime.combine(start_date.replace(day=1), time(0, 0))
-        dt_end = datetime.combine(last_day_of_month(end_date), time(23, 59))
+        day_hours = secondi_giornalieri_location
+        dt_start = datetime.combine(start_date.replace(day=1), time(shour, sminute))
+        dt_end = datetime.combine(last_day_of_month(end_date), time(ehour, eminute))
 
     number_of_days = (dt_end - dt_start).days + 1
 
