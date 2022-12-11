@@ -17,11 +17,14 @@ class RentalLocation(models.Model):
         [('id', '=', self.env.user.partner_id.id)]))
 
     address = fields.Char(string=_("Address"), required=True)
-    postal_code = fields.Char(string=_("Zip"),required=True)
-    city = fields.Char(track_visibility='onchange', string=_('City'))
-    state_id = fields.Many2one("res.country.state", string=_('State'))
-    country_id = fields.Many2one('res.country', string=_('Country'))
+    postal_code = fields.Char(string=_("Zip"), required=True)
+    city = fields.Char(track_visibility='onchange', string=_('City'), required=True)
+    state_id = fields.Many2one("res.country.state", string=_('State'), required=True)
+    country_id = fields.Many2one('res.country', string=_('Country'), required=True)
     resource_ids = fields.One2many('rental.resource', 'location_id', string=_('Resources'), required=True)
+
+    latitudo = fields.Float(sting=_('Lat.'), required=False)
+    longitudo = fields.Float(sting=_('Lon.'), required=False)
 
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):

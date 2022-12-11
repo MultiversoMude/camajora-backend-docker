@@ -11,7 +11,6 @@ class UserService(Component):
     _description = "Camajora private services: get all users"
 
     # OPERATIONS
-
     def get(self, _id):
         """
         Get User by ID
@@ -38,7 +37,8 @@ class UserService(Component):
 
     # SERIALIZERS
 
-    def _serialize(self, user_id):
+    @staticmethod
+    def _serialize(user_id):
         return {
             "email": user_id.login,
             "name": user_id.partner_id.name,
@@ -47,7 +47,8 @@ class UserService(Component):
 
     # VALIDATORS
 
-    def _get_object_schema(self):
+    @staticmethod
+    def _get_object_schema():
         return {
             "email": {"type": "string", "required": True, "empty": False},
             "name": {"type": "string", "required": True, "empty": False},

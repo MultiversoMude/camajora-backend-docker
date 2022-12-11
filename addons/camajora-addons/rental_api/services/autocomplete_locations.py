@@ -22,8 +22,8 @@ class AutocompleteLocationService(Component):
         """
         location_data = (
             self.env["rental.location"]
-                .sudo()
-                .read_group(
+            .sudo()
+            .read_group(
                 domain=[],
                 fields=["state_id"],
                 groupby=["state_id"],
@@ -40,8 +40,8 @@ class AutocompleteLocationService(Component):
 
         location_ids = (
             self.env["res.country.state"]
-                .sudo()
-                .search(domain, offset=offset, limit=limit)
+            .sudo()
+            .search(domain, offset=offset, limit=limit)
         )
 
         return self._to_json(location_ids, many=True, offset=offset)

@@ -67,15 +67,9 @@ class BookingService(Component):
     # PRIVATE  METHODS
 
     def _serialize(self, record):
-        data = {}
-        data['id'] = record.id
-        data['state'] = record.state
-        data['name'] = record.name
-        data['user_id'] = record.user_id.id
-        data['user_name'] = record.user_id.name
-        data['date'] = record.date
-        data['token'] = record.token
-        data['lines'] = self._serialize_slots(record)
+        data = {'id': record.id, 'state': record.state, 'name': record.name, 'user_id': record.user_id.id,
+                'user_name': record.user_id.name, 'date': record.date, 'token': record.token,
+                'lines': self._serialize_slots(record)}
 
         _logger.error('Serialized cart:')
         _logger.error(data)
@@ -122,7 +116,7 @@ class BookingService(Component):
                 'type': 'dict',
                 'schema': {
                     'count': {'type': 'float', 'required': False, 'empty': True, 'nullable': True},
-                    'items':  {
+                    'items': {
                         'type': 'list',
                         'schema': {
                             'type': 'dict',
@@ -136,8 +130,8 @@ class BookingService(Component):
                                 'dt_end': {'type': 'datetime', 'required': True},
                                 'start_date': {'type': 'date', 'required': True},
                                 'end_date': {'type': 'date', 'required': True},
-                                'start_time': {'type': 'integer', 'required': True},
-                                'end_time': {'type': 'integer', 'required': True},
+                                'start_time': {'type': 'float', 'required': True},
+                                'end_time': {'type': 'float', 'required': True},
                             }
                         }
                     }
@@ -186,14 +180,15 @@ class BookingService(Component):
             'booking_id': cart.id,
             'resource_instance_id': resource_instance_id,
             'duration_id': duration_id.id,
-            'start_date':  params['start_date'],
-            'end_date':  params['end_date'],
-            'start_time':  params['start_time'],
-            'end_time':  params['end_time'],
-            'half_day_type':  params['half_day_type'],
+            'start_date': params['start_date'],
+            'end_date': params['end_date'],
+            'start_time': params['start_time'],
+            'end_time': params['end_time'],
+            'half_day_type': params['half_day_type'],
         })
 
-    def _clear_cart(self, cart):
+    @staticmethod
+    def _clear_cart(cart):
         if cart.state != 'draft':
             raise UserError(_('State cart error'))
 

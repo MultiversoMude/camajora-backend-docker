@@ -21,6 +21,8 @@
             <field name="address" />
             <field name="postal_code" />
             <field name="city" />
+            <field name="latitudo" />
+            <field name="longitudo" />
             <field name="state_id" />
             <field name="country_id" />
             <field name="resource_ids"/>

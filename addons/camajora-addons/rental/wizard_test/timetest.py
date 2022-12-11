@@ -20,7 +20,7 @@ def conv_time_float(value):
 if __name__ == '__main__':
     costo = 20
     slot = 3600
-    start_time = float(8)
+    start_time = float(8.50)
     end_time = float(11)
 
     sh, ss = conv_flot_totime(start_time)

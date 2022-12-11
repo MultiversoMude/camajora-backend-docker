@@ -25,7 +25,6 @@ class RentalBookingSlot(models.Model):
         _('Overlapping slots')  # CREATE EXTENSION btree_gist;
     )]
     """
-
     name = fields.Char(related='resource_instance_id.code', string=_('SKU'))
     partner_id = fields.Many2one(related="booking_id.user_id", store=True, string=_("Customer"))
     booking_id = fields.Many2one('rental.booking', string=_('Booking'), required=True, ondelete='cascade')
@@ -60,7 +59,8 @@ class RentalBookingSlot(models.Model):
     total_hours = fields.Integer(string=_('Total Hours'), readonly=True, compute='_compute_range', store=True)
     dt_start = fields.Datetime(string=_('Booking From'), readonly=True, compute='_compute_range', store=True)
     dt_end = fields.Datetime(string=_('Booking To'), readonly=True, compute='_compute_range', store=True)
-
+    formatted_total_hours = fields.Char(string=_('Total Hours Formatted'), readonly=True, compute='_compute_range',
+                                        store=False)
     unlock_link = fields.Char(string=_('Unlock Link'), readonly=True, compute='_compute_unlock_link')
 
     @api.model
@@ -102,6 +102,7 @@ class RentalBookingSlot(models.Model):
             record.total_hours = slot_range['total_hours']
             record.dt_start = slot_range['dt_start']
             record.dt_end = slot_range['dt_end']
+            record.formatted_total_hours = format_total_hour(record.total_hours)
 
     @api.constrains('resource_instance_id', 'dt_start', 'dt_end')
     def _check_dates(self):
@@ -147,6 +148,10 @@ class RentalBookingSlot(models.Model):
 
     @api.model
     def create(self, vals):
+
+        if str(vals.get('end_date')) == 'False':
+            vals['end_date'] = vals.get('start_date')
+
         record = super().create(vals)
         if record.start_date < fields.Date.today():
             raise ValidationError(_('The starting date must not be in the past.'))
@@ -167,6 +172,13 @@ def get_monday(day):
 
 def get_sunday(day):
     return day + timedelta(days=(6 - (day.weekday() % 7)))
+
+
+def format_total_hour(seconds):
+    seconds = 0 if seconds is None else seconds
+    ore, mi = divmod(float(seconds), 3600)
+    m, s = divmod(float(mi), 60)
+    return str(int(ore)) + ":" + str(int(m))
 
 
 def conv_flot_totime(t):

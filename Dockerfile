@@ -14,13 +14,13 @@ RUN apt-get update \
         pkg-config \
         python3-dev \
         libffi-dev \
-        #python3 \
+        python3 \
 		#python3.8-dev  \
         #python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
 COPY ./odoo/extra-requirements.txt /mnt/utils/extra-requirements.txt
-
+RUN export PIP_DEFAULT_TIMEOUT=10000
 RUN pip3 install -U wheel setuptools>=38.6.1
 RUN pip3 install -r /mnt/utils/extra-requirements.txt
 
