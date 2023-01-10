@@ -20,7 +20,6 @@ class UserService(Component):
             .sudo()
             .search([("share", "=", True), ("id", "=", _id)])
         )
-
         return self._to_json(user_id)
 
     def search(self, offset=0, limit=None, **params):
