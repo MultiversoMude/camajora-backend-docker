@@ -2,6 +2,12 @@ from datetime import datetime
 from odoo.addons.component.core import Component
 
 
+def _conv_flot_totime(t):
+    hour, minute = divmod(t, 1)
+    minute *= 60
+    return str(int(hour)) + ':' + str(int(minute))
+
+
 class BookingSlotsService(Component):
     _inherit = 'base.rest.private.service'
     _name = 'booking.slots.service'
@@ -56,11 +62,27 @@ class BookingSlotsService(Component):
             'dt_end': record.dt_end,
             'start_date': record.start_date,
             'end_date': record.end_date,
-            'start_time': record.start_time,
-            'end_time': record.end_time,
+            'start_time': _conv_flot_totime(record.start_time),
+            'end_time': _conv_flot_totime(record.end_time),
             'token': record.booking_id.token,
             'section': section,
+            "endpoint_opener": self._buildEndpoint(record.location_id, record.booking_id.token),
+            "endpoint_resource_activation": self._buildEndpointActivation(record.location_id, record.booking_id.token),
+            "location": record.location_id.name,
+
         }
+
+    def _buildEndpoint(self, location_id, token):
+        return location_id.scc_endpoint_open_door_protocol \
+               + '://' + location_id.scc_address \
+               + ':' + location_id.scc_endpoint_open_door_port \
+               + location_id.scc_endpoint_open_door + token
+
+    def _buildEndpointActivation(self, location_id, token):
+        return location_id.scc_endpoint_resource_activation_protocol \
+               + '://' + location_id.scc_address \
+               + ':' + location_id.scc_endpoint_resource_activation_port \
+               + location_id.scc_endpoint_resource_activation + token
 
     @staticmethod
     def _get_object_schema():
@@ -75,9 +97,12 @@ class BookingSlotsService(Component):
             'dt_end': {'type': 'datetime', 'required': True},
             'start_date': {'type': 'date', 'required': True},
             'end_date': {'type': 'date', 'required': False, 'empty': True, 'nullable': True},
-            'start_time': {'type': 'float', 'required': True},
-            'end_time': {'type': 'float', 'required': True},
+            'start_time': {'type': 'string', 'required': True},
+            'end_time': {'type': 'string', 'required': True},
             'token': {'type': 'string', 'required': False, 'empty': True, 'nullable': True},
             'qr_code': {'type': 'string', 'required': False, 'empty': True, 'nullable': True},
             'section': {'type': 'string', 'required': True},
+            'endpoint_opener': {'type': 'string', 'required': True},
+            'endpoint_resource_activation': {'type': 'string', 'required': True},
+            'location': {'type': 'string', 'required': True},
         }

@@ -174,7 +174,11 @@ class BookingService(Component):
         if not duration_id:
             raise UserError(_('Duration not found'))
 
-        resource_instance_id = resource_id.get_best_instance_match(**params)
+        resource_instance_id = resource_id.get_best_instance_match(
+            resource_id.availability_id.starthour,
+            resource_id.availability_id.endhour,
+            **params)
+
 
         self.env['rental.booking.slot'].sudo().create({
             'booking_id': cart.id,

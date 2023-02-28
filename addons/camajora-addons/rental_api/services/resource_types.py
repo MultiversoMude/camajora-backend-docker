@@ -22,13 +22,23 @@ class ResourceTypesService(Component):
 
     def search(self):
         """
-        Get all Resources
+        Get all Types
         """
         category_ids = self.env['rental.resource.type'].sudo().search([])
         return self._to_json(category_ids, many=True)
 
-    # SERIALIZERS
+    def category(self, **params):
+        category = params['id']
+        domain = [('category_id.id', '=', category if category else -100)]
+        resource_ids = self.env['rental.resource.type'].sudo().search(domain)
+        return self._to_json(resource_ids, many=True)
 
+    def _validator_category(self):
+        return {
+            "id": {"type": "integer", "required": True},
+        }
+
+    # SERIALIZERS
     def _serialize(self, category_id):
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
 

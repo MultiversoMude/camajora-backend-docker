@@ -10,21 +10,33 @@ _logger = logging.getLogger(__name__)
 class RentalLocation(models.Model):
     _name = 'rental.location'
     _description = 'Rental Location'
-
     name = fields.Char(string=_('Name'), required=True)
     description = fields.Char(string=_('Description'))
     partner_id = fields.Many2one('res.partner', string=_('Owner'), default=lambda self: self.env['res.partner'].search(
         [('id', '=', self.env.user.partner_id.id)]))
-
     address = fields.Char(string=_("Address"), required=True)
     postal_code = fields.Char(string=_("Zip"), required=True)
     city = fields.Char(track_visibility='onchange', string=_('City'), required=True)
     state_id = fields.Many2one("res.country.state", string=_('State'), required=True)
     country_id = fields.Many2one('res.country', string=_('Country'), required=True)
     resource_ids = fields.One2many('rental.resource', 'location_id', string=_('Resources'), required=True)
+    contact_email_ref = fields.Char(string=_('Email'), required=True, default='')
+    contact_mobile_ref = fields.Char(string=_('Mobile'), required=True, default='')
+    contact_name_ref = fields.Char(string=_('Name'), required=True, default='')
+    latitudo = fields.Float(sting=_('Lat.'), required=True)
+    longitudo = fields.Float(sting=_('Lon.'), required=True)
+    hotspot_name = fields.Char(string=_('Hot Spot'), required=True, default='')
+    scc_address = fields.Char(string=_('SSC Address'), required=True, default='')
+    scc_endpoint_open_door = fields.Char(string=_('API'), required=True, default='')
+    scc_endpoint_open_door_protocol = fields.Char(string=_('Protocol'), required=True, default='')
+    scc_endpoint_open_door_port = fields.Char(string=_('Port'), required=True, default='')
 
-    latitudo = fields.Float(sting=_('Lat.'), required=False)
-    longitudo = fields.Float(sting=_('Lon.'), required=False)
+    scc_endpoint_resource_activation = fields.Char(string=_('API'), required=True, default='')
+    scc_endpoint_resource_activation_protocol = fields.Char(string=_('Protocol'), required=True, default='')
+    scc_endpoint_resource_activation_port = fields.Char(string=_('Port'), required=True, default='')
+    ip_device_door_opening = fields.Char(string=_('IP Device Door Opening'), required=True, default='')
+    opened_from = fields.Float(string=_('Opened from'), required=True, default=9)
+    opened_to = fields.Float(string=_('Opened to'), required=True, default=19)
 
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):

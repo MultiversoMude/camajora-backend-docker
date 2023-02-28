@@ -7,8 +7,15 @@ import calendar
 import datetime
 import logging
 import pytz
+
 _logger = logging.getLogger(__name__)
 timezone = pytz.timezone('Europe/Rome')
+
+
+def _conv_flot_totime(t):
+    hour, minute = divmod(t, 1)
+    minute *= 60
+    return str(int(hour)) + ':' + str(int(minute))
 
 
 class ResourceService(Component):
@@ -26,6 +33,28 @@ class ResourceService(Component):
         resource_id = self.env['rental.resource'].sudo().search([('id', '=', _id)])
 
         return self._to_json(resource_id)
+
+    def category(self, **params):
+        category = params['id']
+        domain = [('instances_ids', '!=', False), ('type_id.category_id.id', '=', category if category else -100)]
+        resource_ids = self.env['rental.resource'].sudo().search(domain)
+        return self._to_json(resource_ids, many=True)
+
+    def _validator_category(self):
+        return {
+            "id": {"type": "integer", "required": True},
+        }
+
+    def resourcetype(self, **params):
+        resourceType = params['id']
+        domain = [('instances_ids', '!=', False), ('type_id.id', '=', resourceType if resourceType else -100)]
+        resource_ids = self.env['rental.resource'].sudo().search(domain)
+        return self._to_json(resource_ids, many=True)
+
+    def _validator_resourcetype(self):
+        return {
+            "id": {"type": "integer", "required": True},
+        }
 
     def search(self, **params):
         """
@@ -104,6 +133,8 @@ class ResourceService(Component):
             'size': resource_id.type_id.size_id.name,
             'instance_count': resource_id.instance_count,
             'instances': self._serialize_instances(resource_id),
+            'availability_start': _conv_flot_totime(resource_id.availability_id.starthour),
+            'availability_end': _conv_flot_totime(resource_id.availability_id.endhour),
         }
 
     def _serialize_instances(self, resource_id):
@@ -157,5 +188,7 @@ class ResourceService(Component):
                         'code': {'type': 'string', 'required': True},
                     }
                 }
-            }
+            },
+            'availability_start': {'type': 'string', 'required': True},
+            'availability_end': {'type': 'string', 'required': True}
         }

@@ -56,6 +56,20 @@
                 </tree>
               </field>
             </page>
+            <page string="Technical Settings">
+              <group>
+                <field name="door_present"/>
+                <field name="modbus_group"/>
+                <field name="modbus_id"/>
+                <field name="modbus_plugin"/>
+              </group>
+              <group>
+                <field name="api_url"/>
+                <field name="api_key"/>
+                <field name="api_path"/>
+                <field name="plugin_type"/>
+              </group>
+            </page>
           </notebook>
         </sheet>
         <div class="oe_chatter"></div>

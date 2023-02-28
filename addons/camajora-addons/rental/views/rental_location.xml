@@ -25,8 +25,39 @@
             <field name="longitudo" />
             <field name="state_id" />
             <field name="country_id" />
-            <field name="resource_ids"/>
+            <field name="opened_from" widget="timepicker" options="{'datepicker': {'stepping': 30}}"/>
+            <field name="opened_to"   widget="timepicker" options="{'datepicker': {'stepping': 30}}"/>            <field name="resource_ids"/>
           </group>
+          <notebook>
+            <page string="Contact Info">
+              <group>
+                <field name="contact_email_ref"/>
+                <field name="contact_mobile_ref"/>
+                <field name="contact_name_ref"/>
+              </group>
+            </page>
+            <page string="Network Service Access Info">
+              <group>
+                <field name="hotspot_name"/>
+                <field name="scc_address"/>
+                <field name="ip_device_door_opening"/>
+              </group>
+            </page>
+            <page string="API Door Opening Config">
+              <group>
+                <field name="scc_endpoint_open_door"/>
+                <field name="scc_endpoint_open_door_protocol"/>
+                <field name="scc_endpoint_open_door_port"/>
+              </group>
+            </page>
+            <page string="API Resource Activation Config">
+              <group>
+                <field name="scc_endpoint_resource_activation"/>
+                <field name="scc_endpoint_resource_activation_protocol"/>
+                <field name="scc_endpoint_resource_activation_port"/>
+              </group>
+            </page>
+          </notebook>
         </sheet>
         <div class="oe_chatter"></div>
       </form>

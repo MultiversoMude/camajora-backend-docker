@@ -31,11 +31,17 @@ class RentalResource(models.Model):
 
     type_id = fields.Many2one('rental.resource.type', string=_('Type'), required=True)
     location_id = fields.Many2one('rental.location', string=_('Location'), required=True)
-
     partner_id = fields.Many2one('res.partner', related='location_id.partner_id', store=True, string=_('Owner'))
     instances_ids = fields.One2many('rental.resource.instance', 'resource_id', string=_('Instances'), required=True)
-
     instance_count = fields.Integer(string=_('Total Instances'), compute='_compute_instance_count')
+    door_present = fields.Boolean(default=True, string=_('Door Present'))
+    modbus_group = fields.Integer(string=_('Modbus Group'))
+    modbus_id = fields.Integer(string=_('Modbus ID'))
+    modbus_plugin = fields.Char(string=_('Modbus Plugin'))
+    api_url = fields.Char(string=_('URL'))
+    api_key = fields.Char(string=_('Token'))
+    api_path = fields.Char(string=_('Path'))
+    plugin_type = fields.Char(string=_('Plugin'))
 
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):
@@ -120,7 +126,7 @@ class RentalResource(models.Model):
 
         return resource
 
-    def get_best_instance_match(self, **kwargs):
+    def get_best_instance_match(self, start_available, end_available, **kwargs):
         slot_range = compute_range(
             kwargs['duration'],
             fields.Date.from_string(kwargs['start_date']),
@@ -128,6 +134,8 @@ class RentalResource(models.Model):
             kwargs['start_time'],
             kwargs['end_time'],
             kwargs['half_day_type'],
+            start_available,
+            end_available
         )
 
         dt_start = slot_range['dt_start']
