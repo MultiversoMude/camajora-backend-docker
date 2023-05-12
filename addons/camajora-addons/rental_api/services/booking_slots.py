@@ -77,13 +77,15 @@ class BookingSlotsService(Component):
             "location_hotspot": record.location_id.hotspot_name,
         }
 
-    def _buildEndpoint(self, location_id, token):
+    @staticmethod
+    def _buildEndpoint(location_id, token):
         return location_id.scc_endpoint_open_door_protocol \
                + '://' + location_id.scc_address \
                + ':' + location_id.scc_endpoint_open_door_port \
                + location_id.scc_endpoint_open_door + token
 
-    def _buildEndpointActivation(self, location_id, token):
+    @staticmethod
+    def _buildEndpointActivation(location_id, token):
         return location_id.scc_endpoint_resource_activation_protocol \
                + '://' + location_id.scc_address \
                + ':' + location_id.scc_endpoint_resource_activation_port \

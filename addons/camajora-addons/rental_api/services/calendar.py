@@ -76,3 +76,23 @@ class CalendarService(Component):
                 busy.append('{}-{:02}-{:02}'.format(year, month, day))
 
         return busy
+
+    def _validator_search_reservation(self):
+        return {
+            "id": {"type": "integer", "required": True},
+            "target": {"type": "string", "required": True},
+            "slot": {"type": "string", "required": True}
+        }
+
+    def search_reservation(self, **params):
+        busy = []
+        resource = params['id']
+        target = params['target']
+        slot = params['slot']
+
+        resource_id = self.env['rental.resource'].sudo().search([('id', '=', resource)])
+        if not resource_id:
+            raise MissingError('Resource not found')
+
+        return busy
+
