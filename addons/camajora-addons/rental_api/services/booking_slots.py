@@ -1,6 +1,8 @@
 from datetime import datetime
 from odoo.addons.component.core import Component
 
+from .booking import format_total_hour
+
 
 def _conv_flot_totime(t):
     hour, minute = divmod(t, 1)
@@ -57,6 +59,7 @@ class BookingSlotsService(Component):
             'name': record.resource_instance_id.resource_id.name,
             'sku': record.name,
             'total_hours': record.total_hours,
+            'total_hours_formatted': format_total_hour(record.total_hours),
             'image': image,
             'dt_start': record.dt_start,
             'dt_end': record.dt_end,
@@ -69,7 +72,9 @@ class BookingSlotsService(Component):
             "endpoint_opener": self._buildEndpoint(record.location_id, record.booking_id.token),
             "endpoint_resource_activation": self._buildEndpointActivation(record.location_id, record.booking_id.token),
             "location": record.location_id.name,
-
+            "location_opens": _conv_flot_totime(record.location_id.opened_from),
+            "location_closes": _conv_flot_totime(record.location_id.opened_to),
+            "location_hotspot": record.location_id.hotspot_name,
         }
 
     def _buildEndpoint(self, location_id, token):
@@ -92,6 +97,7 @@ class BookingSlotsService(Component):
             'sku': {'type': 'string', 'required': True},
             'name': {'type': 'string', 'required': True},
             'total_hours': {'type': 'integer', 'required': True},
+            'total_hours_formatted': {'type': 'string', 'required': True},
             'image': {'type': 'string', 'required': False, 'empty': True, 'nullable': True},
             'dt_start': {'type': 'datetime', 'required': True},
             'dt_end': {'type': 'datetime', 'required': True},
@@ -105,4 +111,7 @@ class BookingSlotsService(Component):
             'endpoint_opener': {'type': 'string', 'required': True},
             'endpoint_resource_activation': {'type': 'string', 'required': True},
             'location': {'type': 'string', 'required': True},
+            'location_opens': {'type': 'string', 'required': True},
+            'location_closes': {'type': 'string', 'required': True},
+            'location_hotspot': {'type': 'string', 'required': True},
         }

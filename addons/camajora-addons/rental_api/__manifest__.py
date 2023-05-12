@@ -4,7 +4,7 @@
 {
     'name': 'Camajora Rental REST API',
     'description': """Rental management REST API""",
-    'version': '12.0.2.0.0',
+    'version': '12.0.3.0.0',
     'license': 'AGPL-3',
     'author': 'Metadonors srl',
     'website': 'https://www.metadonors.it',

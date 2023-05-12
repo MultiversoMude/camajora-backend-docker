@@ -33,7 +33,7 @@ class RentalBooking(models.Model):
             for slot_id in record.slot_ids:
                 credit_cost += (
                     slot_id.total_hours *
-                    slot_id.resource_instance_id.resource_id.credit_cost  # hourly credit cost
-                    # applicare sconto
+                    (slot_id.resource_instance_id.resource_id.credit_cost/60)  # hourly credit cost
+                    # applicable discount
                 )
             record.credits_used = credit_cost

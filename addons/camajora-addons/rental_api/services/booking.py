@@ -8,6 +8,13 @@ from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
 
 
+def format_total_hour(seconds):
+    seconds = 0 if seconds is None else seconds
+    ore, mi = divmod(float(seconds), 3600)
+    m, s = divmod(float(mi), 60)
+    return str(int(ore)) + ":" + str(int(m))
+
+
 class BookingService(Component):
     _inherit = 'base.rest.private.service'
     _name = 'booking.service'
@@ -93,6 +100,7 @@ class BookingService(Component):
             'name': line.resource_instance_id.resource_id.name,
             'sku': line.name,
             'total_hours': line.total_hours,
+            'total_hours_formatted': format_total_hour(line.total_hours),
             'image': image,
             'dt_start': line.dt_start,
             'dt_end': line.dt_end,
@@ -125,6 +133,7 @@ class BookingService(Component):
                                 'sku': {'type': 'string', 'required': True},
                                 'name': {'type': 'string', 'required': True},
                                 'total_hours': {'type': 'integer', 'required': True},
+                                'total_hours_formatted': {'type': 'string', 'required': True},
                                 'image': {'type': 'string', 'required': False, 'empty': True, 'nullable': True},
                                 'dt_start': {'type': 'datetime', 'required': True},
                                 'dt_end': {'type': 'datetime', 'required': True},
@@ -178,7 +187,6 @@ class BookingService(Component):
             resource_id.availability_id.starthour,
             resource_id.availability_id.endhour,
             **params)
-
 
         self.env['rental.booking.slot'].sudo().create({
             'booking_id': cart.id,
