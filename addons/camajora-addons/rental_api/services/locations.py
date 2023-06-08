@@ -58,13 +58,35 @@ class LocationService(Component):
             "contact_email_ref": location_id.contact_email_ref,
             "contact_mobile_ref": location_id.contact_mobile_ref,
             "contact_name_ref": location_id.contact_name_ref,
-            "endpoint_opener": self.buildEndpoint(location_id)
+            "endpoint_opener": self.buildEndpoint(location_id),
+            "resources": self._serialize_resources(location_id.resource_ids)
+        }
+
+    def _serialize_resources(self, resources):
+        return [self._serialize_resource(resource_id) for resource_id in resources]
+
+    def _serialize_resource(self, resource_id):
+        return {
+            'name': resource_id.name,
+            'code': resource_id.code,
+            'credit_cost': resource_id.credit_cost,
+            'instance_count': resource_id.instance_count,
+            'instances': self._serialize_instances(resource_id)
+        }
+
+    def _serialize_instances(self, resource_id):
+        return [self._serialize_instance(instance_id) for instance_id in resource_id.instances_ids]
+
+    def _serialize_instance(self, instance_id):
+        return {
+            'id': instance_id.id,
+            'code': instance_id.code
         }
 
     def buildEndpoint(self, location_id):
         return location_id.scc_endpoint_open_door_protocol \
-               + '://'+location_id.scc_address\
-               + ':'+location_id.scc_endpoint_open_door_port \
+               + '://' + location_id.scc_address \
+               + ':' + location_id.scc_endpoint_open_door_port \
                + location_id.scc_endpoint_open_door
 
     # VALIDATORS
@@ -90,4 +112,26 @@ class LocationService(Component):
             "contact_mobile_ref": {'type': 'string', 'required': True, 'empty': False},
             "contact_name_ref": {'type': 'string', 'required': True, 'empty': False},
             "endpoint_opener": {'type': 'string', 'required': True, 'empty': False},
+            "resources": {
+                'type': 'list',
+                'schema': {
+                    'type': 'dict',
+                    'schema': {
+                        'name': {'type': 'string', 'required': True, 'empty': False},
+                        'code': {'type': 'string', 'required': True, 'empty': False},
+                        'credit_cost': {'type': 'float', 'required': True, 'empty': False},
+                        'instance_count': {'type': 'integer', 'required': True},
+                        'instances': {
+                            'type': 'list',
+                            'schema': {
+                                'type': 'dict',
+                                'schema': {
+                                    'id': {'type': 'integer', 'required': True},
+                                    'code': {'type': 'string', 'required': True},
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }

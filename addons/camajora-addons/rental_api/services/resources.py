@@ -18,6 +18,20 @@ def _conv_flot_totime(t):
     return str(int(hour)) + ':' + str(int(minute))
 
 
+def filterResource(resources_ids, minPrice, maxPrice):
+    if not minPrice and not maxPrice:
+        return resources_ids
+    elif minPrice and maxPrice:
+        return list(filter(lambda r: (r.credit_cost > minPrice) and (r.credit_cost <= maxPrice),
+                           resources_ids))
+    elif maxPrice:
+        return list(filter(lambda r: (r.credit_cost <= maxPrice),
+                           resources_ids))
+    elif minPrice:
+        return list(filter(lambda r: (r.credit_cost >= minPrice),
+                           resources_ids))
+
+
 class ResourceService(Component):
     _inherit = 'base.rest.public.service'
     _name = 'resource.service'
@@ -64,6 +78,8 @@ class ResourceService(Component):
         from_search_value = params.pop("from", None)
         to_search_value = params.pop("to", None)
         what_search_value = params.pop("what", None)
+        minPrice = params.pop("minPrice", None)
+        maxPrice = params.pop("maxPrice", None)
 
         domain = [('instances_ids', '!=', False)]
 
@@ -75,6 +91,7 @@ class ResourceService(Component):
             domain.append(('location_id.address', 'ilike', where_search_value))
             domain.append(('location_id.city', 'ilike', where_search_value))
             domain.append(('location_id.state_id.name', 'ilike', where_search_value))
+
         if what_search_value:
             domain.append(('type_id.name', 'ilike', what_search_value))
 
@@ -96,9 +113,9 @@ class ResourceService(Component):
                 if resource.is_free(utc_target_start, utc_target_end):
                     free_resources_ids.append(resource)
 
-            return self._to_json(free_resources_ids, many=True)
+            return self._to_json(filterResource(free_resources_ids, minPrice, maxPrice), many=True)
 
-        return self._to_json(resource_ids, many=True)
+        return self._to_json(filterResource(resource_ids, minPrice, maxPrice), many=True)
 
     # SERIALIZERS
 
@@ -154,6 +171,8 @@ class ResourceService(Component):
             "from": {"type": "string", "required": False},
             "to": {"type": "string", "required": False},
             "what": {"type": "string", "required": False},
+            "minPrice": {"type": "integer", "required": False},
+            "maxPrice": {"type": "integer", "required": False},
         }
 
     def _get_object_schema(self):
