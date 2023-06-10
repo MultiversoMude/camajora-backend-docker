@@ -34,8 +34,8 @@ def filterResource(resources_ids, minPrice, maxPrice):
 
 
 if __name__ == '__main__':
-    minPrice = 12
-    maxPrice = 15
+    minPrice = "12"
+    maxPrice = "15"
 
     resources = []
     for i in range(10):
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     for r in resources:
         print(r)
     print('Now print filtered list')
-    filtered = filterResource(resources, minPrice, maxPrice)
+    filtered = filterResource(resources, int(minPrice) if minPrice.isdigit() else None, int(maxPrice) if maxPrice.isdigit() else None)
     for f in filtered:
         print(f)
         ##print((f.getCreditCost() > minPrice) and (f.getCreditCost() <= maxPrice))

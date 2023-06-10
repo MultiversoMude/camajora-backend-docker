@@ -171,8 +171,8 @@ class ResourceService(Component):
             "from": {"type": "string", "required": False},
             "to": {"type": "string", "required": False},
             "what": {"type": "string", "required": False},
-            "minPrice": {"type": "integer", "required": False},
-            "maxPrice": {"type": "integer", "required": False},
+            "minPrice": {"type": "string", "required": False},
+            "maxPrice": {"type": "string", "required": False},
         }
 
     def _get_object_schema(self):

@@ -67,6 +67,7 @@ class LocationService(Component):
 
     def _serialize_resource(self, resource_id):
         return {
+              'id': resource_id.id,
             'name': resource_id.name,
             'code': resource_id.code,
             'credit_cost': resource_id.credit_cost,
@@ -117,6 +118,7 @@ class LocationService(Component):
                 'schema': {
                     'type': 'dict',
                     'schema': {
+                        'id': {'type': 'integer', 'required': True, 'empty': False},
                         'name': {'type': 'string', 'required': True, 'empty': False},
                         'code': {'type': 'string', 'required': True, 'empty': False},
                         'credit_cost': {'type': 'float', 'required': True, 'empty': False},
