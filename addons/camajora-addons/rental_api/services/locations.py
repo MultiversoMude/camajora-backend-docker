@@ -67,10 +67,16 @@ class LocationService(Component):
 
     def _serialize_resource(self, resource_id):
         return {
-              'id': resource_id.id,
+            'id': resource_id.id,
             'name': resource_id.name,
             'code': resource_id.code,
+            'type': resource_id.type_id.category_id.name or "",
+            'category_id': resource_id.type_id.category_id.id,
+            'description': resource_id.description if resource_id.description else "",
+            'performance': resource_id.type_id.performance_id.name or "",
             'credit_cost': resource_id.credit_cost,
+            'setup': resource_id.type_id.setup_id.name or "",
+            'size': resource_id.type_id.size_id.name,
             'instance_count': resource_id.instance_count,
             'instances': self._serialize_instances(resource_id)
         }
@@ -121,7 +127,13 @@ class LocationService(Component):
                         'id': {'type': 'integer', 'required': True, 'empty': False},
                         'name': {'type': 'string', 'required': True, 'empty': False},
                         'code': {'type': 'string', 'required': True, 'empty': False},
+                        'type': {'type': 'string', 'required': True, 'empty': False},
+                        'category_id': {'type': 'integer', 'required': True},
+                        'description': {'type': 'string', 'required': False, 'empty': True, 'nullable': True},
+                        'performance': {'type': 'string', 'required': True, 'empty': False},
                         'credit_cost': {'type': 'float', 'required': True, 'empty': False},
+                        'setup': {'type': 'string', 'required': True, 'empty': False},
+                        'size': {'type': 'string', 'required': True, 'empty': False},
                         'instance_count': {'type': 'integer', 'required': True},
                         'instances': {
                             'type': 'list',

@@ -1,11 +1,26 @@
 import logging
-
+from datetime import datetime, time, timedelta
 from odoo import _
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
 from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
+date_format = '%Y-%m-%dT%H:%M:%S'
+
+
+def conv_flot_totime(t):
+    hour, minute = divmod(t, 1)
+    minute *= 60
+    return int(hour), int(minute)
+
+
+def second_between_time(start, end):
+    ds = timedelta(hours=start.hour, minutes=start.minute)
+    de = timedelta(hours=end.hour, minutes=end.minute)
+    delta = de - ds
+    return delta.total_seconds()
 
 
 def format_total_hour(seconds):
@@ -246,11 +261,60 @@ class BookingService(Component):
             'slot_id': {'type': 'integer', 'coerce': to_int, 'required': True}
         }
 
+    @staticmethod
     def _validator_clear(self):
         return {}
 
-    def _validator_confirm(self):
+    @staticmethod
+    def _validator_confirm():
         return {}
 
-    def _validator_get_confirmed(self):
+    @staticmethod
+    def _validator_get_confirmed():
         return {}
+
+    def prevent_price(self, **params):
+        res_id = params.pop("resource_id")
+        strstart = params.pop("datetime_start")
+        strend = params.pop("datetime_end")
+        slot = 3600
+        dateStart = datetime.strptime(strstart, date_format)
+        dateEnd = datetime.strptime(strend, date_format)
+
+        if dateEnd < dateStart:
+            raise ValidationError(_('The ending date must not be prior to the starting date.'))
+
+        resource_id = self.env['rental.resource'].sudo().search([('id', '=', res_id)])
+
+        if resource_id is None:
+            raise ValidationError(_('Resource not found with specified id.'))
+
+        costo_al_secondo = (resource_id.credit_cost / slot)
+        shour, sminute = conv_flot_totime(resource_id.availability_id.starthour or 9)
+        ehour, eminute = conv_flot_totime(resource_id.availability_id.endhour or 19)
+        location_start = time(shour, sminute)
+        location_end = time(ehour, eminute)
+        secondi_giornalieri_location = second_between_time(location_start, location_end)
+        secondi_prenotazione = second_between_time(dateStart, dateEnd)
+        number_of_days = (dateEnd - dateStart).days + 1
+
+        if number_of_days > 1:
+            price = number_of_days * secondi_giornalieri_location * costo_al_secondo
+        else:
+            price = number_of_days * secondi_prenotazione * costo_al_secondo
+
+        return {'price': price}
+
+    @staticmethod
+    def _validator_prevent_price():
+        return {
+            "resource_id": {"type": "integer", "required": True},
+            "datetime_start": {"type": "string", "required": True},
+            "datetime_end": {"type": "string", "required": True}
+        }
+
+    @staticmethod
+    def _validator_return_prevent_price():
+        return {
+            "price": {"type": "float", "required": True},
+        }

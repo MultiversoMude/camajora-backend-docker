@@ -1,6 +1,8 @@
 FROM mudesrl/camajora-backend:1.6
 
 
+RUN pip3 install kafka-python
+
 COPY ./odoo/scripts /mnt/utils/scripts
 COPY ./odoo/conf /mnt/utils/scripts/conf
 # COPY ./odoo/wait-for-it.sh /wait-for-it.sh

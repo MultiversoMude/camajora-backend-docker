@@ -4,9 +4,6 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 from datetime import datetime, time, timedelta
-import math
-import decimal
-from decimal import Decimal
 import pytz
 import logging
 

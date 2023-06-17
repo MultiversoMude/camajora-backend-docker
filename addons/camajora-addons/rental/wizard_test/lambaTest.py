@@ -19,6 +19,16 @@ class Resource:
         return f'Cost is {self.credit_cost}'
 
 
+def checkPriceInput(price):
+    priceInt = None
+    if not price:
+        return None
+    else:
+        priceInt = int(price) if price.isdigit() else None
+    print('Resolved int ' + str(priceInt))
+    return priceInt
+
+
 def filterResource(resources_ids, minPrice, maxPrice):
     if not minPrice and not maxPrice:
         return resources_ids
@@ -34,8 +44,8 @@ def filterResource(resources_ids, minPrice, maxPrice):
 
 
 if __name__ == '__main__':
-    minPrice = "12"
-    maxPrice = "15"
+    minPrice = '12'
+    maxPrice = '15'
 
     resources = []
     for i in range(10):
@@ -43,7 +53,8 @@ if __name__ == '__main__':
     for r in resources:
         print(r)
     print('Now print filtered list')
-    filtered = filterResource(resources, int(minPrice) if minPrice.isdigit() else None, int(maxPrice) if maxPrice.isdigit() else None)
+    filtered = filterResource(resources, checkPriceInput(minPrice),
+                              checkPriceInput(maxPrice))
     for f in filtered:
         print(f)
         ##print((f.getCreditCost() > minPrice) and (f.getCreditCost() <= maxPrice))

@@ -22,7 +22,7 @@ def filterResource(resources_ids, minPrice, maxPrice):
     if not minPrice and not maxPrice:
         return resources_ids
     elif minPrice and maxPrice:
-        return list(filter(lambda r: (r.credit_cost > minPrice) and (r.credit_cost <= maxPrice),
+        return list(filter(lambda r: (r.credit_cost >= minPrice) and (r.credit_cost <= maxPrice),
                            resources_ids))
     elif maxPrice:
         return list(filter(lambda r: (r.credit_cost <= maxPrice),
@@ -30,6 +30,13 @@ def filterResource(resources_ids, minPrice, maxPrice):
     elif minPrice:
         return list(filter(lambda r: (r.credit_cost >= minPrice),
                            resources_ids))
+
+
+def checkPriceInput(price):
+    if not price:
+        return None
+    else:
+        return int(price) if price.isdigit() else None
 
 
 class ResourceService(Component):
@@ -80,7 +87,8 @@ class ResourceService(Component):
         what_search_value = params.pop("what", None)
         minPrice = params.pop("minPrice", None)
         maxPrice = params.pop("maxPrice", None)
-
+        minPriceInt = checkPriceInput(minPrice)
+        maxPriceInt = checkPriceInput(maxPrice)
         domain = [('instances_ids', '!=', False)]
 
         if where_search_value:
@@ -113,9 +121,9 @@ class ResourceService(Component):
                 if resource.is_free(utc_target_start, utc_target_end):
                     free_resources_ids.append(resource)
 
-            return self._to_json(filterResource(free_resources_ids, minPrice, maxPrice), many=True)
+            return self._to_json(filterResource(free_resources_ids, minPriceInt, maxPriceInt), many=True)
 
-        return self._to_json(filterResource(resource_ids, minPrice, maxPrice), many=True)
+        return self._to_json(filterResource(resource_ids, minPriceInt, maxPriceInt), many=True)
 
     # SERIALIZERS
 
