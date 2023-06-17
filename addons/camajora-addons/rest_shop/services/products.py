@@ -21,6 +21,7 @@ class JobOffersProductsService(Component):
             'description': {'type': 'string', 'required': False},
             'code': {'type': 'string', 'required': False},
             'price': {'type': 'float', 'required': False},
+            'credits': {'type': 'integer', 'required': False},
             'image': {'type': 'string', 'required': False},
             'is_available': {'type': 'boolean', "required": False},
             'variants': {
@@ -57,7 +58,6 @@ class JobOffersProductsService(Component):
 
     def _serialize(self, record):
         base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
-
         data = {}
         data['id'] = record.id
         data['name'] = record.name
@@ -71,6 +71,8 @@ class JobOffersProductsService(Component):
         pricelist = self.env['product.pricelist'].sudo().browse(pricelist_id)
 
         data['price'] = pricelist.get_product_price(record, 1, self.env.user.partner_id.id)
+
+        data['credits'] = record.credits_value
 
         variant_ids = self.env['product.product'].sudo().search([
             ('product_tmpl_id', '=', record.id)
