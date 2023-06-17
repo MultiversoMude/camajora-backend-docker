@@ -1,7 +1,7 @@
 # Copyright 2020 Metadonors Srl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models, _
+from odoo import api, fields, models, _
 
 
 class RentalBookingSlot(models.Model):
@@ -11,6 +11,7 @@ class RentalBookingSlot(models.Model):
                                  string=_('Credit Cost'), store=True)
     credit_total = fields.Integer(string=_('Total'), compute='_compute_total', store=True)
 
+    @api.depends('credit_cost', 'total_hours')
     def _compute_total(self):
         for record in self:
-            record.credit_total = (record.credit_cost / 60) * record.total_hours
+            record.credit_total = (record.credit_cost / 3600) * record.total_hours
