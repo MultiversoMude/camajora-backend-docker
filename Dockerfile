@@ -18,7 +18,7 @@ COPY ./odoo/entrypoint.sh /entrypoint.sh
 
 
 # CMD ["run"]
-#ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["run"]
 
 

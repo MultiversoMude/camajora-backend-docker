@@ -16,6 +16,7 @@
             </h1>
           </div>
           <group>
+            <field name="id"  readonly="1"/>
             <field name="partner_id"  readonly="1"/>
             <field name="description" />
             <field name="address" />
@@ -26,7 +27,8 @@
             <field name="state_id" />
             <field name="country_id" />
             <field name="opened_from" widget="timepicker" options="{'datepicker': {'stepping': 30}}"/>
-            <field name="opened_to"   widget="timepicker" options="{'datepicker': {'stepping': 30}}"/>            <field name="resource_ids"/>
+            <field name="opened_to"   widget="timepicker" options="{'datepicker': {'stepping': 30}}"/>
+            <field name="resource_ids"/>
           </group>
           <notebook>
             <page string="Contact Info">
