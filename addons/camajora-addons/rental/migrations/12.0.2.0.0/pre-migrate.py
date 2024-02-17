@@ -59,3 +59,4 @@ def migrate(cr, version):
                ' plugin_type varchar NULL')
 
 
+

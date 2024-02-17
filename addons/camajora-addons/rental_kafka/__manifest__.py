@@ -4,13 +4,14 @@
 {
     'name': 'Camajora Rental Kafka Topics',
     'description': """Kafka Topics""",
-    'version': '12.0.2.0.0',
+    'version': '12.0.3.0.0',
     'license': 'AGPL-3',
     'author': 'Giacomo Arianna',
     'website': 'https://jackarian-iot.it',
     'depends': ['rental'],
     'data': [
         'views/rental_kafka_configuration.xml',
+        'views/rental_location.xml',
         'security/rental_kafka_configuration.xml',
         'views/menu.xml'
     ],

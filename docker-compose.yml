@@ -5,7 +5,7 @@ volumes:
 services:
   odoo:
     build: .
-    image: mudesrl/camajora-backend:1.7
+    image: mudesrl/camajora-backend:1.7.1
     ports:
       - 80:80
       - 8069:8069
