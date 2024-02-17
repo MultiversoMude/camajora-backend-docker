@@ -17,9 +17,9 @@ class RentalResourceInstance(models.Model):
         location = resource.location_id
         configuration = location.kafka_configuration
 
+        _logger.debug("Test kafka send: resource %s", resource)
         _logger.debug("Test kafka send: location %s", location)
-        _logger.debug("Test kafka send: location %s", configuration)
-        _logger.debug("Test kafka send: location %s", configuration)
+        _logger.debug("Test kafka send: configuration %s", configuration)
 
         producer = InstanceMessageProducer(configuration, resource_instance, location, resource)
         producer.sendToKafka()

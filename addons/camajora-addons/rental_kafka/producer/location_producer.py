@@ -18,7 +18,7 @@ class InstanceMessageProducer:
                 _logger.debug("Instance queued")
                 producer = self._buildProducer()
                 producer.send(self.channel_configuration['topic'], key=str(self.location['id']),
-                          value=self._serializeData())
+                              value=self._serializeData())
                 producer.flush()
         except Exception:
             _logger.debug("Failed sending info to Kafka")
