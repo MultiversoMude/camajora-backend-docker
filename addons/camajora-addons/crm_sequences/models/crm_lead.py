@@ -5,7 +5,6 @@ from odoo import api, fields, models, _
 
 
 class CrmLead(models.Model):
-
     _inherit = 'crm.lead'
 
     code = fields.Char(
@@ -13,7 +12,6 @@ class CrmLead(models.Model):
         readonly=True
     )
 
-    @api.multi
     @api.depends('name', 'code')
     def name_get(self):
         result = []
@@ -34,4 +32,4 @@ class CrmLead(models.Model):
 
         for lead_id in lead_ids:
             code = self.env['ir.sequence'].next_by_code('crm.lead')
-            lead_id.write({'code': code })
+            lead_id.write({'code': code})

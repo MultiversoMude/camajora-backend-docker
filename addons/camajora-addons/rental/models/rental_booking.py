@@ -66,11 +66,9 @@ class RentalBooking(models.Model):
             )
             record.slot_count = len(count)
 
-    @api.multi
     def action_confirm(self):
         return self.write({'state': 'confirmed'})
 
-    @api.multi
     def action_cancel(self):
         return self.write({'state': 'cancelled'})
 

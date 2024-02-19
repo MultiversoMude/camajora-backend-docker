@@ -1,14 +1,14 @@
-version: '3'
+version: '3.1'
 volumes:
-    camajora_data_odoo:
-    camajora_pgdata_odoo:
+    camajora_data_migration:
+    camajora_pgdata_migration_odoo:
 services:
   odoo:
     build: .
-    image: mudesrl/camajora-backend:1.7.1
+    image: mudesrl/camajora-backend:1.7.2
     ports:
-      - 80:80
-      - 8069:8069
+      - "80:80"
+      - "8069:8069"
     depends_on:
       - postgres
     links:
@@ -25,19 +25,17 @@ services:
       - ODOO_LIMIT_MEMORY_HARD=6845104128
       - ODOO_LIMIT_MEMORY_SOFT=5704253440
     volumes:
-      - "camajora_data_odoo:/var/lib/odoo/"
-      # mount volumes for dev needs
+      - "camajora_data_migration:/var/lib/odoo/"
       - "./addons/camajora-addons:/mnt/bundle-addons/camajora-addons"
-    # launch container in odoo dev mode
     command: run  -d odoo_camajora --dev=all --db-filter odoo_camajora
   postgres:
-    image: postgres:10.0
+    image: postgres:15.0
     ports:
-       - 5432:5432
+       - "5432:5432"
     environment:
       - POSTGRES_USER=odoo
       - POSTGRES_PASSWORD=odoo
     volumes:
-      - "camajora_pgdata_odoo:/var/lib/postgresql/data"
+      - "camajora_pgdata_migration_odoo:/var/lib/postgresql/data"
 
   

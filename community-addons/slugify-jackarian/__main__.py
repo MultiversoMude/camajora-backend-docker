@@ -48,6 +48,7 @@ def parse_args(argv):
             if SEP not in repl:
                 parser.error("Replacements must be of the form: ORIGINAL{SEP}REPLACED".format(SEP=SEP))
             return repl.split(SEP, 1)
+
         args.replacements = [split_check(repl) for repl in args.replacements]
 
     if args.input_string:
@@ -77,7 +78,7 @@ def slugify_params(args):
     )
 
 
-def main(argv=None): # pragma: no cover
+def main(argv=None):  # pragma: no cover
     """ Run this program """
     if argv is None:
         argv = sys.argv
@@ -89,5 +90,5 @@ def main(argv=None): # pragma: no cover
         sys.exit(-1)
 
 
-if __name__ == '__main__': # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
     main()

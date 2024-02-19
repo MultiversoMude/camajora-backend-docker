@@ -5,7 +5,7 @@
 {
     'name': 'Api Key Auth',
     'description': 'Authentication with Api Key in headers',
-    'version': '12.0.1.0.0',
+    'version': '17.0.1.0',
     'license': 'AGPL-3',
     'author': 'Metadonors srl',
     'website': 'https://www.metadonors.it',

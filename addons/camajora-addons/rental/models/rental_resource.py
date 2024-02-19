@@ -88,7 +88,6 @@ class RentalResource(models.Model):
             )
             record.instance_count = len(count)
 
-    @api.multi
     def action_open_instances(self):
         self.ensure_one()
         return {
@@ -102,7 +101,6 @@ class RentalResource(models.Model):
             'context': {'default_resource_id': self.id},
         }
 
-    @api.multi
     def action_open_calendar(self):
         self.ensure_one()
         return {

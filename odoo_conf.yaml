@@ -1,0 +1,28 @@
+---
+
+addons_path:
+    - /mnt/bundle-addons/account-invoicing
+    - /mnt/bundle-addons/connector 
+    - /mnt/bundle-addons/muk_base
+    - /mnt/bundle-addons/muk_misc
+    - /mnt/bundle-addons/muk_web
+    - /mnt/bundle-addons/l10n-italy
+    - /mnt/bundle-addons/partner-contact
+    - /mnt/bundle-addons/project
+    - /mnt/bundle-addons/purchase-workflow 
+    - /mnt/bundle-addons/queue 
+    - /mnt/bundle-addons/rest-framework
+    - /mnt/bundle-addons/server-tools
+    - /mnt/bundle-addons/server-env
+    - /mnt/bundle-addons/server-ux
+    - /mnt/bundle-addons/web
+    - /mnt/bundle-addons/storage
+    - /mnt/bundle-addons/slugify-jackarian
+    - /mnt/bundle-addons/camajora-addons
+
+log_level : debug
+admin_passwd: admin
+server_wide_modules: queue_job,web
+channels: root:4
+proxy_mode: true
+

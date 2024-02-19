@@ -25,4 +25,4 @@ admin_passwd: admin
 server_wide_modules: queue_job,web
 channels: root:4
 proxy_mode: true
-
+logfile: /var/log/odoo/odoo-server.log

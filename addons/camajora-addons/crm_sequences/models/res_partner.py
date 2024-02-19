@@ -5,7 +5,6 @@ from odoo import api, fields, models, _
 
 
 class ResPartner(models.Model):
-
     _inherit = 'res.partner'
 
     code = fields.Char(
@@ -13,7 +12,6 @@ class ResPartner(models.Model):
         readonly=True
     )
 
-    @api.multi
     @api.depends('name', 'code')
     def name_get(self):
         result = []
@@ -34,4 +32,4 @@ class ResPartner(models.Model):
 
         for partner_id in partner_ids:
             code = self.env['ir.sequence'].next_by_code('res.partner')
-            partner_id.write({ 'code': code})
+            partner_id.write({'code': code})

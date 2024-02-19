@@ -1,7 +1,29 @@
-FROM mudesrl/camajora-backend:1.6
+FROM odoo:16.0
 
+USER root
+#RUN cat /etc/apt/sources.list
+#RUN sed -i 's/stable\/updates/stable-security\/updates/' /etc/apt/sources.list
+RUN mkdir -p /mnt/utils /mnt/bundle-addons \
+    && chown -R odoo:odoo /mnt/utils /mnt/bundle-addons
 
-RUN pip3 install kafka-python
+RUN apt-get update \
+    && apt-get install -y  \
+        vim \
+        libtool \
+        nginx \
+        sudo \
+        pkg-config \
+        python3-dev \
+        libffi-dev \
+        python3 \
+		#python3.8-dev  \
+        #python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY ./odoo/extra-requirements.txt /mnt/utils/extra-requirements.txt
+RUN export PIP_DEFAULT_TIMEOUT=1000000
+RUN pip3 install -U wheel setuptools==58.0.0
+RUN pip3 install -r /mnt/utils/extra-requirements.txt
 
 COPY ./odoo/scripts /mnt/utils/scripts
 COPY ./odoo/conf /mnt/utils/scripts/conf

@@ -46,7 +46,7 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.res_partner_kanban_view" />
         <field name="arch" type="xml">
-            <xpath expr="//t/div/div[@class='oe_kanban_details']/div" position="before">
+            <xpath expr="//t/div/div[@class='oe_kanban_details d-flex flex-column justify-content-between']/div" position="before">
                 <div>
                     <small>
                         <field name="code" />

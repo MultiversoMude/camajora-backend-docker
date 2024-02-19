@@ -5,7 +5,7 @@
 {
     "name": "Resource Image Gallery",
     "summary": "Link images to rental resources",
-    'version': '12.0.1.0.0',
+    'version': '17.0.1.0',
     'license': 'AGPL-3',
     'author': 'Metadonors srl',
     'website': 'https://www.metadonors.it',

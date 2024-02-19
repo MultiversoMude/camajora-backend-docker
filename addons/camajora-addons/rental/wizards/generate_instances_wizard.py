@@ -14,7 +14,6 @@ class GenerateInstancesWizard(models.TransientModel):
     count = fields.Integer(string=_("Number of Instances"), help=_("Number of Instances"), default=1)
     equipments_ids = fields.Many2many('rental.resource.equipment', string=_('Equipments'))
 
-    @api.multi
     def generate_instances(self):
         """Generates the number of resource instances entered in wizard field 'count'"""
 

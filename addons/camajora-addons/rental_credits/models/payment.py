@@ -10,7 +10,6 @@ log = logging.getLogger(__name__)
 class PaymentTransaction(models.Model):
     _inherit = 'payment.transaction'
 
-    @api.multi
     def _reconcile_after_transaction_done(self):
         res = super()._reconcile_after_transaction_done()
         for trans in self.filtered(lambda t: t.sale_order_ids):
@@ -29,7 +28,7 @@ class PaymentTransaction(models.Model):
         for line in sale_order_id.order_line:
             if line.product_id.product_tmpl_id.is_credits:
                 credits_to_add = credits_to_add + (
-                    line.product_id.product_tmpl_id.credits_value * int(line.product_uom_qty)
+                        line.product_id.product_tmpl_id.credits_value * int(line.product_uom_qty)
                 )
 
         sale_order_id.partner_id.write({
