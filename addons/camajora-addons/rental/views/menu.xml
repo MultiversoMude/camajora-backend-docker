@@ -6,7 +6,7 @@
     <field name="name">Rental</field>
     <field name="web_icon">rental,static/description/icon.png</field>
     <field name="action" ref="rental_booking_act_window" />
-    <field name="sequence" eval="30" />
+    <field name="sequence" eval="10" />
   </record>
   <!-- Booking Menu -->
   <record model="ir.ui.menu" id="rental_booking_menu">
@@ -34,14 +34,7 @@
     <field name="name">Resources</field>
     <field name="parent_id" ref="rental_main_menu" />
     <field name="action" ref="rental_resource_act_window" />
-    <field name="sequence" eval="20" />
-  </record>
-
-  <record model="ir.ui.menu" id="rental_resource_type_menu">
-    <field name="name">Resource Types</field>
-    <field name="parent_id" ref="rental_configuration_menu" />
-    <field name="action" ref="rental_resource_type_act_window" />
-    <field name="sequence" eval="20" />
+    <field name="sequence" eval="12" />
   </record>
   <!--
   <record model="ir.ui.menu" id="rental_resource_instance_main_menu">
@@ -67,47 +60,53 @@
     <field name="action" ref="rental_resource_act_window" />
     <field name="sequence" eval="40" />
   </record>
+  <record model="ir.ui.menu" id="rental_resource_type_menu">
+    <field name="name">Resource Types</field>
+    <field name="parent_id" ref="rental_configuration_menu" />
+    <field name="action" ref="rental_resource_type_act_window" />
+    <field name="sequence" eval="50" />
+  </record>
   <record model="ir.ui.menu" id="rental_resource_category_menu">
     <field name="name">Category</field>
     <field name="parent_id" ref="rental_configuration_menu" />
     <field name="action" ref="rental_resource_category_act_window" />
-    <field name="sequence" eval="10" />
+    <field name="sequence" eval="60" />
   </record>
   <record model="ir.ui.menu" id="rental_resource_equipment_menu">
     <field name="name">Equipment</field>
     <field name="parent_id" ref="rental_configuration_menu" />
     <field name="action" ref="rental_resource_equipment_act_window" />
-    <field name="sequence" eval="20" />
+    <field name="sequence" eval="70" />
   </record>
   <record model="ir.ui.menu" id="rental_resource_performance_menu">
     <field name="name">Performance</field>
     <field name="parent_id" ref="rental_configuration_menu" />
     <field name="action" ref="rental_resource_performance_act_window" />
-    <field name="sequence" eval="30" />
+    <field name="sequence" eval="80" />
   </record>
   <record model="ir.ui.menu" id="rental_resource_setup_menu">
     <field name="name">Setup</field>
     <field name="parent_id" ref="rental_configuration_menu" />
     <field name="action" ref="rental_resource_setup_act_window" />
-    <field name="sequence" eval="40" />
+    <field name="sequence" eval="90" />
   </record>
   <record model="ir.ui.menu" id="rental_resource_size_menu">
     <field name="name">Size</field>
     <field name="parent_id" ref="rental_configuration_menu" />
     <field name="action" ref="rental_resource_size_act_window" />
-    <field name="sequence" eval="50" />
+    <field name="sequence" eval="100" />
   </record>
   <record model="ir.ui.menu" id="rental_availability_menu">
     <field name="name">Availability</field>
     <field name="parent_id" ref="rental_configuration_menu" />
     <field name="action" ref="rental_availability_act_window" />
-    <field name="sequence" eval="60" />
+    <field name="sequence" eval="110" />
   </record>
   <record model="ir.ui.menu" id="rental_duration_menu">
     <field name="name">Duration</field>
     <field name="parent_id" ref="rental_configuration_menu" />
     <field name="action" ref="rental_duration_act_window" />
-    <field name="sequence" eval="70" />
+    <field name="sequence" eval="120" />
   </record>
 
 </odoo>

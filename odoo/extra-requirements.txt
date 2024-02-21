@@ -49,4 +49,6 @@ graphene
 graphql-server-core
 marshmallow-objects
 apispec
+fsspec
+python_slugify
 kafka-python

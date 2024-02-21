@@ -111,19 +111,6 @@
       </calendar>
     </field>
   </record>
-  <record model="ir.ui.view" id="rental_booking_slot_calendar_list_view">
-    <field name="name">rental.booking.slot.calendar (in rental)</field>
-    <field name="model">rental.booking.slot</field>
-    <field name="arch" type="xml">
-      <calendar_list  color="name" date_start="dt_start" date_stop="dt_end" string="Slots" quick_add="False" >
-        <field name="name" />
-        <field name="booking_id"/>
-        <field name="location_id" />
-        <field name="partner_id" />
-        <field name="total_hours" />
-      </calendar_list>
-    </field>
-  </record>
 
   <record model="ir.actions.act_window" id="rental_booking_slot_act_window">
     <field name="name">Booking Slots</field>

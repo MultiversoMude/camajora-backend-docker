@@ -27,7 +27,6 @@
         'security/rental_resource_type.xml',
         'security/res_partner.xml',
         'wizards/generate_instances_wizard.xml',
-        'wizard_test/wizard_test.xml',
         'views/rental_availability.xml',
         'views/rental_duration.xml',
         'views/rental_location.xml',
@@ -51,7 +50,12 @@
         'data/rental_resource_size_data.xml',
         'data/ir_sequence_data.xml',
         'data/reservation.xml',
-        'templates/assets.xml'
     ],
+    'assets': {
+        "web.assets_backend": [
+            "/rental/static/src/js/rental_calendar_view.js",
+            "/rental/static/src/js/hour_widget.js"
+        ]
+    },
     'demo': []
 }

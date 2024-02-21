@@ -19,7 +19,7 @@ addons_path:
     - /mnt/bundle-addons/web
     - /mnt/bundle-addons/website
     - /mnt/bundle-addons/storage
-    - /mnt/bundle-addons/camajora-addons
+    #- /mnt/bundle-addons/camajora-addons
     - /mnt/bundle-addons/multi_step_wizard
     
 admin_passwd: admin
