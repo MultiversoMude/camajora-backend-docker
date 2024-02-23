@@ -115,7 +115,7 @@
   <record model="ir.actions.act_window" id="rental_booking_slot_act_window">
     <field name="name">Booking Slots</field>
     <field name="res_model">rental.booking.slot</field>
-    <field name="view_mode">calendar,calendar_list</field>
+    <field name="view_mode">calendar</field>
     <field name="domain">[]</field>
     <field name="context">{
       'search_default_confirmed': 1,

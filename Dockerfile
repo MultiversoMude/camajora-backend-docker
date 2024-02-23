@@ -1,4 +1,4 @@
-FROM odoo:17.0
+FROM odoo:16.0
 
 USER root
 #RUN cat /etc/apt/sources.list
@@ -30,7 +30,7 @@ COPY ./odoo/conf /mnt/utils/scripts/conf
 # COPY ./odoo/wait-for-it.sh /wait-for-it.sh
 
 COPY ./community-addons/ /mnt/bundle-addons/
-# COPY ./addons/ /mnt/bundle-addons/
+COPY ./addons/ /mnt/bundle-addons/
 
 COPY ./odoo/conf/web/nginx.conf /etc/nginx/nginx.conf
 COPY ./odoo/conf/web/odoo.conf /etc/nginx/conf.d/default.conf
