@@ -22,7 +22,7 @@ class TokenService(Component):
         """
         try:
             uid = self.env['res.users'].sudo()._login(
-                self.env.cr.dbname, data['login'], data['password']
+                self.env.cr.dbname, data['login'], data['password'],None
             )
         except AccessDenied:
             raise AccessDenied()

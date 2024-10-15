@@ -29,7 +29,7 @@ class SignupService(Component):
         user_id = self.env['res.users'].sudo().create({
             'partner_id': partner_id.id,
             'login': values['email'],
-            'new_password': values['password'],
+            'password': values['password'],
             'share': True
         })
 

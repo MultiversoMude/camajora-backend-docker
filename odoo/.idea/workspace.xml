@@ -1,119 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b41a53-7b8e-4e2c-b0bc-16729790349d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/__manifest__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/readme/CONTRIBUTORS.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/readme/DESCRIPTION.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/readme/INSTALL.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/readme/USAGE.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/assets/activity-view.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/assets/calendar-view.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/assets/card-view.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/assets/dashboard-view.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/assets/form-view.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/assets/graph-view.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/assets/kanban-view.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/assets/list-view.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/assets/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/assets/mail-view.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/assets/modules-view.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/assets/pivot-view.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/assets/pos-view.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/description/theme_screenshot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/components/message/message.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/activity.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/calendar.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/card.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/chatter.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/dashboard.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/form.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/graph.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/header.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/kanban.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/list.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/mail.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/navbar.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/other.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/pivot.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/pos.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/images/home-menu-bg-overlay.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/images/menu-bg-overlay_1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/images/smiling_face.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/scss/primary_variables_custom.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/webclient/appsmenu/appsmenu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/webclient/appsmenu/appsmenu.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/webclient/appsmenu/appsmenu.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/webclient/appssearch/appssearch.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/webclient/appssearch/appssearch.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/webclient/appssearch/appssearch.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/webclient/mixins.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/webclient/navbar/navbar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/webclient/navbar/navbar.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/webclient/navbar/navbar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../community-addons/modern_theme/modern_theme/static/src/xml/mail.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/api_key_auth/models/ir_http.py" beforeDir="false" afterPath="$PROJECT_DIR$/../addons/camajora-addons/api_key_auth/models/ir_http.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/rental/views/menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../addons/camajora-addons/rental/views/menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/rental/views/rental_booking_slot.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../addons/camajora-addons/rental/views/rental_booking_slot.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/rental_credits/views/rental_booking_slot.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../addons/camajora-addons/rental_credits/views/rental_booking_slot.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../community-addons/muk_web" beforeDir="false" afterPath="$PROJECT_DIR$/../community-addons/muk_web" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/odoo_conf.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/conf/odoo_conf.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="82b41a53-7b8e-4e2c-b0bc-16729790349d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="ProjectId" id="2cjVHTuKj3Ke1CudRfxTMrG1imi" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/giacomo/git/camajora-backend-docker"
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-eebebe6c2be4-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.15325.20" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="82b41a53-7b8e-4e2c-b0bc-16729790349d" name="Changes" comment="" />
-      <created>1708624886705</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1708624886705</updated>
-    </task>
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
