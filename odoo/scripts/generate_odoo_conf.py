@@ -12,7 +12,7 @@ ENV = Environment(loader=FileSystemLoader('./'))
 @click.option('--config', help='Config file to use')
 def generate_odoo_conf(template, config):
     with open(config, 'r') as config_file:
-        config = yaml.load(config_file)
+        config = yaml.safe_load(config_file)
         template = ENV.get_template(template)
         print(template.render(cfg=config, env=os.environ))
 

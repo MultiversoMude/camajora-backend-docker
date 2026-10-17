@@ -1,4 +1,3 @@
-version: '3.9'
 volumes:
     camajora_data_migration:
     camajora_pgdata_migration_odoo:
@@ -8,7 +7,7 @@ services:
     image: mudesrl/service.back-iot:1.0
     ports:
       - "80:80"
-      - "8069:8069"
+      - "8069:80"
     depends_on:
       - postgres
     links:
@@ -29,6 +28,8 @@ services:
       - "camajora_data_migration:/var/lib/odoo/"
       - "./addons/camajora-addons:/mnt/bundle-addons/camajora-addons"
       - "./external/connector:/mnt/bundle-addons/connector"
+      - "./external/queue:/mnt/bundle-addons/queue"
+      - "./external/server-ux:/mnt/bundle-addons/server-ux"
       - "./external/rest-framework:/mnt/bundle-addons/rest-framework"
     command: run  -d odoo_camajora --dev=all --db-filter odoo_camajora
   odoo-init:
@@ -36,7 +37,7 @@ services:
     image: mudesrl/service.back-iot:1.0
     ports:
       - "80:80"
-      - "8069:8069"
+      - "8069:80"
     depends_on:
       - postgres
     links:
@@ -57,6 +58,8 @@ services:
       - "camajora_data_migration:/var/lib/odoo/"
       - "./addons/camajora-addons:/mnt/bundle-addons/camajora-addons"
       - "./external/connector:/mnt/bundle-addons/connector"
+      - "./external/queue:/mnt/bundle-addons/queue"
+      - "./external/server-ux:/mnt/bundle-addons/server-ux"
       - "./external/rest-framework:/mnt/bundle-addons/rest-framework"
     profiles:
       - init
