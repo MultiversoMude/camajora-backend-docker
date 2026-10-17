@@ -17,4 +17,5 @@
         "views/image_tag.xml",
         "views/storage_image.xml",
     ],
+    "assets": {},
 }

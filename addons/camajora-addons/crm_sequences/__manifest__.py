@@ -16,5 +16,6 @@
         'views/crm_lead.xml',
         'data/crm_sequences.xml',
     ],
+    'assets': {},
     'demo': [],
 }

@@ -13,5 +13,6 @@
         'wizards/onboarding_wizard.xml',
         'data/onboarding_mail_template.xml',
     ],
+    'assets': {},
     'demo': []
 }

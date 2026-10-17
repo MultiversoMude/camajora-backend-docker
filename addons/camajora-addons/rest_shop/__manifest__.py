@@ -19,6 +19,7 @@
         'views/sale_order.xml',
         'data/sequences.xml',
     ],
+    'assets': {},
     'demo': [
     ],
 }
