@@ -18,5 +18,6 @@
         'views/home_config.xml',
         'views/menu.xml',
     ],
+    'assets': {},
     'demo': []
 }

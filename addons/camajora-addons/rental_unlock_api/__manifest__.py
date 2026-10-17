@@ -13,5 +13,6 @@
         'rental',
     ],
     'data': [],
+    'assets': {},
     'demo': [],
 }

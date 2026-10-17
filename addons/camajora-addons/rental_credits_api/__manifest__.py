@@ -15,5 +15,6 @@
         'rest_shop',
     ],
     'data': [],
+    'assets': {},
     'demo': [],
 }

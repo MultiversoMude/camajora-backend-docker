@@ -13,5 +13,6 @@
         'api_key_auth',
     ],
     'data': [],
+    'assets': {},
     'demo': [],
 }

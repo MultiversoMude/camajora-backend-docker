@@ -22,5 +22,6 @@
         'views/rental_booking.xml',
         'data/product_template_data.xml',
     ],
+    'assets': {},
     'demo': []
 }

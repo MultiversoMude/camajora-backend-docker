@@ -15,5 +15,6 @@
         'security/rental_kafka_configuration.xml',
         'views/menu.xml'
     ],
+    'assets': {},
     'demo': []
 }
