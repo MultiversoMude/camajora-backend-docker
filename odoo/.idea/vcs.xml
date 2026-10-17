@@ -12,5 +12,21 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/account-invoicing" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/connector" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/l10n-italy" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/muk_base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/muk_misc" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/muk_web" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/partner-contact" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/project" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/purchase-workflow" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/queue" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/rest-framework" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/server-env" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/server-tools" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/server-ux" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/storage" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../community-addons/web" vcs="Git" />
   </component>
 </project>

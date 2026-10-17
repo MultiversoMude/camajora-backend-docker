@@ -4,32 +4,315 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b41a53-7b8e-4e2c-b0bc-16729790349d" name="Changes" comment="" />
+    <list default="true" id="82b41a53-7b8e-4e2c-b0bc-16729790349d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../myaddons/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_base/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_base/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_base/controllers/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_base/controllers/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_base/services/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_base/services/image.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_base/services/service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/controllers/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/controllers/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/data/user_password_reset_email.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/models/auth_api_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/models/ir_http.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/models/res_users.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/security/auth_api_token.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/services/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/services/me.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/services/password_reset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/services/signup.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/services/token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/api_key_auth/views/auth_api_token.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/crm_sequences/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/crm_sequences/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/crm_sequences/data/crm_sequences.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/crm_sequences/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/crm_sequences/models/crm_lead.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/crm_sequences/models/res_partner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/crm_sequences/views/crm_lead.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/crm_sequences/views/res_partner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/owner_onboarding/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/owner_onboarding/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/owner_onboarding/data/onboarding_mail_template.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/owner_onboarding/i18n/it.po" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/owner_onboarding/wizards/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/owner_onboarding/wizards/onboarding_wizard.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/owner_onboarding/wizards/onboarding_wizard.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/data/ir_sequence_data.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/data/rental_availability_data.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/data/rental_duration_data.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/data/rental_resource_equipment_data.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/data/rental_resource_performance_data.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/data/rental_resource_setup_data.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/data/rental_resource_size_data.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/data/reservation.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/i18n/it.po" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/migrations/17.0.1.0/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/migrations/17.0.1.0/pre-migrate.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/rental_availability.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/rental_booking.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/rental_booking_slot.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/rental_duration.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/rental_location.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/rental_resource.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/rental_resource_category.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/rental_resource_equipment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/rental_resource_instance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/rental_resource_performance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/rental_resource_setup.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/rental_resource_size.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/rental_resource_type.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/models/res_partner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/groups.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/rental_availability.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/rental_booking.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/rental_booking_slot.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/rental_duration.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/rental_location.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/rental_resource.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/rental_resource_category.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/rental_resource_equipment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/rental_resource_instance.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/rental_resource_performance.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/rental_resource_setup.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/rental_resource_size.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/rental_resource_type.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/security/res_partner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/static/description/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/static/src/js/hour_widget.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/static/src/js/rental_calendar_view.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/templates/assets.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/menu.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/rental_availability.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/rental_booking.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/rental_booking_slot.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/rental_duration.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/rental_location.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/rental_resource.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/rental_resource_category.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/rental_resource_equipment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/rental_resource_instance.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/rental_resource_performance.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/rental_resource_setup.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/rental_resource_size.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/rental_resource_type.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/views/res_partner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/wizard_test/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/wizard_test/calendarioTest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/wizard_test/lambaTest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/wizard_test/price_reservationTest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/wizard_test/rental_resource_backup.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/wizard_test/timetest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/wizard_test/wizard_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/wizard_test/wizard_test.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/wizards/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/wizards/generate_instances_wizard.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental/wizards/generate_instances_wizard.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/services/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/services/autocomplete_locations.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/services/autocomplete_resource_types.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/services/booking.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/services/booking_slots.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/services/calendar.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/services/categories.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/services/images.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/services/locations.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/services/resource_types.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/services/resources.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_api/services/users.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/data/product_template_data.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/i18n/it.po" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/models/payment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/models/product_template.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/models/rental_booking.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/models/rental_booking_slot.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/models/rental_resource.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/models/res_partner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/views/product_template.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/views/rental_booking.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/views/rental_booking_slot.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/views/rental_resource.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits/views/res_partner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits_api/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits_api/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits_api/services/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits_api/services/booking.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits_api/services/credits.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_credits_api/services/products.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/migrations/17.0.1.0/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/migrations/17.0.1.0/pre-migrate.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/model/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/model/rental_kafka_configuration.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/model/rental_location.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/model/rental_resource_instance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/producer/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/producer/location_producer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/security/rental_kafka_configuration.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/views/menu.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/views/rental_kafka_configuration.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_kafka/views/rental_location.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_unlock_api/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_unlock_api/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_unlock_api/services/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_unlock_api/services/unlock.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_website/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_website/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_website/data/home_config_data.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_website/i18n/it.po" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_website/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_website/models/home_config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_website/security/home_config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_website/services/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_website/services/home_config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_website/views/home_config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rental_website/views/menu.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/README.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/i18n/storage_image_product.pot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/models/image_tag.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/models/rental_resource.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/models/resource_image_relation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/models/storage_image.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/security/ir.model.access.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/services/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/services/booking.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/services/booking_slots.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/services/resources.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/views/image_tag.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/views/rental_resource.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/views/resource_image_relation.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/resource_image_gallery/views/storage_image.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/controllers/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/controllers/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/data/sequences.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/models/payment_acquirer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/models/res_partner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/models/sale_order.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/services/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/services/cart.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/services/products.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/services/sale_order.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/services/stripe.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/views/payment_acquirer.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/views/sale_order.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/README.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/__manifest__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/i18n/web_widget_slick.pot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/description/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/description/icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/lib/slick/ajax-loader.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/lib/slick/slick-theme.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/lib/slick/slick.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/lib/slick/slick.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/src/js/web_widget_slick.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/src/less/slick.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/src/xml/web_widget_slick.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/tests/js/web_widget_slick.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/templates/assets.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/tests/test_ui.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../odoo.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/odoo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/rental_kafka/producer/location_producer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../addons/camajora-addons/rental_kafka/producer/location_producer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../community-addons/server-tools" beforeDir="false" afterPath="$PROJECT_DIR$/../community-addons/server-tools" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="DatabaseLocalColorSettings">
+    <colors>
+      <entry key="38db6905-edd2-4e30-9c42-4e38c6bfb451" value="" />
+    </colors>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;jackarian&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:MultiversoMude/camajora-backend-docker.git&quot;,
+    &quot;accountId&quot;: &quot;b420d6c6-1ac2-4725-9348-94012bffb5f0&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="3KYIAfrOjCQNdITgTdp2jPCqDJL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "feature/migration__to__17",
+    "last_opened_file_path": "/home/giacomo/git/camajora-backend-docker",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true"
   }
 }]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-eebebe6c2be4-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.15325.20" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-PY-262.10968.92" />
+        <option value="bundled-python-sdk-73a66231627c-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.10968.92" />
       </set>
     </attachedChunks>
   </component>
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="82b41a53-7b8e-4e2c-b0bc-16729790349d" name="Changes" comment="" />
+      <created>1791727936443</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1791727936443</updated>
+      <workItem from="1791727937727" duration="135000" />
+      <workItem from="1792212347975" duration="892000" />
+    </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
