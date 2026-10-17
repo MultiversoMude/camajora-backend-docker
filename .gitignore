@@ -6,3 +6,5 @@ __pycache__
 /.idea/
 /camajora-backend-docker.iml
 /.pytest_cache/
+/odoo/.venv
+/odoo/.idea

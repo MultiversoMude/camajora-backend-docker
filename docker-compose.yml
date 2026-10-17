@@ -1,11 +1,11 @@
-version: '3.1'
+version: '3.9'
 volumes:
     camajora_data_migration:
     camajora_pgdata_migration_odoo:
 services:
   odoo:
     build: .
-    image: mudesrl/camajora-backend:1.7.2
+    image: mudesrl/service.back-iot:1.0
     ports:
       - "80:80"
       - "8069:8069"
@@ -18,6 +18,7 @@ services:
       - ODOO_DB_NAME=odoo_camajora
       - ODOO_DB_USER=odoo
       - ODOO_DB_PASSWORD=odoo
+      - ODOO_DB_PORT=5432
       - ODOO_WORKERS=7
       - ODOO_LIMIT_TIME_CPU=120000
       - ODOO_LIMIT_TIME_REAL=132000
@@ -28,6 +29,35 @@ services:
       - "camajora_data_migration:/var/lib/odoo/"
       - "./addons/camajora-addons:/mnt/bundle-addons/camajora-addons"
     command: run  -d odoo_camajora --dev=all --db-filter odoo_camajora
+  odoo-init:
+    build: .
+    image: mudesrl/service.back-iot:1.0
+    ports:
+      - "80:80"
+      - "8069:8069"
+    depends_on:
+      - postgres
+    links:
+      - "postgres:postgres"
+    environment:
+      - ODOO_DB_HOST=postgres
+      - ODOO_DB_NAME=odoo_camajora
+      - ODOO_DB_USER=odoo
+      - ODOO_DB_PASSWORD=odoo
+      - ODOO_DB_PORT=5432
+      - ODOO_WORKERS=7
+      - ODOO_LIMIT_TIME_CPU=120000
+      - ODOO_LIMIT_TIME_REAL=132000
+      - ODOO_QUEUE_JOB_CHANNELS=root:6
+      - ODOO_LIMIT_MEMORY_HARD=6845104128
+      - ODOO_LIMIT_MEMORY_SOFT=5704253440
+    volumes:
+      - "camajora_data_migration:/var/lib/odoo/"
+      - "./addons/camajora-addons:/mnt/bundle-addons/camajora-addons"
+    profiles:
+      - init
+    command: run  -d odoo_camajora -i base --without-demo=all --stop-after-init --dev=all --db-filter odoo_camajora
+
   postgres:
     image: postgres:15.0
     ports:

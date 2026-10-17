@@ -52,3 +52,5 @@ apispec
 fsspec
 python_slugify
 kafka-python
+lxml<6
+lxml_html_clean

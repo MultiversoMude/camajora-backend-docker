@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="odoo@localhost" uuid="38db6905-edd2-4e30-9c42-4e38c6bfb451">
+    <data-source source="LOCAL" name="odoo_camajora@localhost" uuid="38db6905-edd2-4e30-9c42-4e38c6bfb451">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/odoo</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/odoo_camajora</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

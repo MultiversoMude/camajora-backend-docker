@@ -1,8 +1,9 @@
-FROM odoo:16.0
+FROM odoo:17.0
 
 USER root
 #RUN cat /etc/apt/sources.list
 #RUN sed -i 's/stable\/updates/stable-security\/updates/' /etc/apt/sources.list
+RUN mkdir -p /var/lib/odoo/sessions && chown -R odoo:odoo /var/lib/odoo/sessions
 RUN mkdir -p /mnt/utils /mnt/bundle-addons \
     && chown -R odoo:odoo /mnt/utils /mnt/bundle-addons
 

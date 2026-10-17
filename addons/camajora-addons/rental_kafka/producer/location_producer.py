@@ -51,14 +51,18 @@ class InstanceMessageProducer:
 
 
 if __name__ == '__main__':
-    producer = KafkaProducer(bootstrap_servers='jackarian-iot.it:9093',
+    producer = KafkaProducer(bootstrap_servers='kafka.back-iot.it:9092',
                              value_serializer=lambda v: json.dumps(v).encode('utf-8'),
                              key_serializer=str.encode,
-                             security_protocol='SASL_PLAINTEXT',
+                             security_protocol='SASL_SSL',
                              sasl_mechanism='PLAIN',
-                             sasl_plain_username='jackarian',
-                             sasl_plain_password='MfFeZcJcZtdej6N')
-    producer.send('location-consumption', key=str(1), value={
+                             sasl_plain_username="jackarian",
+                             sasl_plain_password="YNk4ScPPu8S9gx9M",
+                             ssl_check_hostname=False,
+                             ssl_keyfile="/opt/config/kafka.keystore.jks",
+                             ssl_password="xL!L[[4miU9<"
+                             )
+    producer.send('consumi-cabine-multiverso', key=str(1), value={
         'ambiente': 'soggiorno',
         'timestamp': '2023-01-01T12:12:00',
         'gradi': 78,

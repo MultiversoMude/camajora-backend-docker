@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b41a53-7b8e-4e2c-b0bc-16729790349d" name="Changes" comment="">
+    <list default="true" id="82b41a53-7b8e-4e2c-b0bc-16729790349d" name="Changes" comment="feat: start upgrade to 17">
       <change afterPath="$PROJECT_DIR$/../myaddons/README.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../myaddons/__init__.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/__init__.py" afterDir="false" />
@@ -220,31 +220,37 @@
       <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/services/stripe.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/views/payment_acquirer.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/rest_shop/views/sale_order.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/README.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/__manifest__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/i18n/web_widget_slick.pot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/description/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/description/icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/lib/slick/ajax-loader.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/lib/slick/slick-theme.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/lib/slick/slick.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/lib/slick/slick.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/src/js/web_widget_slick.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/src/less/slick.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/src/xml/web_widget_slick.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/tests/js/web_widget_slick.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/templates/assets.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/tests/test_ui.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../odoo.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/odoo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/rental_kafka/producer/location_producer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../addons/camajora-addons/rental_kafka/producer/location_producer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/README.rst" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/README.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/__manifest__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/__manifest__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/i18n/web_widget_slick.pot" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/i18n/web_widget_slick.pot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/static/description/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/description/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/static/description/icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/description/icon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/static/lib/slick/ajax-loader.gif" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/lib/slick/ajax-loader.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/static/lib/slick/slick-theme.less" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/lib/slick/slick-theme.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/static/lib/slick/slick.js" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/lib/slick/slick.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/static/lib/slick/slick.less" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/lib/slick/slick.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/static/src/js/web_widget_slick.js" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/src/js/web_widget_slick.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/static/src/less/slick.less" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/src/less/slick.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/static/src/xml/web_widget_slick.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/src/xml/web_widget_slick.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/static/tests/js/web_widget_slick.js" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/static/tests/js/web_widget_slick.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/templates/assets.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/templates/assets.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/tests/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../addons/camajora-addons/web_widget_slick/tests/test_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/../myaddons/camajora-addons/web_widget_slick/tests/test_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../community-addons/account-invoicing" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../community-addons/queue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../community-addons/server-tools" beforeDir="false" afterPath="$PROJECT_DIR$/../community-addons/server-tools" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/odoo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/odoo.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/odoo_conf.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/conf/odoo_conf.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extra-requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/extra-requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../odoo_conf.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../odoo_conf.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,6 +264,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -279,22 +286,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "feature/migration__to__17",
-    "last_opened_file_path": "/home/giacomo/git/camajora-backend-docker",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/migration__to__17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/giacomo/git/camajora-backend-docker&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -311,11 +319,25 @@
       <option name="presentableId" value="Default" />
       <updated>1791727936443</updated>
       <workItem from="1791727937727" duration="135000" />
-      <workItem from="1792212347975" duration="892000" />
+      <workItem from="1792212347975" duration="1293000" />
+      <workItem from="1792213673457" duration="15305000" />
     </task>
+    <task id="LOCAL-00001" summary="feat: start upgrade to 17">
+      <option name="closed" value="true" />
+      <created>1792213273613</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1792213273613</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: start upgrade to 17" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: start upgrade to 17" />
   </component>
 </project>
