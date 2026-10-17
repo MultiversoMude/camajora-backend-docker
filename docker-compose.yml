@@ -28,6 +28,8 @@ services:
     volumes:
       - "camajora_data_migration:/var/lib/odoo/"
       - "./addons/camajora-addons:/mnt/bundle-addons/camajora-addons"
+      - "./external/connector:/mnt/bundle-addons/connector"
+      - "./external/rest-framework:/mnt/bundle-addons/rest-framework"
     command: run  -d odoo_camajora --dev=all --db-filter odoo_camajora
   odoo-init:
     build: .
@@ -54,6 +56,8 @@ services:
     volumes:
       - "camajora_data_migration:/var/lib/odoo/"
       - "./addons/camajora-addons:/mnt/bundle-addons/camajora-addons"
+      - "./external/connector:/mnt/bundle-addons/connector"
+      - "./external/rest-framework:/mnt/bundle-addons/rest-framework"
     profiles:
       - init
     command: run  -d odoo_camajora -i base --without-demo=all --stop-after-init --dev=all --db-filter odoo_camajora
